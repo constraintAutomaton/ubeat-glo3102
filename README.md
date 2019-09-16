@@ -1,4 +1,4 @@
-# vue-starter
+# vue-starter Test
 
 Kit de départ préconfiguré utilisant [vue-cli](https://cli.vuejs.org/), [ESLint](https://eslint.org/) avec [Prettier](https://prettier.io/) et [Jest](https://jestjs.io/).
 
