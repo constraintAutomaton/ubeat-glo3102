@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-dark is-touch" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <router-link to="/" class="navbar-item"><i class="material-icons navbar-icon">home</i>Home</router-link>
       <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="ubeatNav" v-on:click="hamburgerClick">
@@ -36,28 +36,38 @@
         </div>
 
 
-        <router-link to="/playlist" class="navbar-item">
-          <i class="material-icons navbar-icon">play_circle_outline</i>
-          Playlists
-        </router-link>
+        
 
         <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          <i class="material-icons navbar-icon">account_box</i>
-          Rafael Galan
-        </a>
+          <router-link to="/playlist" class="navbar-link">
+            <i class="material-icons navbar-icon">play_circle_outline</i>
+            Playlists
+          </router-link>
 
         <div class="navbar-dropdown">
-          <router-link to="/settings" class="navbar-item">
-            <i class="material-icons navbar-icon">build</i>
-            Settings
-          </router-link>
-          <router-link to="/logout" class="navbar-item">
-            <i class="material-icons navbar-icon">lock</i>
-            Logout
+          <router-link v-for="playlist in User.Playlists" to="/playlist" class="navbar-item" v-bind:key="playlist.Id">
+            {{playlist.Name}}
           </router-link>
         </div>
       </div>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            <i class="material-icons navbar-icon">account_box</i>
+            {{User.Name}}
+          </a>
+
+          <div class="navbar-dropdown">
+            <router-link to="/settings" class="navbar-item">
+              <i class="material-icons navbar-icon">build</i>
+              Settings
+            </router-link>
+            <router-link to="/logout" class="navbar-item">
+              <i class="material-icons navbar-icon">lock</i>
+              Logout
+            </router-link>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -107,6 +117,18 @@ export default {
         hamburger.classList.toggle('is-active');
         $target.classList.toggle('is-active');
     },
+  },
+  data() {
+    return {
+      User: {
+          Id: 1,
+          Name: "Rafael Galan",
+          Playlists: [
+            {Id: 1, Name: "Playlist1", Page: "/playlist1"},
+            {Id: 2, Name: "Playlist2", Page: "/playlist2"}
+          ]
+      }
+    }
   }
 }
 </script>
