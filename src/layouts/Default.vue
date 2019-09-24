@@ -22,6 +22,12 @@
 </script>
 
 <style>
+  :root
+  {
+    /*Constante à utiliser pour tous les lien noir sur le hover*/
+    --blackLinkHoverColor: #5f5f5f;
+  }
+
   .main-layout {
     color: #2d2d2d;
     background-color: #f9f9f9;

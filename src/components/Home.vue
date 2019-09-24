@@ -1,13 +1,13 @@
 <template>
   <div class="mainContainer container">
-    <h2 class="listTitle">Top 50</h2>
+    <h2 class="listTitle"><a>Top 50</a></h2>
     <ul class="albumList row row-no-padding">
       <li class="col s6 m4 l2">
         <img
           src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">All music genres</h3>
+        <h3 class="albumGenre"><a>All music genres</a></h3>
         <p>Top 50</p>
       </li>
       <li class="col s6 m4 l2">
@@ -15,7 +15,7 @@
           src="https://i1.sndcdn.com/artworks-000407556927-308w8o-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">Rock</h3>
+        <h3 class="albumGenre"><a>Rock</a></h3>
         <p>Top 50</p>
       </li>
       <li class="col s6 m4 l2">
@@ -23,7 +23,7 @@
           src="https://i1.sndcdn.com/artworks-000515405376-5tpu2f-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">R&B</h3>
+        <h3 class="albumGenre"><a>R&B</a></h3>
         <p>Top 50</p>
       </li>
       <li class="col s6 m4 l2">
@@ -31,7 +31,7 @@
           src="https://i1.sndcdn.com/artworks-000424060938-h6emj1-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">Blues</h3>
+        <h3 class="albumGenre"><a>Blues</a></h3>
         <p>Top 50</p>
       </li>
       <li class="col s6 m4 l2">
@@ -39,7 +39,7 @@
           src="https://i1.sndcdn.com/artworks-000087867383-j4snt5-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">Jazz</h3>
+        <h3 class="albumGenre"><a>Jazz</a></h3>
         <p>Top 50</p>
       </li>
       <li class="col s6 m4 l2">
@@ -47,12 +47,12 @@
           src="https://i1.sndcdn.com/artworks-000003026332-oqfy71-t500x500.jpg"
           alt="Album Image"
         />
-        <h3 class="albumGenre">Country</h3>
+        <h3 class="albumGenre"><a>Country</a></h3>
         <p>Top 50</p>
       </li>
     </ul>
 
-    <h2 class="listTitle">Most Popular Tracks</h2>
+    <h2 class="listTitle"><a>Most Popular Tracks</a></h2>
     <ul class="trackList row">
       <li class="col s12 m6">
         <div class="popularTrack">
@@ -61,10 +61,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#1</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -77,10 +81,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#2</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -93,10 +101,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#3</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -110,10 +122,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#4</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -126,10 +142,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#5</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -142,10 +162,14 @@
             alt="Album Image"
             class="left"
           />
+          <img 
+            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
+            class="playButton"
+          />
           <div class="trackDesc">
             <h4 class="ranking">#6</h4>
             <p>
-              <span class="artistText">Artist</span> -
+              <a class="artistText">Artist</a> -
               <span class="trackNameText">TrackName</span>
             </p>
           </div>
@@ -161,9 +185,14 @@
     padding-bottom: 0.5rem;
     border-bottom: 1px solid;
   }
+  
+  .listTitle a {
+    color: black;
+  }
 
-  .mainContainer {
-    /*min-width: 320px;*/
+  .listTitle a:hover {
+    color: var(--blackLinkHoverColor);
+    cursor: pointer;
   }
 
   .albumList {
@@ -193,21 +222,29 @@
     height: auto;
   }
 
+  .albumList img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+
   .albumGenre {
     font-size: 14px;
     margin-top: 0;
     margin-bottom: 0;
   }
 
+  .albumGenre a {
+    color: black;
+  }
+
+  .albumGenre a:hover {
+    color: var(--blackLinkHoverColor);
+    cursor: pointer;
+  }
+
   p {
     font-size: 12px;
     margin: 0;
-  }
-
-  @media (max-width: 810px) {
-    .fullScreenOnly {
-      display: none;
-    }
   }
 
   li .popularTrack {
@@ -218,6 +255,7 @@
     height: 100px;
     color: #fff;
     margin-bottom: 1rem;
+    position: relative;
   }
 
   li .popularTrack:nth-child(even) {
@@ -236,11 +274,33 @@
     margin-right: 1rem
   }
 
-  .trackDesc {
-    /*height: 100%;*/
+  .ranking {
+    margin: 0 0 0.5rem;
   }
 
-  .ranking{
-    margin: 0 0 0.5rem;
+  .artistText {
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .artistText:hover {
+    color: rgb(204, 204, 204);
+    cursor: pointer;
+  }
+
+  .trackNameText {
+    font-style: italic;
+  }
+
+  .playButton {
+    margin: 0px;
+    position: absolute;
+    background-color:rgba(255, 255, 255, 0.329);
+    opacity: 0;
+  }
+
+  .playButton:hover {
+    opacity: 1;
+    cursor: pointer;
   }
 </style>
