@@ -61,7 +61,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -81,7 +81,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -101,7 +101,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -122,7 +122,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -142,7 +142,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -162,7 +162,7 @@
             alt="Album Image"
             class="left"
           />
-          <img 
+          <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
           />
@@ -179,13 +179,13 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .listTitle {
     font-size: 22px;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid;
   }
-  
+
   .listTitle a {
     color: black;
   }

@@ -46,6 +46,12 @@
   .playInformation{
     min-width: 33%;
     color: #8FD1D9;
+    font-size: 0.9rem;
+  }
+
+  .playInformation p {
+    margin: 0;
+    line-height: 1.6;
   }
 
   .playIcon{
