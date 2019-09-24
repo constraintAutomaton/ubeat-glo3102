@@ -158,7 +158,8 @@
 <style>
   .listTitle {
     font-size: 22px;
-    /*margin: 15px;*/
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid;
   }
 
   .mainContainer {
@@ -210,7 +211,7 @@
   }
 
   li .popularTrack {
-    background-color: #2F5559;
+    background-color: #4F868C;
     display: flex;
     align-items: center;
     /* padding: 0 8px; */
