@@ -94,7 +94,6 @@
           </div>
         </div>
       </li>
-      
       <li class="col s12 m6">
         <div class="popularTrack">
           <img
@@ -115,7 +114,6 @@
           </div>
         </div>
       </li>
-
       <li class="col s12 m6">
         <div class="popularTrack">
           <img
