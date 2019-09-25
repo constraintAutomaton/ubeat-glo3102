@@ -28,6 +28,7 @@
 <style>
 
   @import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,700&display=swap');
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
   #app{
     font-family: 'Muli', sans-serif;

@@ -1,17 +1,235 @@
 <template>
-  <nav>
-    <ul>
+  <div>
+    <div class="navbar-fixed">
+      <nav class="grey darken-3">
+        <div class="nav-wrapper container">
+          <router-link to="/" class="navLogo">
+            UBeat
+          </router-link>
+          <ul class="right">
+            <li class="hide-on-small-only">
+              <router-link to="/album">
+                <i class="material-icons left hide-on-med-and-down">
+                  album
+                </i>
+                Album
+              </router-link>
+            </li>
+            <li class="hide-on-small-only">
+              <router-link to="/artist">
+                <i class="material-icons left hide-on-med-and-down">
+                  person
+                </i>
+                Artist
+              </router-link>
+            </li>
+            <li class="hide-on-small-only">
+              <div class="customNavItem">
+                <a href="#" v-on:click="toggleSearch">
+                  <i class="material-icons">
+                    search
+                  </i>
+                </a>
+                <div id="navSearchContainer" class="input-field hide">
+                  <input id="navSearchInput" v-model="searchText" v-on:keydown.enter="search" v-on:blur="toggleSearch" type="search" placeholder="Search..." required>
+                </div>
+              </div>
+            </li>
+            <li
+              class="hide-on-small-only"
+              v-on:mouseenter="showDropdown"
+              v-on:mouseleave="hideDropdown"
+              v-on:click="toggleDropdown"
+            >
+              <a class="dropdown-trigger" href="#">
+                {{ user.name }}
+                <i class="material-icons right">
+                  arrow_drop_down
+                </i>
+              </a>
+
+              <ul id="navDropdown" class="dropdown-content">
+                <li>
+                  <router-link to="/playlists">
+                    <i class="material-icons navbar-icon">
+                      play_circle_outline
+                    </i>
+                    Playlists
+                  </router-link>
+                </li>
+                <li v-for="playlist in user.playlists" v-bind:key="playlist.id">
+                  <router-link :to="playlist.page">
+                    <i class="material-icons">
+                      chevron_right
+                    </i>
+                    {{ playlist.name }}
+                  </router-link>
+                </li>
+                <li class="divider"></li>
+
+                <li>
+                  <router-link to="/settings" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      build
+                    </i>
+                    Settings
+                  </router-link>
+                </li>
+                <li>
+                  <router-link to="/logout" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      lock
+                    </i>
+                    Logout
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+            <li class="hide-on-med-and-up">
+              <a href="#" data-target="sideNav" class="sidenav-trigger ">
+                <i class="material-icons">menu</i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <ul id="sideNav" class="sidenav">
       <li>
-        <router-link to="/">Home</router-link>
+        <router-link to="/">
+          <i class="material-icons">
+            home
+          </i>
+          Home
+        </router-link>
       </li>
       <li>
-        <router-link to="/album">Album</router-link>
+        <router-link to="/album">
+          <i class="material-icons">
+            album
+          </i>
+          Album
+        </router-link>
       </li>
       <li>
-        <router-link to="/artist">Artist</router-link>
+        <router-link to="/artist">
+          <i class="material-icons">
+            person
+          </i>
+          Artist
+        </router-link>
+      </li>
+      <li>
+        <a class="customNavItem">
+          <i class="material-icons">
+            search
+          </i>
+          <input id="sideNavSearchInput" type="text" v-model="searchText" v-on:keydown.enter="search" placeholder="Search..." />
+        </a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <router-link to="/playlists">
+          <i class="material-icons">
+            play_circle_outline
+          </i>
+          Playlists
+        </router-link>
+      </li>
+      <li v-for="playlist in user.playlists" v-bind:key="playlist.id">
+        <router-link :to="playlist.page">
+          <i class="material-icons">
+            chevron_right
+          </i>
+          {{ playlist.name }}
+        </router-link>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <router-link to="/settings">
+          <i class="material-icons">
+            build
+          </i>
+          Settings
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/logout">
+          <i class="material-icons">
+            lock
+          </i>
+          Logout
+        </router-link>
       </li>
     </ul>
-  </nav>
+  </div>
 </template>
 
-<style></style>
+<style scoped>
+.dropdownOpen {
+  display: block;
+  opacity: 1;
+  position: relative;
+}
+.navLogo {
+  font-weight: bold;
+  font-size: 2.1rem;
+}
+
+#sideNavSearchInput{
+  font-size: 100%;
+}
+
+.customNavItem {
+  display: flex;
+}
+
+.nav-wrapper .input-field input[type="search"] {
+  padding-left: 1rem;
+  width: calc(100% - 1rem);
+  margin: 0 0 0 0;
+}
+
+</style>
+
+<script>
+export default {
+  methods: {
+    toggleDropdown: () => {
+      document.getElementById("navDropdown").classList.toggle("dropdownOpen");
+    },
+    showDropdown: () => {
+      document.getElementById("navDropdown").classList.add("dropdownOpen");
+    },
+    hideDropdown: () => {
+      document.getElementById("navDropdown").classList.remove("dropdownOpen");
+    },
+    search: function () {
+      console.log(this.searchText);
+      this.searchText = "";
+      this.toggleSearch();
+    },
+    toggleSearch: () => {
+      if(!document.getElementById("navSearchContainer").classList.toggle("hide"))
+        document.getElementById("navSearchInput").focus();
+    }
+  },
+  mounted() {
+    M.Sidenav.init(document.getElementById("sideNav"));
+  },
+  data() {
+    return {
+      user: {
+        id: 1,
+        name: "Robin Desbois",
+        playlists: [
+          { id: 1, name: "Playlist1", page: "/playlist?name=playlist1" },
+          { id: 2, name: "Playlist2", page: "/playlist?name=playlist2" }
+        ]
+      },
+      searchText: ""
+    };
+  }
+};
+</script>
