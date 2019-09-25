@@ -37,4 +37,10 @@
     padding-bottom: 100px;
   }
 
+  .listTitle {
+    font-size: 22px;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid;
+  }
+
 </style>
