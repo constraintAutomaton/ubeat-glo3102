@@ -10,6 +10,19 @@
         <p><a href="https://www.apple.com/ca/itunes/link/"><img src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png"></a></p>
       </div>
     </section>
+
+    <section>
+      <h3 class="listTitle">Latest Releases</h3>
+      <div class="latestReleases row">
+      </div>
+    </section>
+
+    <section>
+      <h3 class="listTitle">Popular Tracks</h3>
+      <div class="popularTracks row">
+      </div>
+    </section>
+
     <section>
       <h3 class="listTitle">Albums</h3>
       <ul class="listAlbum row">
@@ -59,7 +72,6 @@
           <p>2014</p>
         </li>
       </ul>
-
     </section>
   </div>
 </template>
