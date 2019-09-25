@@ -2,11 +2,11 @@
   <div class="container">
     <section class="infoArtist row">
       <div class="col s12 m6 l6 imgArtist">
-        <img src="https://i1.sndcdn.com/artworks-000087867383-j4snt5-t500x500.jpg" />
+        <img src="https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg" />
       </div>
       <div class="col s12 m6 l6">
         <h2>Mick Jenkins</h2>
-        <h3>Genre: Jazz</h3>
+        <h3>Genre: Hip-Hop/Rap</h3>
         <p><a href="https://www.apple.com/ca/itunes/link/"><img src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png"></a></p>
       </div>
     </section>
