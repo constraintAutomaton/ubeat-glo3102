@@ -19,8 +19,43 @@
 
     <section>
       <h3 class="listTitle">Popular Tracks</h3>
-      <div class="popularTracks row">
-      </div>
+      <ul class="popularTracks">
+        <li class="row">
+          <img src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" alt="Album Image" class="trackImg" />
+          <img src="https://www.ccfinc.ca/wp-content/uploads/play-button.png" class="playButton" />
+          <div class="infoTrack">
+            <p class="trackPosition">#1 - <span class="trackName">Track Name</span></p>
+          </div>
+        </li>
+        <li class="row">
+          <img src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" alt="Album Image" class="trackImg" />
+          <img src="https://www.ccfinc.ca/wp-content/uploads/play-button.png" class="playButton" />
+          <div class="infoTrack">
+            <p class="trackPosition">#2 - <span class="trackName">Track Name</span></p>
+          </div>
+        </li>
+        <li class="row">
+          <img src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" alt="Album Image" class="trackImg" />
+          <img src="https://www.ccfinc.ca/wp-content/uploads/play-button.png" class="playButton" />
+          <div class="infoTrack">
+            <p class="trackPosition">#3 - <span class="trackName">Track Name</span></p>
+          </div>
+        </li>
+        <li class="row">
+          <img src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" alt="Album Image" class="trackImg" />
+          <img src="https://www.ccfinc.ca/wp-content/uploads/play-button.png" class="playButton" />
+          <div class="infoTrack">
+            <p class="trackPosition">#4 - <span class="trackName">Track Name</span></p>
+          </div>
+        </li>
+        <li class="row">
+          <img src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" alt="Album Image" class="trackImg" />
+          <img src="https://www.ccfinc.ca/wp-content/uploads/play-button.png" class="playButton" />
+          <div class="infoTrack">
+            <p class="trackPosition">#5 - <span class="trackName">Track Name</span></p>
+          </div>
+        </li>
+      </ul>
     </section>
 
     <section>
@@ -91,6 +126,42 @@
     margin: auto;
   }
 
+  .popularTracks li {
+    background-color: #4F868C;
+    display: flex;
+    position: relative;
+    align-items: center;
+    height: 40px;
+    color: #fff;
+    margin-bottom: 0;
+    border-bottom: solid rgba(0, 0, 0, 0.4) 1px;
+  }
+
+  .popularTracks li:hover {
+    opacity: 0.8;
+  }
+
+  .trackImg {
+    height: 100%;
+  }
+
+  .playButton {
+    margin: 0px;
+    height: 40px;
+    position: absolute;
+    background-color:rgba(255, 255, 255, 0.329);
+    opacity: 0;
+  }
+
+  .playButton:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  .infoTrack {
+    margin-left: 1rem;
+  }
+
   .listAlbum a {
     color: black;
   }
@@ -102,6 +173,11 @@
 
   .listAlbum img {
     max-width: 100%;
+  }
+  
+  .listAlbum img:hover {
+    opacity: 0.8;
+    cursor: pointer;
   }
 
   .albumTitle {
