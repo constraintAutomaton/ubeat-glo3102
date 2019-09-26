@@ -7,7 +7,7 @@
       <div class="col s12 m6 l6">
         <h2>Mick Jenkins</h2>
         <h3>Genre: Hip-Hop/Rap</h3>
-        <p><a href="https://www.apple.com/ca/itunes/link/"><img src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png"></a></p>
+        <p><a href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"><img src="https://www.apple.com/ca/itunes/link/images/link-badge-itunes.png"></a></p>
       </div>
     </section>
 
@@ -174,7 +174,7 @@
   .listAlbum img {
     max-width: 100%;
   }
-  
+
   .listAlbum img:hover {
     opacity: 0.8;
     cursor: pointer;
