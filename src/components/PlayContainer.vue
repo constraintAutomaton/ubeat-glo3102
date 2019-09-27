@@ -28,6 +28,7 @@ export default {
   width: 100%;
   height: 80px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   background-color: #2d2d2d;
   color: #fff;
@@ -45,15 +46,37 @@ export default {
   justify-content: center;
 }
 
+@media screen and (max-width: 500px) {
+  .playOptions {
+    width: 100%;
+  }
+}
+
 .playInformation {
   min-width: 33%;
   color: #8fd1d9;
+}
+
+@media screen and (max-width: 500px) {
+  .playInformation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .playInformation p {
   margin: 0;
   line-height: 1.6;
   font-size: 0.9rem;
+}
+@media screen and (max-width: 500px) {
+  .playInformation p:last-child{
+    margin-left: 5px;
+  }
+  .playInformation p:last-child:before {
+    content: " – ";
+  }
 }
 
 .playIcon {
@@ -62,5 +85,11 @@ export default {
 
 .playButton {
   font-size: 2.5rem;
+}
+
+@media screen and (max-width: 500px) {
+  .playButton {
+    font-size: 1.5rem;
+  }
 }
 </style>

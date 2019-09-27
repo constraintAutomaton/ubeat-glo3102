@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer container">
     <h2 class="listTitle"><a>Top 50</a></h2>
-    <ul class="albumList flexContent row row-no-padding">
+    <ul class="albumList flexContent row">
       <li class="col s6 m4 l2">
         <img
           src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
@@ -64,6 +64,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#1</h4>
@@ -84,6 +85,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#2</h4>
@@ -104,6 +106,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#3</h4>
@@ -124,6 +127,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#4</h4>
@@ -144,6 +148,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#5</h4>
@@ -164,6 +169,7 @@
           <img
             src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
             class="playButton"
+            alt="Play Icon"
           />
           <div class="trackDesc">
             <h4 class="ranking">#6</h4>
@@ -179,15 +185,13 @@
 </template>
 
 <style scoped>
+.albumList {
+  align-items: flex-start;
+}
+
 .albumList li {
   padding: 8px;
   margin-bottom: 1rem;
-  flex-grow: 1;
-  flex-shrink: 1;
-  min-width: 100px;
-  min-height: 130px;
-  max-width: 260px;
-  max-height: 300px;
 }
 
 .albumList img {
@@ -212,7 +216,7 @@ p {
 }
 
 li .popularTrack {
-  background-color: #4f868c;
+  background-color: var(--primaryAccentColor);
   display: flex;
   align-items: center;
   /* padding: 0 8px; */
@@ -222,13 +226,13 @@ li .popularTrack {
   position: relative;
 }
 
-li .popularTrack:nth-child(even) {
-  background-color: #4f868c;
+li .popularTrack:hover {
+  background-color: var(--darkerAccentColor);
+  cursor: pointer;
 }
 
 .trackList {
   display: flex;
-  /*flex-direction: column;*/
   flex-wrap: wrap;
 }
 
@@ -263,8 +267,7 @@ li .popularTrack:nth-child(even) {
   opacity: 0;
 }
 
-.playButton:hover {
+li .popularTrack:hover .playButton {
   opacity: 1;
-  cursor: pointer;
 }
 </style>

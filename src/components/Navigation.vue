@@ -197,12 +197,15 @@
 
 .customNavItem {
   display: flex;
+  align-items: center;
 }
 
 .nav-wrapper .input-field input[type="search"] {
-  padding-left: 1rem;
+  /*padding-left: 1rem;*/
   width: calc(100% - 1rem);
   margin: 0 0 0 0;
+  padding: 5px 5px 5px 1rem;
+  border-radius: 5rem;
 }
 </style>
 
