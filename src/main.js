@@ -8,7 +8,13 @@ import "materialize-css";
 import "materialize-css/dist/css/materialize.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faRandom, faSync, faPlayCircle, faBackward, faForward } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRandom,
+  faSync,
+  faPlayCircle,
+  faBackward,
+  faForward
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faRandom, faSync, faPlayCircle, faBackward, faForward);

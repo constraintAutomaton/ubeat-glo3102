@@ -31,7 +31,15 @@
                   </i>
                 </a>
                 <div id="navSearchContainer" class="input-field hide">
-                  <input id="navSearchInput" v-model="searchText" v-on:keydown.enter="search" v-on:blur="toggleSearch" type="search" placeholder="Search..." required>
+                  <input
+                    id="navSearchInput"
+                    v-model="searchText"
+                    v-on:keydown.enter="search"
+                    v-on:blur="toggleSearch"
+                    type="search"
+                    placeholder="Search..."
+                    required
+                  />
                 </div>
               </div>
             </li>
@@ -125,7 +133,13 @@
           <i class="material-icons">
             search
           </i>
-          <input id="sideNavSearchInput" type="text" v-model="searchText" v-on:keydown.enter="search" placeholder="Search..." />
+          <input
+            id="sideNavSearchInput"
+            type="text"
+            v-model="searchText"
+            v-on:keydown.enter="search"
+            placeholder="Search..."
+          />
         </a>
       </li>
       <li class="divider"></li>
@@ -177,7 +191,7 @@
   font-size: 2.1rem;
 }
 
-#sideNavSearchInput{
+#sideNavSearchInput {
   font-size: 100%;
 }
 
@@ -190,7 +204,6 @@
   width: calc(100% - 1rem);
   margin: 0 0 0 0;
 }
-
 </style>
 
 <script>
@@ -205,13 +218,15 @@ export default {
     hideDropdown: () => {
       document.getElementById("navDropdown").classList.remove("dropdownOpen");
     },
-    search: function () {
+    search: function() {
       console.log(this.searchText);
       this.searchText = "";
       this.toggleSearch();
     },
     toggleSearch: () => {
-      if(!document.getElementById("navSearchContainer").classList.toggle("hide"))
+      if (
+        !document.getElementById("navSearchContainer").classList.toggle("hide")
+      )
         document.getElementById("navSearchInput").focus();
     }
   },

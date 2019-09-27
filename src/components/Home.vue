@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer container">
     <h2 class="listTitle"><a>Top 50</a></h2>
-    <ul class="albumList row row-no-padding">
+    <ul class="albumList flexContent row row-no-padding">
       <li class="col s6 m4 l2">
         <img
           src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
@@ -179,122 +179,92 @@
 </template>
 
 <style scoped>
+.albumList li {
+  padding: 8px;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-width: 100px;
+  min-height: 130px;
+  max-width: 260px;
+  max-height: 300px;
+}
 
-  .listTitle a {
-    color: black;
-  }
+.albumList img {
+  max-width: 100%;
+  height: auto;
+}
 
-  .listTitle a:hover {
-    color: var(--blackLinkHoverColor);
-    cursor: pointer;
-  }
+.albumList img:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
 
-  .albumList {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    overflow-y: scroll;
-  }
+.albumGenre {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
-  .albumList::-webkit-scrollbar {
-    display: none;
-  }
+p {
+  font-size: 12px;
+  margin: 0;
+}
 
-  .albumList li {
-    padding: 8px;
-    margin-bottom: 1rem;
-    flex-grow: 1;
-    flex-shrink: 1;
-    min-width: 100px;
-    min-height: 130px;
-    max-width: 260px;
-    max-height: 300px;
-  }
+li .popularTrack {
+  background-color: #4f868c;
+  display: flex;
+  align-items: center;
+  /* padding: 0 8px; */
+  height: 100px;
+  color: #fff;
+  margin-bottom: 1rem;
+  position: relative;
+}
 
-  .albumList img {
-    max-width: 100%;
-    height: auto;
-  }
+li .popularTrack:nth-child(even) {
+  background-color: #4f868c;
+}
 
-  .albumList img:hover {
-    opacity: 0.8;
-    cursor: pointer;
-  }
+.trackList {
+  display: flex;
+  /*flex-direction: column;*/
+  flex-wrap: wrap;
+}
 
-  .albumGenre {
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+.trackList img {
+  width: auto;
+  height: 100%;
+  margin-right: 1rem;
+}
 
-  .albumGenre a {
-    color: black;
-  }
+.ranking {
+  margin: 0 0 0.5rem;
+}
 
-  .albumGenre a:hover {
-    color: var(--blackLinkHoverColor);
-    cursor: pointer;
-  }
+.artistText {
+  color: #fff;
+  cursor: pointer;
+}
 
-  p {
-    font-size: 12px;
-    margin: 0;
-  }
+.artistText:hover {
+  color: rgb(204, 204, 204);
+  cursor: pointer;
+}
 
-  li .popularTrack {
-    background-color: #4F868C;
-    display: flex;
-    align-items: center;
-    /* padding: 0 8px; */
-    height: 100px;
-    color: #fff;
-    margin-bottom: 1rem;
-    position: relative;
-  }
+.trackNameText {
+  font-style: italic;
+}
 
-  li .popularTrack:nth-child(even) {
-    background-color: #4F868C;
-  }
+.playButton {
+  margin: 0px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.329);
+  opacity: 0;
+}
 
-  .trackList {
-    display: flex;
-    /*flex-direction: column;*/
-    flex-wrap: wrap;
-  }
-
-  .trackList img {
-    width: auto;
-    height: 100%;
-    margin-right: 1rem
-  }
-
-  .ranking {
-    margin: 0 0 0.5rem;
-  }
-
-  .artistText {
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .artistText:hover {
-    color: rgb(204, 204, 204);
-    cursor: pointer;
-  }
-
-  .trackNameText {
-    font-style: italic;
-  }
-
-  .playButton {
-    margin: 0px;
-    position: absolute;
-    background-color:rgba(255, 255, 255, 0.329);
-    opacity: 0;
-  }
-
-  .playButton:hover {
-    opacity: 1;
-    cursor: pointer;
-  }
+.playButton:hover {
+  opacity: 1;
+  cursor: pointer;
+}
 </style>

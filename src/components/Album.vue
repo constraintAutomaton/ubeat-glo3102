@@ -57,7 +57,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 :root {
   --album-width: 34vw;
 }
