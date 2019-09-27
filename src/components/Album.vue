@@ -12,25 +12,41 @@
         <section class="tracks">
           <ul>
             <li id="first-track">
-              <span>1. track name</span>
+              <span>
+                1. track name
+                <span>duration: xx:xx</span>
+              </span>
               <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
             </li>
             <li>
-              <span>2. track name</span>
-              <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
-
+              <span>
+                2. track name
+                <span>duration: xx:xx</span>
+              </span>
+              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
             </li>
             <li>
-              <span>3. track name</span>
-              <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
-
+              <span>
+                3. track name
+                <span>duration: xx:xx</span>
+              </span>
+              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
             </li>
             <li id="last-track">
-              <span>4. track name</span>
-              <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
+              <span>
+                4. track name
+                <span>duration: xx:xx</span>
+              </span>
+              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
             </li>
           </ul>
         </section>
+
+
+        <a class="itune-link" href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music">
+          <img src="https://www.apple.com/ca/itunes/link/images/link-badge-itunes.png" />
+        </a>
+        <h1 class="line-under-title">Album info</h1>
 
         <section class="album-info">
           <ul>
@@ -58,7 +74,6 @@
 </template>
 
 <style scoped>
-
 .first-haft {
   display: flex;
 }
@@ -68,9 +83,10 @@
   margin-bottom: 0px;
 }
 .image-album {
-  width:  33vw;
+  width: 33vw;
   height: auto;
   border: solid black;
+  border-width: 1px;
 }
 .tracks {
   width: 100%;
@@ -88,14 +104,15 @@
 .tracks > ul li {
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   list-style-position: inside;
   border-top: solid black;
   border-right: solid black;
-  font-size: 2.0em;
-  background-color: rgb(209, 209, 27);
+  border-width: 1px;
+  font-size: 1.7em;
+  background-color: var(--primaryAccentColor);
 }
-.tracks > ul li:hover{
+.tracks > ul li:hover {
   background-color: transparent;
 }
 .tracks > ul {
@@ -107,17 +124,32 @@
 #last-track {
   margin-bottom: 0px;
   border-bottom: solid black;
+  border-width: 1px;
 }
-.custom-play-button{
+.custom-play-button {
   height: 9000;
   width: auto;
 }
 .album-info {
   font-size: 2em;
 }
-.album-info> ul li{
+.album-info > ul li {
   display: flex;
   justify-content: space-between;
-
+}
+.album-info >ul{
+  margin-top: 0px;
+}
+.tracks span span {
+  font-size: 0.5em;
+}
+.itune-link{
+  display: flex;
+  justify-content: center;
+}
+.line-under-title{
+  border-bottom: black solid;
+  border-width: 1px;
+  margin-bottom: 0px;
 }
 </style>
