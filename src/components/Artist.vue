@@ -27,7 +27,7 @@
     <section>
       <h3 class="listTitle">Popular Tracks</h3>
       <ul class="popularTracks">
-        <li class="row flexContent">
+        <li class="flexContent">
           <img
             src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
             alt="Album Image"
@@ -43,7 +43,7 @@
             </p>
           </div>
         </li>
-        <li class="row flexContent">
+        <li class="flexContent">
           <img
             src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
             alt="Album Image"
@@ -59,7 +59,7 @@
             </p>
           </div>
         </li>
-        <li class="row flexContent">
+        <li class="flexContent">
           <img
             src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
             alt="Album Image"
@@ -75,7 +75,7 @@
             </p>
           </div>
         </li>
-        <li class="row flexContent">
+        <li class="flexContent">
           <img
             src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
             alt="Album Image"
@@ -91,7 +91,7 @@
             </p>
           </div>
         </li>
-        <li class="row flexContent">
+        <li class="flexContent">
           <img
             src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
             alt="Album Image"
@@ -112,7 +112,7 @@
 
     <section>
       <h3 class="listTitle">Albums</h3>
-      <ul class="listAlbum row">
+      <ul class="listAlbum flexContent row">
         <li class="col s6 m4 l2">
           <a>
             <img
@@ -225,6 +225,15 @@
 .infoTrack {
   margin-left: 1rem;
 }
+
+.listAlbum{
+  align-items: flex-start;
+}
+
+.listAlbum li{
+  margin-bottom: 1rem;
+}
+
 
 .listAlbum img {
   max-width: 100%;
