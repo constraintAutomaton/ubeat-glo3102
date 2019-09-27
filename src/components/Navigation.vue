@@ -2,7 +2,7 @@
   <div>
     <div class="navbar-fixed">
       <nav class="grey darken-3">
-        <div class="nav-wrapper container">
+        <div class="nav-wrapper navContainer">
           <router-link to="/" class="navLogo">
             UBeat
           </router-link>
@@ -200,12 +200,57 @@
   align-items: center;
 }
 
+@media only screen and (max-width: 699px) and (min-width: 600px){
+  .navContainer {
+    padding-left: 20px;
+  }
+
+  #navSearchContainer {
+    width: 130px;
+  }
+}
+
+@media only screen and (max-width: 993px) and (min-width: 700px){
+  .navContainer {
+    padding-left: 20px;
+  }
+  
+  #navSearchContainer {
+    width: 200px;
+  }
+}
+
+@media only screen and (min-width: 993px) {
+  #navSearchContainer {
+    width: 130px;
+  }
+
+  .navContainer {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (min-width: 1093px) {
+  #navSearchContainer {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+  }
+}
+
 .nav-wrapper .input-field input[type="search"] {
-  /*padding-left: 1rem;*/
   width: calc(100% - 1rem);
   margin: 0 0 0 0;
   padding: 5px 5px 5px 1rem;
   border-radius: 5rem;
+  height: 3rem;
 }
 </style>
 
