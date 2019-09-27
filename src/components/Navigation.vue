@@ -200,7 +200,7 @@
   align-items: center;
 }
 
-@media only screen and (max-width: 699px) and (min-width: 600px){
+@media only screen and (max-width: 699px) and (min-width: 600px) {
   .navContainer {
     padding-left: 20px;
   }
@@ -210,11 +210,11 @@
   }
 }
 
-@media only screen and (max-width: 993px) and (min-width: 700px){
+@media only screen and (max-width: 993px) and (min-width: 700px) {
   .navContainer {
     padding-left: 20px;
   }
-  
+
   #navSearchContainer {
     width: 200px;
   }
@@ -279,6 +279,7 @@ export default {
     }
   },
   mounted() {
+    // eslint-disable-next-line
     M.Sidenav.init(document.getElementById("sideNav"));
   },
   data() {
