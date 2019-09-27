@@ -12,21 +12,21 @@
         <section class="tracks">
           <ul>
             <li id="first-track">
-              <span>track name</span>
+              <span>1. track name</span>
               <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
             </li>
             <li>
-              <span>track name</span>
+              <span>2. track name</span>
               <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
 
             </li>
             <li>
-              <span>track name</span>
+              <span>3. track name</span>
               <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
 
             </li>
             <li id="last-track">
-              <span>track name</span>
+              <span>4. track name</span>
               <font-awesome-icon class="" :icon="['fas', 'play-circle']" />
             </li>
           </ul>
@@ -58,9 +58,6 @@
 </template>
 
 <style scoped>
-:root {
-  --album-width: 34vw;
-}
 
 .first-haft {
   display: flex;
@@ -71,16 +68,14 @@
   margin-bottom: 0px;
 }
 .image-album {
-  width: var(--album-width);
+  width:  33vw;
   height: auto;
+  border: solid black;
 }
 .tracks {
   width: 100%;
 }
-.album-info {
-  display: flex;
-  justify-content: center;
-}
+
 .album-info > ul {
   width: 100%;
 }
@@ -96,11 +91,17 @@
   align-items:center;
   list-style-position: inside;
   border-top: solid black;
+  border-right: solid black;
   font-size: 2.0em;
+  background-color: rgb(209, 209, 27);
+}
+.tracks > ul li:hover{
+  background-color: transparent;
 }
 .tracks > ul {
   margin-top: 0px;
   padding-left: 0px;
+  width: 100%;
 }
 
 #last-track {
@@ -110,5 +111,13 @@
 .custom-play-button{
   height: 9000;
   width: auto;
+}
+.album-info {
+  font-size: 2em;
+}
+.album-info> ul li{
+  display: flex;
+  justify-content: space-between;
+
 }
 </style>
