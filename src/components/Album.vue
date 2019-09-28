@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root-of-component">
     <h1 class="album-name">Camelot</h1>
     <section class="first-haft">
       <section class="head">
@@ -42,8 +42,10 @@
           </ul>
         </section>
 
-
-        <a class="itune-link" href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music">
+        <a
+          class="itune-link"
+          href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
+        >
           <img src="https://www.apple.com/ca/itunes/link/images/link-badge-itunes.png" />
         </a>
         <h1 class="line-under-title">Album info</h1>
@@ -52,7 +54,7 @@
           <ul>
             <li>
               <span>Title</span>
-              <span class="title-album">Value</span>
+              <span class="title-album">Camelot</span>
             </li>
             <li>
               <span>release date</span>
@@ -99,6 +101,7 @@
   width: 100%;
 }
 .tracks {
+  height: 170px;
   overflow-y: scroll;
 }
 .tracks > ul li {
@@ -119,6 +122,7 @@
   margin-top: 0px;
   padding-left: 0px;
   width: 100%;
+  height: 100%;
 }
 
 #last-track {
@@ -137,19 +141,30 @@
   display: flex;
   justify-content: space-between;
 }
-.album-info >ul{
+.album-info > ul {
   margin-top: 0px;
 }
 .tracks span span {
   font-size: 0.5em;
 }
-.itune-link{
+.itune-link {
   display: flex;
   justify-content: center;
 }
-.line-under-title{
+.line-under-title {
   border-bottom: black solid;
   border-width: 1px;
   margin-bottom: 0px;
+}
+
+@media (max-width: 961px) {
+  .first-haft {
+    flex-direction: column;
+    align-items: center;
+  }
+  .root-of-component {
+    margin-right: 1.5vh;
+    margin-left: 1.5vh;
+  }
 }
 </style>
