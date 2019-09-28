@@ -1,6 +1,6 @@
 <template>
-  <div class="root-of-component">
-    <h1 class="album-name">Camelot</h1>
+  <div class="root-of-component container">
+    <h2 class="album-name">Camelot</h2>
     <section class="first-haft">
       <section class="head">
         <img
@@ -76,19 +76,26 @@
 </template>
 
 <style scoped>
+.album-name {
+  text-align: center;
+  margin-top: 2.3rem;
+  margin-bottom: 2.3rem;
+}
+
 .first-haft {
   display: flex;
 }
-.album-name {
-  text-align: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
+
+.head {
+  margin: 0 0.75rem;
 }
+
 .image-album {
   width: 33vw;
   height: auto;
-  border: solid black;
+  border: solid var(--darkerAccentColor);
   border-width: 1px;
+  margin-bottom: 2.3rem;
 }
 .tracks {
   width: 100%;
@@ -109,14 +116,16 @@
   justify-content: space-between;
   align-items: center;
   list-style-position: inside;
-  border-top: solid black;
-  border-right: solid black;
+  border-top: solid var(--darkerAccentColor);
+  border-right: solid var(--darkerAccentColor);
+  border-left: solid var(--darkerAccentColor);
   border-width: 1px;
   font-size: 1.7em;
   background-color: var(--primaryAccentColor);
 }
 .tracks > ul li:hover {
-  background-color: transparent;
+  cursor: pointer;
+  background-color: var(--darkerAccentColor);
 }
 .tracks > ul {
   margin-top: 0px;
@@ -127,7 +136,7 @@
 
 #last-track {
   margin-bottom: 0px;
-  border-bottom: solid black;
+  border-bottom: solid var(--darkerAccentColor);
   border-width: 1px;
 }
 .custom-play-button {
