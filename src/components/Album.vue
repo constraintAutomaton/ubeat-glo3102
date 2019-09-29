@@ -44,7 +44,7 @@
 
         <a
           class="itune-link"
-          href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
+          href=" https://geo.music.apple.com/ca/album/camelot-single/1478620794?mt=1&app=music"
         >
           <img src="https://www.apple.com/ca/itunes/link/images/link-badge-itunes.png" />
         </a>
@@ -58,15 +58,15 @@
             </li>
             <li>
               <span>release date</span>
-              <span class="release-date-album">Value</span>
+              <span class="release-date-album">2019</span>
             </li>
             <li>
               <span>Number of track</span>
-              <span class="number-track-album">Value</span>
+              <span class="number-track-album">4</span>
             </li>
             <li>
               <span>Gender</span>
-              <span class="gender-album">Value</span>
+              <span class="gender-album">Hip-Hop/Rap</span>
             </li>
           </ul>
         </section>
