@@ -13,7 +13,7 @@
           <a
             href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
             ><img
-              src="https://www.apple.com/ca/itunes/link/images/link-badge-itunes.png"
+              src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png"
           /></a>
         </div>
       </div>
