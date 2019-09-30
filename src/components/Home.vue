@@ -219,7 +219,6 @@ li .popularTrack {
   background-color: var(--primaryAccentColor);
   display: flex;
   align-items: center;
-  /* padding: 0 8px; */
   height: 100px;
   color: #fff;
   margin-bottom: 1rem;

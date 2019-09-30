@@ -68,7 +68,7 @@ p {
   margin: 0 0 1rem;
 }
 
-p:last-child{
+p:last-child {
   margin: 0;
 }
 
@@ -78,4 +78,26 @@ p:last-child{
   align-items: center;
 }
 
+.badgeContainer{
+  width: 135px;
+  height: 40px;
+  margin-top: 1rem;
+}
+.itunesBadge {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left;
+}
+
+@media screen and (max-width: 500px) {
+  .badgeContainer {
+    margin: 0 auto;
+  }
+}
+img.responsiveImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 </style>

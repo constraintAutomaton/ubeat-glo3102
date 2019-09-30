@@ -1,20 +1,28 @@
 <template>
   <div id="artistPage" class="container">
-    <section class="infoArtist row flexContent">
-      <div class="col s12 m6 l6 imgArtist">
+    <section class="flexContent">
+      <div class="imgArtist">
         <img
           src="https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg"
+          class="responsiveImage"
         />
       </div>
-      <div class="col s12 m6 l6">
+      <div class="infoArtist">
         <h1>Mick Jenkins</h1>
         <p class="musicStyle">Genre: Hip-Hop/Rap</p>
-        <div>
+
+        <div class="badgeContainer">
           <a
-            href=" https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
-            ><img
-              src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png"
-          /></a>
+            href="https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              class="itunesBadge"
+              src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
+              alt="Listen on iTunes"
+            />
+          </a>
         </div>
       </div>
     </section>
@@ -211,18 +219,21 @@
 </template>
 
 <style scoped>
-#artistPage {
-  margin-top: 2.3rem;
-}
-
 .imgArtist {
-  display: flex;
+  width: 35%;
+  margin-right: 2rem;
 }
-
+@media screen and (max-width: 500px) {
+  .imgArtist,
+  .infoArtist {
+    width: 100%;
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+}
 .imgArtist img {
-  max-width: 340px;
-  width: 100%;
-  margin: auto;
+  max-width: 275px;
+  border-radius: 50%;
 }
 
 .latestReleases li {
@@ -291,7 +302,6 @@
 .listAlbum li {
   margin-bottom: 1rem;
 }
-
 
 .listAlbum img {
   max-width: 100%;

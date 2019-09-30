@@ -250,7 +250,7 @@
   margin: 0 0 0 0;
   padding: 5px 5px 5px 1rem;
   border-radius: 5rem;
-  height: 3rem;
+  height: 2rem;
 }
 </style>
 

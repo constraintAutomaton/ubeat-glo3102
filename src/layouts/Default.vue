@@ -38,17 +38,19 @@ export default {
 .main-layout {
   color: var(--darkGrey);
   background-color: var(--extraLightColor);
+  min-height: 100vh;
 }
 
 .main-content {
+  padding-top: 3rem;
   padding-bottom: 100px;
 }
 
-.main-content a{
+.main-content a {
   color: var(--darkGrey);
 }
 
-.main-content a:hover{
+.main-content a:hover {
   color: var(--blackLinkHoverColor);
   cursor: pointer;
 }

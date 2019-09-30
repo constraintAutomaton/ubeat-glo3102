@@ -1,179 +1,147 @@
 <template>
-  <div class="root-of-component container">
-    <h2 class="album-name">Camelot</h2>
-    <section class="first-haft">
-      <section class="head">
+  <div id="albumPage" class="container">
+    <section class="flexContent">
+      <div class="albumImage">
         <img
-          class="image-album"
+          class="responsiveImage"
           src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
+          alt="Album Image"
         />
-      </section>
-      <div>
-        <section class="tracks">
-          <ul>
-            <li id="first-track">
-              <span>
-                1. track name
-                <span>duration: xx:xx</span>
-              </span>
-              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
-            </li>
-            <li>
-              <span>
-                2. track name
-                <span>duration: xx:xx</span>
-              </span>
-              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
-            </li>
-            <li>
-              <span>
-                3. track name
-                <span>duration: xx:xx</span>
-              </span>
-              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
-            </li>
-            <li id="last-track">
-              <span>
-                4. track name
-                <span>duration: xx:xx</span>
-              </span>
-              <font-awesome-icon class="custom-play-button" :icon="['fas', 'play-circle']" />
-            </li>
-          </ul>
-        </section>
-
-        <a
-          class="itune-link"
-          href=" https://geo.music.apple.com/ca/album/camelot-single/1478620794?mt=1&app=music"
-        >
-          <img src="https://www.apple.com/ca/itunes/link/images/link-badge-music.png" />
-        </a>
-        <h1 class="line-under-title">Album info</h1>
-
-        <section class="album-info">
-          <ul>
-            <li>
-              <span>Title</span>
-              <span class="title-album">Camelot</span>
-            </li>
-            <li>
-              <span>release date</span>
-              <span class="release-date-album">2019</span>
-            </li>
-            <li>
-              <span>Number of track</span>
-              <span class="number-track-album">4</span>
-            </li>
-            <li>
-              <span>Gender</span>
-              <span class="gender-album">Hip-Hop/Rap</span>
-            </li>
-          </ul>
-        </section>
       </div>
+      <div class="infoAlbum">
+        <h1>Camelot</h1>
+        <p class=""><span>Artist:</span> NLE Choppa</p>
+        <p class=""><span>Genre:</span> Hip-Hop/Rap</p>
+        <p class=""><span>Release:</span> 2019</p>
+        <p class=""><span>Number of tracks:</span> 4</p>
+        <div class="badgeContainer">
+          <a
+            href="https://geo.music.apple.com/ca/album/camelot-single/1478620794?mt=1&app=music"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              class="itunesBadge"
+              src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
+              alt="Listen on iTunes"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+    <section class="tracks">
+      <h2 class="listTitle"><a>Tracks</a></h2>
+      <ul>
+        <li class="trackInfo">
+          <font-awesome-icon
+            class="playTrackIcon"
+            :icon="['fas', 'play-circle']"
+          />
+          <span class="trackNumber">1.</span>
+          <span class="songTitle">Track Name</span>
+          <span class="trackDuration">2:28</span>
+        </li>
+        <li class="trackInfo">
+          <font-awesome-icon
+            class="playTrackIcon"
+            :icon="['fas', 'play-circle']"
+          />
+          <span class="trackNumber">2.</span>
+          <span class="songTitle">Track Name</span>
+          <span class="trackDuration">5:12</span>
+        </li>
+        <li class="trackInfo">
+          <font-awesome-icon
+            class="playTrackIcon"
+            :icon="['fas', 'play-circle']"
+          />
+          <span class="trackNumber">3.</span>
+          <span class="songTitle">Track Name</span>
+          <span class="trackDuration">3:20</span>
+        </li>
+        <li class="trackInfo">
+          <font-awesome-icon
+            class="playTrackIcon"
+            :icon="['fas', 'play-circle']"
+          />
+          <span class="trackNumber">4.</span>
+          <span class="songTitle">Track Name</span>
+          <span class="trackDuration">3:45</span>
+        </li>
+      </ul>
     </section>
   </div>
 </template>
 
 <style scoped>
-.album-name {
-  text-align: center;
-  margin-top: 2.3rem;
-  margin-bottom: 2.3rem;
+.albumImage {
+  width: 35%;
+  margin-right: 2rem;
 }
 
-.first-haft {
-  display: flex;
+.albumImage img {
+  max-width: 275px;
 }
 
-.head {
-  margin: 0 0.75rem;
+@media screen and (max-width: 500px) {
+  .albumImage,
+  .infoAlbum {
+    width: 100%;
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+}
+.infoAlbum p {
+  margin-bottom: 0.5rem;
 }
 
-.image-album {
-  width: 33vw;
-  height: auto;
-  border: solid var(--darkerAccentColor);
-  border-width: 1px;
-  margin-bottom: 2.3rem;
-}
-.tracks {
-  width: 100%;
+.infoAlbum span {
+  color: var(--primaryAccentColor);
+  font-weight: 600;
 }
 
-.album-info > ul {
-  width: 100%;
+.infoAlbum {
+  margin-bottom: 1.5rem;
 }
-.first-haft > div {
-  width: 100%;
-}
-.tracks {
-  height: 170px;
-  overflow-y: scroll;
-}
-.tracks > ul li {
+
+.trackInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  list-style-position: inside;
-  border-top: solid var(--darkerAccentColor);
-  border-right: solid var(--darkerAccentColor);
-  border-left: solid var(--darkerAccentColor);
-  border-width: 1px;
-  font-size: 1.7em;
   background-color: var(--primaryAccentColor);
+  position: relative;
+  height: 40px;
+  color: #fff;
+  margin-bottom: 0;
+  border-bottom: solid var(--darkerAccentColor) 1px;
+  padding: 5px 10px;
 }
-.tracks > ul li:hover {
+
+.trackInfo:last-child {
+  border-bottom: none;
+}
+
+.trackInfo:hover {
   cursor: pointer;
   background-color: var(--darkerAccentColor);
-}
-.tracks > ul {
-  margin-top: 0px;
-  padding-left: 0px;
-  width: 100%;
-  height: 100%;
+  color: var(--darkGrey);
 }
 
-#last-track {
-  margin-bottom: 0px;
-  border-bottom: solid var(--darkerAccentColor);
-  border-width: 1px;
+.trackInfo .songTitle {
+  flex-grow: 2;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.custom-play-button {
-  height: 9000;
-  width: auto;
-}
-.album-info {
-  font-size: 2em;
-}
-.album-info > ul li {
-  display: flex;
-  justify-content: space-between;
-}
-.album-info > ul {
-  margin-top: 0px;
-}
-.tracks span span {
-  font-size: 0.5em;
-}
-.itune-link {
-  display: flex;
-  justify-content: center;
-}
-.line-under-title {
-  border-bottom: black solid;
-  border-width: 1px;
-  margin-bottom: 0px;
+.playTrackIcon {
+  font-size: 1.3rem;
 }
 
-@media (max-width: 961px) {
-  .first-haft {
-    flex-direction: column;
-    align-items: center;
-  }
-  .root-of-component {
-    margin-right: 1.5vh;
-    margin-left: 1.5vh;
-  }
+.playTrackIcon,
+.trackNumber,
+.songTitle {
+  margin-right: 10px;
 }
 </style>

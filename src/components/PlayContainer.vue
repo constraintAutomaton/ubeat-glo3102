@@ -71,7 +71,7 @@ export default {
   font-size: 0.9rem;
 }
 @media screen and (max-width: 500px) {
-  .playInformation p:last-child{
+  .playInformation p:last-child {
     margin-left: 5px;
   }
   .playInformation p:last-child:before {
