@@ -6,6 +6,7 @@
     <span class="trackDuration">{{trackDuration}}</span>
   </li>
 </template>
+
 <script>
 export default {
   props: {
