@@ -3,35 +3,26 @@
     <h2 class="listTitle">
       <a>Tracks</a>
     </h2>
-    <ul>
-      <li class="trackInfo">
-        <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
-        <span class="trackNumber">1.</span>
-        <span class="songTitle">Track Name</span>
-        <span class="trackDuration">2:28</span>
-      </li>
-      <li class="trackInfo">
-        <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
-        <span class="trackNumber">2.</span>
-        <span class="songTitle">Track Name</span>
-        <span class="trackDuration">5:12</span>
-      </li>
-      <li class="trackInfo">
-        <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
-        <span class="trackNumber">3.</span>
-        <span class="songTitle">Track Name</span>
-        <span class="trackDuration">3:20</span>
-      </li>
-      <li class="trackInfo">
-        <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
-        <span class="trackNumber">4.</span>
-        <span class="songTitle">Track Name</span>
-        <span class="trackDuration">3:45</span>
-      </li>
+    <ul v-for="track in trackList">
+      <TrackItem v-bind:key="track.trackNumber" v-bind:trackNumber="track.trackNumber"></TrackItem>
     </ul>
   </section>
 </template>
 <script>
+import TrackItem from "./TrackItem.vue";
+import { type } from "os";
 export default {
+  props: {
+    trackList: {
+      type: Array,
+      default: [
+        { trackNumber: 1, songTitle: "foo", trackDuration: "0:00" },
+        { trackNumber: 2, songTitle: "foo", trackDuration: "0:00" }
+      ]
+    }
+  },
+  components: {
+    TrackItem
+  }
 };
 </script>

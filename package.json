@@ -13,7 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
-    "core-js": "^3.2.1",
+    "core-js": "^3.3.4",
     "howler": "^2.1.2",
     "materialize-css": "^1.0.0",
     "vue": "^2.6.10",
