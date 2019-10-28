@@ -1,0 +1,70 @@
+.albumImage {
+    width: 35%;
+    margin-right: 2rem;
+  }
+  
+  .albumImage img {
+    max-width: 275px;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .albumImage,
+    .infoAlbum {
+      width: 100%;
+      margin: 0 0 2rem 0;
+      text-align: center;
+    }
+  }
+  .infoAlbum p {
+    margin-bottom: 0.5rem;
+  }
+  
+  .infoAlbum span {
+    color: var(--primaryAccentColor);
+    font-weight: 600;
+  }
+  
+  .infoAlbum {
+    margin-bottom: 1.5rem;
+  }
+  
+  .trackInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primaryAccentColor);
+    position: relative;
+    height: 40px;
+    color: #fff;
+    margin-bottom: 0;
+    border-bottom: solid var(--darkerAccentColor) 1px;
+    padding: 5px 10px;
+  }
+  
+  .trackInfo:last-child {
+    border-bottom: none;
+  }
+  
+  .trackInfo:hover {
+    cursor: pointer;
+    background-color: var(--darkerAccentColor);
+    color: var(--darkGrey);
+  }
+  
+  .trackInfo .songTitle {
+    flex-grow: 2;
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .playTrackIcon {
+    font-size: 1.3rem;
+  }
+  
+  .playTrackIcon,
+  .trackNumber,
+  .songTitle {
+    margin-right: 10px;
+  }
