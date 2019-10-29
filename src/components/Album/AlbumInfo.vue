@@ -1,7 +1,7 @@
 <template>
   <section class="flexContent">
     <div class="albumImage">
-      <img class="responsiveImage" v-bind:src="{image}" alt="Album Image" />
+      <img class="responsiveImage" v-bind:src="image" alt="Album Image" />
     </div>
     <div class="infoAlbum">
       <h1>{{ambumName}}</h1>
@@ -22,7 +22,7 @@
         {{numberOfTrack}}
       </p>
       <div class="badgeContainer">
-        <a v-bind:href="{linkItune}" target="_blank" rel="noopener">
+        <a v-bind:href="linkItune" target="_blank" rel="noopener">
           <img
             class="itunesBadge"
             src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
@@ -43,7 +43,7 @@ export default {
     },
     image: {
       type: String,
-      default: "./../../assets/logo.png"
+      default: ""
     },
     artiste: {
       type: String,

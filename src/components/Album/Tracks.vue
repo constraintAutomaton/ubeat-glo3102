@@ -15,10 +15,10 @@ export default {
   props: {
     trackList: {
       type: Array,
-      default: [
+      default: ()=>{return [
         { trackNumber: 1, songTitle: "foo", trackDuration: "0:00" },
         { trackNumber: 2, songTitle: "foo", trackDuration: "0:00" }
-      ]
+      ];}
     }
   },
   components: {

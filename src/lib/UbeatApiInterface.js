@@ -25,6 +25,8 @@ export default class UbeatApiInterface {
     );
     if (rep.ok) {
       return await rep.json();
+    } else {
+      return {};
     }
   }
   async searchAlbum(p_query, p_limite = 10) {
@@ -52,6 +54,8 @@ export default class UbeatApiInterface {
     );
     if (rep.ok) {
       return await rep.json();
+    } else {
+      return {};
     }
   }
   async getAlbumById(p_id) {
