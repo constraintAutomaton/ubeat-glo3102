@@ -13,11 +13,12 @@ import {
   faSync,
   faPlayCircle,
   faBackward,
-  faForward
+  faForward,
+  faPencilAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faRandom, faSync, faPlayCircle, faBackward, faForward);
+library.add(faRandom, faSync, faPlayCircle, faBackward, faForward, faPencilAlt);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

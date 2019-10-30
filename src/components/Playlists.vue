@@ -1,13 +1,15 @@
 <template>
   <div id="playlistsPage" class="container">
-    <template v-for="playlist in playlists">
-      <h2>{{ playlist.name }}</h2>
+    <h1>My Playlists</h1>
+    <template v-for="(playlist, index) in playlists">
+      <single-playlist :playlist="playlist" :indexNumber="index.toString()"></single-playlist>
     </template>
   </div>
 </template>
 
 <script>
 import { getPlaylists } from "./../lib/util/utilPlaylist";
+import SinglePlaylist from "./Playlist/SinglePlaylist";
 
 export default {
   name: "Playlists.vue",
@@ -18,14 +20,14 @@ export default {
     };
   },
 
-  mounted() {
-    console.log("TEST", this.playlists);
+  components: {
+    SinglePlaylist
   },
 
+  mounted() {},
+
   async created() {
-      console.log("before", this.playlists);
-      this.playlists = await getPlaylists();
-      console.log(this.playlists);
+    this.playlists = await getPlaylists();
   }
 };
 </script>
