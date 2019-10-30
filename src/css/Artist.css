@@ -1,0 +1,98 @@
+.imgArtist {
+  width: 35%;
+  margin-right: 2rem;
+}
+@media screen and (max-width: 500px) {
+  .imgArtist,
+  .infoArtist {
+    width: 100%;
+    margin: 0 0 2rem 0;
+    text-align: center;
+  }
+}
+.imgArtist img {
+  max-width: 275px;
+  border-radius: 50%;
+}
+
+.latestReleases li {
+  height: 80px;
+}
+
+.release {
+  position: relative;
+  background-color: var(--primaryAccentColor);
+  height: 100%;
+  color: #fff;
+  border-bottom: solid var(--darkerAccentColor) 1px;
+}
+
+.release:hover {
+  cursor: pointer;
+  background-color: var(--darkerAccentColor);
+}
+
+.popularTracks li {
+  background-color: var(--primaryAccentColor);
+  position: relative;
+  height: 40px;
+  color: #fff;
+  margin-bottom: 0;
+  border-bottom: solid var(--darkerAccentColor) 1px;
+}
+
+.popularTracks li:last-child {
+  border-bottom: none;
+}
+
+.popularTracks li:hover {
+  cursor: pointer;
+  background-color: var(--darkerAccentColor);
+}
+
+.trackImg {
+  height: 100%;
+}
+
+.playButton {
+  margin: 0px;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.329);
+  opacity: 0;
+}
+
+.release:hover .playButton {
+  opacity: 1;
+}
+
+.popularTracks li:hover .playButton {
+  opacity: 1;
+}
+
+.infoTrack {
+  margin-left: 1rem;
+}
+
+.listAlbum {
+  align-items: flex-start;
+}
+
+.listAlbum li {
+  margin-bottom: 1rem;
+}
+
+.listAlbum img {
+  max-width: 100%;
+}
+
+.listAlbum img:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.albumTitle {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 0;
+}

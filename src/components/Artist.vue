@@ -1,31 +1,11 @@
 <template>
   <div id="artistPage" class="container">
-    <section class="flexContent">
-      <div class="imgArtist">
-        <img
-          src="https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg"
-          class="responsiveImage"
-        />
-      </div>
-      <div class="infoArtist">
-        <h1>Mick Jenkins</h1>
-        <p class="musicStyle">Genre: Hip-Hop/Rap</p>
-
-        <div class="badgeContainer">
-          <a
-            href="https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
-            target="_blank"
-            rel="noopener"
-          >
-            <img
-              class="itunesBadge"
-              src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
-              alt="Listen on iTunes"
-            />
-          </a>
-        </div>
-      </div>
-    </section>
+    <ArtistInfo
+      v-bind:artistName="artistInfo.artistName"
+      v-bind-image="artistInfo.imgArtist"
+      v-bind:genre="artistInfo.genre"
+      v-bind:linkItune="artistInfo.linkItune"
+    ></ArtistInfo>
 
     <section>
       <h3 class="listTitle">Latest Releases</h3>
@@ -69,91 +49,7 @@
       </ul>
     </section>
 
-    <section>
-      <h3 class="listTitle">Popular Tracks</h3>
-      <ul class="popularTracks">
-        <li class="flexContent">
-          <img
-            src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            alt="Album Image"
-            class="trackImg"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-          />
-          <div class="infoTrack">
-            <p class="trackPosition">
-              #1 - <span class="trackName">Track Name</span>
-            </p>
-          </div>
-        </li>
-        <li class="flexContent">
-          <img
-            src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            alt="Album Image"
-            class="trackImg"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-          />
-          <div class="infoTrack">
-            <p class="trackPosition">
-              #2 - <span class="trackName">Track Name</span>
-            </p>
-          </div>
-        </li>
-        <li class="flexContent">
-          <img
-            src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            alt="Album Image"
-            class="trackImg"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-          />
-          <div class="infoTrack">
-            <p class="trackPosition">
-              #3 - <span class="trackName">Track Name</span>
-            </p>
-          </div>
-        </li>
-        <li class="flexContent">
-          <img
-            src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            alt="Album Image"
-            class="trackImg"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-          />
-          <div class="infoTrack">
-            <p class="trackPosition">
-              #4 - <span class="trackName">Track Name</span>
-            </p>
-          </div>
-        </li>
-        <li class="flexContent">
-          <img
-            src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            alt="Album Image"
-            class="trackImg"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-          />
-          <div class="infoTrack">
-            <p class="trackPosition">
-              #5 - <span class="trackName">Track Name</span>
-            </p>
-          </div>
-        </li>
-      </ul>
-    </section>
+   <Tracks title="Popular tracks"></Tracks>
 
     <section>
       <h3 class="listTitle">Albums</h3>
@@ -217,104 +113,25 @@
     </section>
   </div>
 </template>
+<script>
+  import ArtistInfo from "./Artist/ArtistInfo.vue";
+  import Tracks from "./Album/Tracks";
+  export default {
+      data() {
+          return {
+              artistInfo: {
+                  artistName: "bar",
+                  imgArtist: "./../../assets/logo.png",
+                  genre: "bar",
+                  linkItune: "./"
+              }
+          };
+      },
+      components: {
+          ArtistInfo,
+          Tracks
+      }
 
-<style scoped>
-.imgArtist {
-  width: 35%;
-  margin-right: 2rem;
-}
-@media screen and (max-width: 500px) {
-  .imgArtist,
-  .infoArtist {
-    width: 100%;
-    margin: 0 0 2rem 0;
-    text-align: center;
-  }
-}
-.imgArtist img {
-  max-width: 275px;
-  border-radius: 50%;
-}
-
-.latestReleases li {
-  height: 80px;
-}
-
-.release {
-  position: relative;
-  background-color: var(--primaryAccentColor);
-  height: 100%;
-  color: #fff;
-  border-bottom: solid var(--darkerAccentColor) 1px;
-}
-
-.release:hover {
-  cursor: pointer;
-  background-color: var(--darkerAccentColor);
-}
-
-.popularTracks li {
-  background-color: var(--primaryAccentColor);
-  position: relative;
-  height: 40px;
-  color: #fff;
-  margin-bottom: 0;
-  border-bottom: solid var(--darkerAccentColor) 1px;
-}
-
-.popularTracks li:last-child {
-  border-bottom: none;
-}
-
-.popularTracks li:hover {
-  cursor: pointer;
-  background-color: var(--darkerAccentColor);
-}
-
-.trackImg {
-  height: 100%;
-}
-
-.playButton {
-  margin: 0px;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.329);
-  opacity: 0;
-}
-
-.release:hover .playButton {
-  opacity: 1;
-}
-
-.popularTracks li:hover .playButton {
-  opacity: 1;
-}
-
-.infoTrack {
-  margin-left: 1rem;
-}
-
-.listAlbum {
-  align-items: flex-start;
-}
-
-.listAlbum li {
-  margin-bottom: 1rem;
-}
-
-.listAlbum img {
-  max-width: 100%;
-}
-
-.listAlbum img:hover {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.albumTitle {
-  font-size: 14px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-</style>
+  };
+</script>
+<style src="./../css/Artist.css"></style>
