@@ -1,15 +1,22 @@
 /**
  * This class handle the raw request to the Ubeat Api
- * Futher threatement are in the util class corresponding to the component.
+ * Further usages are in the util class corresponding to the component.
  */
 
 export default class UbeatApiInterface {
   constructor(isSecure = true) {
     this.rootUrl = "https://ubeat.herokuapp.com/";
+    this.userTest = {
+      name: "User Test",
+      email: "valerie.boivin.7@ulaval.ca",
+      id: "5db9a4fbd0c7f00004015499",
+      password: "Equipe7ulaval"
+    };
     if (!isSecure) {
       this.rootUrl += "unsecure/";
     }
   }
+
   async search(p_query, p_type = "", p_limite = 10) {
     const param = {
       method: "GET",
