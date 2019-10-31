@@ -1,13 +1,35 @@
 <template>
-    $END$
+  <li class="col s6 m4 l2">
+    <a>
+      <img v-bind:src="albumImage" />
+    </a>
+    <h3 class="albumTitle">
+      <a>{{albumTitle}}</a>
+    </h3>
+    <p>{{albumYear}}</p>
+  </li>
 </template>
 
 <script>
     export default {
-        name: "AlbumsItem"
-    }
+        props: {
+            albumTitle: {
+                type: String,
+                default: "abc"
+            },
+            albumYear: {
+                type: Number,
+                default: 2019
+            },
+            albumImage: {
+                type: String,
+                default: "./"
+            },
+
+        }
+    };
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 
 </style>

@@ -50,86 +50,28 @@
     </section>
 
    <Tracks title="Popular tracks"></Tracks>
-
-    <section>
-      <h3 class="listTitle">Albums</h3>
-      <ul class="listAlbum flexContent row">
-        <li class="col s6 m4 l2">
-          <a>
-            <img
-              src="https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg"
-            />
-          </a>
-          <h3 class="albumTitle">
-            <a>Pieces of a Man</a>
-          </h3>
-          <p>2018</p>
-        </li>
-        <li class="col s6 m4 l2">
-          <a>
-            <img
-              src="https://i1.sndcdn.com/artworks-3e86379b-ae93-443b-887a-52b0a8b05a93-0-t500x500.jpg"
-            />
-          </a>
-          <h3 class="albumTitle">
-            <a>Or More The Anxious</a>
-          </h3>
-          <p>2017</p>
-        </li>
-        <li class="col s6 m4 l2">
-          <a>
-            <img
-              src="https://i1.sndcdn.com/artworks-f12bb816-104e-4655-bc63-6c84c373a7a2-0-t500x500.jpg"
-            />
-          </a>
-          <h3 class="albumTitle">
-            <a>The Healing Component</a>
-          </h3>
-          <p>2016</p>
-        </li>
-        <li class="col s6 m4 l2">
-          <a>
-            <img
-              src="https://i1.sndcdn.com/artworks-000127868569-v269fn-t500x500.jpg"
-            />
-          </a>
-          <h3 class="albumTitle">
-            <a>Wave[s]</a>
-          </h3>
-          <p>2015</p>
-        </li>
-        <li class="col s6 m4 l2">
-          <a>
-            <img
-              src="https://i1.sndcdn.com/artworks-c65a3566-53c4-4cd1-9b24-2a14c90efed4-0-t500x500.jpg"
-            />
-          </a>
-          <h3 class="albumTitle">
-            <a>The Water (S)</a>
-          </h3>
-          <p>2014</p>
-        </li>
-      </ul>
-    </section>
+    <AlbumOfArtist title="Albums"></AlbumOfArtist>
   </div>
 </template>
 <script>
   import ArtistInfo from "./Artist/ArtistInfo.vue";
   import Tracks from "./Album/Tracks";
+  import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
   export default {
       data() {
           return {
               artistInfo: {
-                  artistName: "bar",
+                  artistName: "Mick Jenkins",
                   imgArtist: "./../../assets/logo.png",
-                  genre: "bar",
+                  genre: "Hip-Hop/Rap",
                   linkItune: "./"
               }
           };
       },
       components: {
           ArtistInfo,
-          Tracks
+          Tracks,
+          AlbumOfArtist
       }
 
   };

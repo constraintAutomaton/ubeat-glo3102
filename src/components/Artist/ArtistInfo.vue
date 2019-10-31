@@ -7,7 +7,7 @@
       />
     </div>
     <div class="infoArtist">
-      <h1>{{artistName}}}</h1>
+      <h1>{{artistName}}</h1>
       <p class="musicStyle">Genre: {{genre}}</p>
 
       <div class="badgeContainer">
