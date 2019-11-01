@@ -33,6 +33,7 @@ export default class UbeatApiInterface {
     if (rep.ok) {
       return await rep.json();
     } else {
+      console.error(rep);
       return {};
     }
   }
@@ -56,12 +57,13 @@ export default class UbeatApiInterface {
     p_getTracksOrAlbum =
       p_getTracksOrAlbum != "" ? p_getTracksOrAlbum + "/" : "";
     const rep = await fetch(
-      `${this.rootUrl}${p_type}/${p_id}${p_getTracksOrAlbum}`,
+      `${this.rootUrl}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
       param
     );
     if (rep.ok) {
       return await rep.json();
     } else {
+      console.error(rep);
       return {};
     }
   }
