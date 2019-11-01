@@ -27,7 +27,8 @@ export const getTrackInfo = async p_id => {
     return {
       trackNumber: el.trackNumber,
       songTitle: el.trackName,
-      trackDuration: convertMillisToTrackTime(el.trackTimeMillis)
+      trackDuration: convertMillisToTrackTime(el.trackTimeMillis),
+      songLink: el.previewUrl
     };
   });
   return formated;

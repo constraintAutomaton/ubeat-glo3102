@@ -1,8 +1,6 @@
 <template>
   <div id="albumPage" class="container">
-    <AlbumInfo
-      v-bind:albumInfo="albumInfo"
-    ></AlbumInfo>
+    <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
     <Tracks v-bind:trackList="trackInfo"></Tracks>
   </div>
 </template>
@@ -25,8 +23,8 @@ export default {
         linkItune: "./"
       },
       trackInfo: [
-        { trackNumber: 1, songTitle: "bar", trackDuration: "99:00" },
-        { trackNumber: 2, songTitle: "bar", trackDuration: "99:00" }
+        { trackNumber: 1, songTitle: "bar", trackDuration: "99:00",songLink:"./" },
+        { trackNumber: 2, songTitle: "bar", trackDuration: "99:00",songLink:"./" }
       ]
     };
   },

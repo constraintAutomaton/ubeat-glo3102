@@ -39,6 +39,9 @@
     margin-bottom: 0;
     border-bottom: solid var(--darkerAccentColor) 1px;
     padding: 5px 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
   }
   
   .trackInfo:last-child {
@@ -58,6 +61,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    
   }
   .playTrackIcon {
     font-size: 1.3rem;
@@ -68,4 +72,5 @@
   .songTitle {
     margin-right: 10px;
   }
+  
   

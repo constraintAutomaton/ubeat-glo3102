@@ -21,6 +21,10 @@ export default {
     trackDuration: {
       type: String,
       default: "0:00"
+    },
+    songLink:{
+      type:String,
+      default:"./"
     }
   }
 };
