@@ -46,7 +46,7 @@ export default class UbeatApiInterface {
   async searchTracks(p_query, p_limite = 10) {
     return await this.search(p_query, "tracks", p_limite);
   }
-  async _getAlbumOrArtist(p_type, p_id, p_getTracksOrAlbum = "") {
+  async _getAlbumOrArtistById(p_type, p_id, p_getTracksOrAlbum = "") {
     const param = {
       method: "GET",
       headers: {
@@ -68,15 +68,15 @@ export default class UbeatApiInterface {
     }
   }
   async getAlbumById(p_id) {
-    return await this._getAlbumOrArtist("albums", p_id);
+    return await this._getAlbumOrArtistById("albums", p_id);
   }
   async getAlbumTrackById(p_id) {
-    return await this._getAlbumOrArtist("albums", p_id, "tracks");
+    return await this._getAlbumOrArtistById("albums", p_id, "tracks");
   }
   async getArtistById(p_id) {
-    return await this._getAlbumOrArtist("artists", p_id);
+    return await this._getAlbumOrArtistById("artists", p_id);
   }
   async getArtistAlbumById(p_id) {
-    return await this._getAlbumOrArtist("artists", p_id, "albums");
+    return await this._getAlbumOrArtistById("artists", p_id, "albums");
   }
 }

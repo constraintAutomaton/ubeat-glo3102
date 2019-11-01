@@ -1,25 +1,25 @@
 <template>
   <section class="flexContent">
     <div class="albumImage">
-      <img class="responsiveImage" v-bind:src="image" alt="Album Image" />
+      <img class="responsiveImage" v-bind:src="albumInfo.image" alt="Album Image" />
     </div>
     <div class="infoAlbum">
-      <h1>{{ambumName}}</h1>
+      <h1>{{albumInfo.albumName}}</h1>
       <p class>
         <span>Artist:</span>
-        {{artiste}}
+        {{albumInfo.artist}}
       </p>
       <p class>
         <span>Genre:</span>
-        {{genre}}
+        {{albumInfo.genre}}
       </p>
       <p class>
         <span>Release:</span>
-        {{release}}
+        {{albumInfo.release}}
       </p>
       <p class>
         <span>Number of tracks:</span>
-        {{numberOfTrack}}
+        {{albumInfo.numberOfTrack}}
       </p>
       <div class="badgeContainer">
         <a v-bind:href="linkItune" target="_blank" rel="noopener">
@@ -37,33 +37,18 @@
 <script>
 export default {
   props: {
-    ambumName: {
-      type: String,
-      default: "bar"
-    },
-    image: {
-      type: String,
-      default: ""
-    },
-    artiste: {
-      type: String,
-      default: "foo"
-    },
-    genre: {
-      type: String,
-      default: "bar"
-    },
-    release: {
-      type: Number,
-      default: 1984
-    },
-    numberOfTrack: {
-      type: Number,
-      default: 2501
-    },
-    linkItune: {
-      type: String,
-      default: "./"
+    albumInfo: {
+      type: Object,
+      default: () => {
+        return {
+          albumName: "bar",
+          artist: "foo",
+          genre: "bar",
+          release: 1984,
+          numberOfTrack: 2501,
+          linkItune: "./"
+        };
+      }
     }
   }
 };
