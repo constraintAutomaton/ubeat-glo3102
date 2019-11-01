@@ -16,15 +16,25 @@ export default {
       albumInfo: {
         albumName: "bar",
         image: "./../../assets/logo.png",
-        artiste: "foo",
+        artist: "foo",
         genre: "bar",
         release: 1984,
         numberOfTrack: 2501,
         linkItune: "./"
       },
       trackInfo: [
-        { trackNumber: 1, songTitle: "bar", trackDuration: "99:00",songLink:"./" },
-        { trackNumber: 2, songTitle: "bar", trackDuration: "99:00",songLink:"./" }
+        {
+          trackNumber: 1,
+          songTitle: "bar",
+          trackDuration: "99:00",
+          songLink: "./"
+        },
+        {
+          trackNumber: 2,
+          songTitle: "bar",
+          trackDuration: "99:00",
+          songLink: "./"
+        }
       ]
     };
   },

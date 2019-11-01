@@ -6,10 +6,11 @@ const UbeatEngine = new UbeatApiInterface(isSecure);
 export const getAlbumInfo = async p_album => {
   const searchResults = await UbeatEngine.searchAlbum(p_album, 1);
   const result = searchResults.results[0];
+
   const formated = {
-    ambumName: result.collectionName,
+    albumName: result.collectionName,
     image: result.artworkUrl100,
-    artiste: result.artistName,
+    artist: result.artistName,
     genre: result.primaryGenreName,
     release: new Date(result.releaseDate).getFullYear(),
     numberOfTrack: result.trackCount,
@@ -31,6 +32,7 @@ export const getTrackInfo = async p_id => {
       songLink: el.previewUrl
     };
   });
+
   return formated;
 };
 const convertMillisToTrackTime = p_millis => {
