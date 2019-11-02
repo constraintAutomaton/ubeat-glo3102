@@ -57,6 +57,8 @@
   import ArtistInfo from "./Artist/ArtistInfo.vue";
   import Tracks from "./Album/Tracks";
   import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
+  import {getArtistInfo} from "../lib/util/utilArtist";
+
   export default {
       data() {
           return {
@@ -67,6 +69,13 @@
                   linkItune: "./"
               }
           };
+      },
+      async mounted() {
+          if (this.$route.params.name) {
+              const artistSearch = await getArtistInfo(this.$route.params.name);
+              this.artistInfo = artistSearch;
+              console.log(artistSearch);
+          }
       },
       components: {
           ArtistInfo,
