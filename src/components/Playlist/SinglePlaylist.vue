@@ -3,14 +3,13 @@
     <div class="playlistNameWrapper">
       <textarea
         :id="`playlistName${indexNumber}`"
-        data-autoresize
-        class="playlistNameInput autoexpand"
-        placeholder="Enter task"
+        class="playlistNameInput"
+        placeholder="Enter a playlist title"
         rows="1"
         disabled
-        width="auto"
         v-on:keydown="saveNewTitle"
         v-on:focusout="saveNewTitle"
+        v-on:keyup="addAutoResize"
         v-model="playlist.name"
       >
       </textarea>
@@ -30,6 +29,7 @@
 
 <script>
 import SingleTrack from "./SingleTrack";
+import { modifyPlaylist } from "../../lib/util/utilPlaylist";
 
 export default {
   name: "SinglePlaylist",
@@ -68,33 +68,41 @@ export default {
       );
 
       if (event.type === "focusout") {
-        alert("need To save");
-        //TODO call save New Playlist name
+        this.callPutAPI(inputField.value);
         event.target.setAttribute("disabled", "");
       }
       let keycode = event.keyCode ? event.keyCode : event.which;
       if (keycode === 13) {
         event.preventDefault();
-        //TODO call save New Playlist name
+        this.callPutAPI(inputField.value);
         inputField.setAttribute("disabled", "");
       }
     },
 
-    addAutoResize() {
-      document.querySelectorAll("[data-autoresize]").forEach(function(element) {
-        element.style.boxSizing = "border-box";
-        var offset = element.offsetHeight - element.clientHeight;
-        document.addEventListener("input", function(event) {
-          event.target.style.height = "auto";
-          event.target.style.height = event.target.scrollHeight + offset + "px";
+    addAutoResize(event) {
+      if (typeof event !== "undefined" && event.type !== "resize") {
+        console.log(event);
+        event.target.style.height = "auto";
+        event.target.style.height = event.target.scrollHeight + "px";
+      } else {
+        document.querySelectorAll("textarea").forEach(function(element) {
+          element.style.boxSizing = "border-box";
+          let offset = element.offsetHeight - element.clientHeight;
+          element.style.height = element.scrollHeight + offset + "px";
         });
-        element.removeAttribute("data-autoresize");
-      });
+      }
+    },
+
+    async callPutAPI(newName) {
+      console.log("param", newName);
+      this.playlist.name = newName;
+      await modifyPlaylist(this.playlist);
     }
   },
 
   mounted() {
     this.addAutoResize();
+    window.addEventListener("resize", this.addAutoResize);
   }
 };
 </script>
@@ -107,9 +115,10 @@ export default {
 
 .playlistNameInput {
   border: none;
-  width: auto;
+  /*width: auto;*/
   outline: none;
-  overflow: auto;
+  height: auto;
+  /*overflow: auto;*/
   resize: none;
   box-sizing: border-box;
   font-family: "Muli", sans-serif;
