@@ -25,7 +25,7 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("default-layout", Default);
 
 Vue.config.productionTip = false;
-
+Vue.prototype.$songEvent = new Vue(); // Global event bus
 new Vue({
   render: h => h(App),
   router
