@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 export default {
   data() {
     return {
@@ -35,15 +35,15 @@ export default {
   },
   methods: {
     ChangePlayingSong(info) {
-      // name will be automatically transported to the parameter.
+      this.song != undefined ? this.song.stop() : "";
       this.songTitle = info.songTitle;
       this.songLink = info.songLink;
       this.artist = info.artist;
       this.album = info.album;
-       this.sound = new Howl({
+      this.song = new Howl({
         src: [this.songLink]
       });
-      this.sound.play();
+      this.song.play();
     }
   },
   name: "PlayContainer.vue"
