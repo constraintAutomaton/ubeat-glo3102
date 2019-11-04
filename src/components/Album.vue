@@ -1,7 +1,11 @@
 <template>
   <div id="albumPage" class="container">
     <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
-    <Tracks v-bind:trackList="trackInfo"></Tracks>
+    <Tracks
+      v-bind:trackList="trackInfo"
+      v-bind:artist="albumInfo.artist"
+      v-bind:album="albumInfo.album"
+    ></Tracks>
   </div>
 </template>
 

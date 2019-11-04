@@ -15,13 +15,15 @@
 </template>
 
 <script>
+import { Howl, Howler } from "howler";
 export default {
   data() {
     return {
       songTitle: "Name of the song",
       songLink: "",
       artist: "Artist",
-      album: "Album"
+      album: "Album",
+      song: undefined
     };
   },
   created() {
@@ -35,7 +37,13 @@ export default {
     ChangePlayingSong(info) {
       // name will be automatically transported to the parameter.
       this.songTitle = info.songTitle;
-      this.songLink =info.songLink;
+      this.songLink = info.songLink;
+      this.artist = info.artist;
+      this.album = info.album;
+       this.sound = new Howl({
+        src: [this.songLink]
+      });
+      this.sound.play();
     }
   },
   name: "PlayContainer.vue"
