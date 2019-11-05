@@ -2,7 +2,7 @@
   <section class="flexContent">
     <div class="imgArtist">
       <img
-        v-bind:src="imArtist"
+        v-bind:src="imgArtist"
         class="responsiveImage"
       />
     </div>
@@ -12,7 +12,7 @@
 
       <div class="badgeContainer">
         <a
-          href="https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
+          v-bind:href="artistLink"
           target="_blank"
           rel="noopener"
         >
@@ -36,7 +36,7 @@
                 type: String,
                 default: "Mick Jenkins"
             },
-            imArtist: {
+            imgArtist: {
                 type: String,
                 default: "https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg"
             },
@@ -48,7 +48,7 @@
                 type: String,
                 default: "Hip-Hop/Rap"
             },
-            linkItune: {
+            artistLink: {
                 type: String,
                 default: "./"
             }

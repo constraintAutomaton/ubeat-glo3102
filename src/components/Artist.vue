@@ -2,9 +2,9 @@
   <div id="artistPage" class="container">
     <ArtistInfo
       v-bind:artistName="artistInfo.artistName"
-      v-bind-image="artistInfo.imgArtist"
+      v-bind:imgArtist="artistInfo.imgArtist"
       v-bind:genre="artistInfo.genre"
-      v-bind:linkItune="artistInfo.linkItune"
+      v-bind:artistLink="artistInfo.artistLink"
     ></ArtistInfo>
 
     <section>
@@ -64,9 +64,9 @@
           return {
               artistInfo: {
                   artistName: "Mick Jenkins",
-                  imgArtist: "./../../assets/logo.png",
+                  imgArtist: "https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg",
                   genre: "Hip-Hop/Rap",
-                  linkItune: "./"
+                  linkItune: "https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
               }
           };
       },
