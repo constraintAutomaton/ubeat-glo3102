@@ -81,12 +81,12 @@ export default {
 
     addAutoResize(event) {
       if (typeof event !== "undefined" && event.type !== "resize") {
-        console.log(event);
         event.target.style.height = "auto";
         event.target.style.height = event.target.scrollHeight + "px";
       } else {
         document.querySelectorAll("textarea").forEach(function(element) {
           element.style.boxSizing = "border-box";
+          element.style.height = "inherit";
           let offset = element.offsetHeight - element.clientHeight;
           element.style.height = element.scrollHeight + offset + "px";
         });
@@ -94,7 +94,6 @@ export default {
     },
 
     async callPutAPI(newName) {
-      console.log("param", newName);
       this.playlist.name = newName;
       await modifyPlaylist(this.playlist);
     }
@@ -118,12 +117,15 @@ export default {
   /*width: auto;*/
   outline: none;
   height: auto;
+  min-height: 1em;
   /*overflow: auto;*/
   resize: none;
   box-sizing: border-box;
   font-family: "Muli", sans-serif;
   font-size: 2rem;
   font-weight: 500;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .playlistNameInput:disabled {
