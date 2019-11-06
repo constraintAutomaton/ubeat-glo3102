@@ -1,5 +1,5 @@
 <template>
-  <li class="trackInfo">
+  <li class="trackInfo" v-on:click="playSong">
     <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
     <span class="trackNumber">{{trackNumber}}</span>
     <span class="songTitle">{{songTitle}}</span>
@@ -22,9 +22,27 @@ export default {
       type: String,
       default: "0:00"
     },
-    songLink:{
-      type:String,
-      default:"./"
+    songLink: {
+      type: String,
+      default: "./"
+    },
+    artist: {
+      type: String,
+      default: ""
+    },
+    album: {
+      type: String,
+      default: ""
+    }
+  },
+  methods: {
+    playSong() {
+      this.$songEvent.$emit("data", {
+        songTitle: this.songTitle,
+        songLink: this.songLink,
+        artist: this.artist,
+        album: this.album
+      });
     }
   }
 };

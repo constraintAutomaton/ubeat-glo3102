@@ -14,18 +14,20 @@ import {
   faPlayCircle,
   faBackward,
   faForward,
-  faPencilAlt
+  faPencilAlt,
+  faAngleRight,
+  faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faRandom, faSync, faPlayCircle, faBackward, faForward, faPencilAlt);
+library.add(faRandom, faSync, faPlayCircle, faBackward, faForward, faPencilAlt, faAngleRight, faAngleDown);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.component("default-layout", Default);
 
 Vue.config.productionTip = false;
-
+Vue.prototype.$songEvent = new Vue(); // Global event bus
 new Vue({
   render: h => h(App),
   router

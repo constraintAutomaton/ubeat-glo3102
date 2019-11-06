@@ -1,6 +1,8 @@
 <template>
-  <div>
+  <div class="collapsed">
     <div class="playlistNameWrapper">
+      <font-awesome-icon class="iconAngleRight collapseHandleIcon" :icon="['fas', 'angle-right']" @click="expandPlaylist" />
+      <font-awesome-icon class="iconAngleDown collapseHandleIcon" :icon="['fas', 'angle-down']" @click="collapsePlaylist" />
       <textarea
         :id="`playlistName${indexNumber}`"
         class="playlistNameInput"
@@ -19,7 +21,7 @@
         @click="modifyTitle"
       />
     </div>
-    <ul>
+    <ul class='playlistTracks'>
       <template v-for="track in playlist.tracks">
         <single-track :track="track"> </single-track>
       </template>
@@ -93,6 +95,26 @@ export default {
       }
     },
 
+    expandPlaylist(event) {
+      let playlistElem = document.getElementById(`playlistName${this.indexNumber}`).parentElement.parentElement;
+
+      if(playlistElem.classList.contains('collapsed')) {
+        playlistElem.classList.remove('collapsed')
+      }
+
+      playlistElem.classList.add('expanded')
+    },
+
+    collapsePlaylist(event) {
+      let playlistElem = document.getElementById(`playlistName${this.indexNumber}`).parentElement.parentElement;
+
+      if(playlistElem.classList.contains('expanded')) {
+        playlistElem.classList.remove('expanded')
+      }
+
+      playlistElem.classList.add('collapsed')
+    },
+
     async callPutAPI(newName) {
       this.playlist.name = newName;
       await modifyPlaylist(this.playlist);
@@ -110,6 +132,7 @@ export default {
 .playlistNameWrapper {
   display: inline-flex;
   width: 100%;
+  position: relative;
 }
 
 .playlistNameInput {
@@ -130,5 +153,35 @@ export default {
 
 .playlistNameInput:disabled {
   color: var(--primaryAccentColor);
+}
+
+.collapseHandleIcon {
+  position: absolute;
+  left: -10px;
+  top : 10px;
+}
+
+.collapsed .playlistTracks {
+  visibility: hidden;
+}
+
+.collapsed .iconAngleDown {
+  visibility: hidden;
+}
+
+.collapsed .iconAngleRight {
+  visibility: visible;
+}
+
+.expanded .playlistTracks {
+  visibility: visible;
+}
+
+.expanded .iconAngleDown {
+  visibility: visible;
+}
+
+.expanded .iconAngleRight {
+  visibility: hidden;
 }
 </style>

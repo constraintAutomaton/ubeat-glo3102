@@ -21,9 +21,12 @@ export const getAlbumInfo = async p_album => {
 
   //return searchResult;
 };
-export const getTrackInfo = async (p_id,nb_track=-1) => {
+export const getTrackInfo = async (p_id, nb_track = -1) => {
   const searchResults = await UbeatEngine.getAlbumTrackById(p_id);
-  const results = nb_track===-1?searchResults.results:searchResults.results.slice(0,nb_track);
+  const results =
+    nb_track === -1
+      ? searchResults.results
+      : searchResults.results.slice(0, nb_track);
   const formated = results.map(el => {
     return {
       trackNumber: el.trackNumber,
