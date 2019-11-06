@@ -1,8 +1,16 @@
 <template>
   <div class="collapsed">
     <div class="playlistNameWrapper">
-      <font-awesome-icon class="iconAngleRight collapseHandleIcon" :icon="['fas', 'angle-right']" @click="expandPlaylist" />
-      <font-awesome-icon class="iconAngleDown collapseHandleIcon" :icon="['fas', 'angle-down']" @click="collapsePlaylist" />
+      <font-awesome-icon
+        class="iconAngleRight collapseHandleIcon"
+        :icon="['fas', 'angle-right']"
+        @click="expandPlaylist"
+      />
+      <font-awesome-icon
+        class="iconAngleDown collapseHandleIcon"
+        :icon="['fas', 'angle-down']"
+        @click="collapsePlaylist"
+      />
       <textarea
         :id="`playlistName${indexNumber}`"
         class="playlistNameInput"
@@ -16,14 +24,14 @@
       >
       </textarea>
       <font-awesome-icon
-        class=""
+        class="modifyIcon"
         :icon="['fa', 'pencil-alt']"
         @click="modifyTitle"
       />
     </div>
-    <ul class='playlistTracks'>
+    <ul class="playlistTracks">
       <template v-for="track in playlist.tracks">
-        <single-track :track="track"> </single-track>
+        <single-track :track="track" @deleteSong="deleteSong"> </single-track>
       </template>
     </ul>
   </div>
@@ -31,7 +39,7 @@
 
 <script>
 import SingleTrack from "./SingleTrack";
-import { modifyPlaylist } from "../../lib/util/utilPlaylist";
+import { modifyPlaylist, deleteTrack } from "../../lib/util/utilPlaylist";
 
 export default {
   name: "SinglePlaylist",
@@ -96,28 +104,51 @@ export default {
     },
 
     expandPlaylist(event) {
-      let playlistElem = document.getElementById(`playlistName${this.indexNumber}`).parentElement.parentElement;
+      let playlistElem = document.getElementById(
+        `playlistName${this.indexNumber}`
+      ).parentElement.parentElement;
 
-      if(playlistElem.classList.contains('collapsed')) {
-        playlistElem.classList.remove('collapsed')
+      if (playlistElem.classList.contains("collapsed")) {
+        playlistElem.classList.remove("collapsed");
       }
 
-      playlistElem.classList.add('expanded')
+      playlistElem.classList.add("expanded");
     },
 
     collapsePlaylist(event) {
-      let playlistElem = document.getElementById(`playlistName${this.indexNumber}`).parentElement.parentElement;
+      let playlistElem = document.getElementById(
+        `playlistName${this.indexNumber}`
+      ).parentElement.parentElement;
 
-      if(playlistElem.classList.contains('expanded')) {
-        playlistElem.classList.remove('expanded')
+      if (playlistElem.classList.contains("expanded")) {
+        playlistElem.classList.remove("expanded");
       }
 
-      playlistElem.classList.add('collapsed')
+      playlistElem.classList.add("collapsed");
     },
 
     async callPutAPI(newName) {
       this.playlist.name = newName;
       await modifyPlaylist(this.playlist);
+    },
+
+    deleteSong(trackId) {
+      this.$dialog
+        .confirm(`Delete this track from the playlist \"${this.playlist.name}\"?`, {customClass:'ubeatDelete'})
+
+        .then(async (dialog) => {
+          try {
+            await deleteTrack(this.playlist.id, trackId);
+            const trackIndex = this.playlist.tracks.findIndex(
+              track => track.trackId === trackId
+            );
+            this.playlist.tracks.splice(trackIndex, 1);
+          } catch (e) {
+            alert(e);
+          }
+        })
+        .catch(function() {
+        });
     }
   },
 
@@ -131,8 +162,10 @@ export default {
 <style scoped>
 .playlistNameWrapper {
   display: inline-flex;
-  width: 100%;
+  /*width: 100%;*/
+  margin-left: 20px;
   position: relative;
+  width: calc(100% - 26px);
 }
 
 .playlistNameInput {
@@ -149,16 +182,29 @@ export default {
   font-weight: 500;
   word-wrap: break-word;
   white-space: pre-wrap;
+  padding-right: 10px;
 }
 
 .playlistNameInput:disabled {
   color: var(--primaryAccentColor);
 }
 
+.modifyIcon {
+  top: 6px;
+  position: relative;
+  color: var(--darkGrey);
+  background-color: #38384226;
+  padding: 7px;
+  border-radius: 100%;
+  width: 26px;
+  height: 26px;
+}
+
 .collapseHandleIcon {
   position: absolute;
-  left: -10px;
-  top : 10px;
+  left: -20px;
+  top: 10px;
+  font-size: 16px;
 }
 
 .collapsed .playlistTracks {
@@ -184,4 +230,19 @@ export default {
 .expanded .iconAngleRight {
   visibility: hidden;
 }
+
+button:focus {
+  outline: none;
+  background-color: #2ab7a9;
+  color: #fff;
+}
+
+ .dg-pull-right {
+   float: right;
+ }
+ .dg-btn--ok {
+   color: #009688;
+   background-color: #fefefe;
+   border-color: #009688;
+ }
 </style>

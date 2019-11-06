@@ -33,6 +33,8 @@ export default {
 
   /*Constante à utiliser pour tous les lien noir sur le hover*/
   --blackLinkHoverColor: #5f5f5f;
+
+  --mainFont: "Muli", sans-serif;
 }
 
 .main-layout {
@@ -65,5 +67,31 @@ p.musicStyle {
   font-size: 1.6rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid;
+}
+
+.ubeatDelete {
+  font-family: var(--mainFont);
+}
+
+.ubeatDelete .dg-btn {
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
+.ubeatDelete .dg-btn--cancel {
+  color: #fff;
+  background-color: var(--mediumGrey);
+}
+
+.ubeatDelete .dg-btn--ok {
+  color: var(--primaryAccentColor);
+  background-color: #fefefe;
+  border-color: var(--primaryAccentColor);
+}
+
+.ubeatDelete .dg-btn--ok:focus {
+  color: #fff;
+  background-color: var(--primaryAccentColor);
 }
 </style>

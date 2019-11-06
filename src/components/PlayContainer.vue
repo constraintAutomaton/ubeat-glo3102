@@ -3,7 +3,8 @@
     <div class="playOptions">
       <font-awesome-icon class="playIcon" :icon="['fas', 'sync']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'backward']" />
-      <font-awesome-icon class="playIcon playButton" :icon="['fas', 'play-circle']" />
+      <font-awesome-icon id="mainPlay" class="playIcon mainPlayButton" :icon="['fas', 'play-circle']" />
+      <font-awesome-icon id="mainPause" class="playIcon mainPlayButton" :icon="['fas', 'pause-circle']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
     </div>
@@ -44,6 +45,8 @@ export default {
         src: [this.songLink]
       });
       this.song.play();
+      document.getElementById('mainPlay').style.display = 'none';
+      document.getElementById('mainPause').style.display = 'block';
     }
   },
   name: "PlayContainer.vue"

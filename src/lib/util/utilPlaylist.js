@@ -1,5 +1,5 @@
 import UbeatApiInterface from "./../UbeatApiInterface";
-import {stringify} from "cli-highlight";
+import { stringify } from "cli-highlight";
 
 const isSecure = false;
 const UbeatEngine = new UbeatApiInterface(isSecure);
@@ -26,7 +26,7 @@ export const getPlaylists = async () => {
     });
 };
 
-export const modifyPlaylist = async (playlist) => {
+export const modifyPlaylist = async playlist => {
   const param = {
     method: "PUT",
     headers: {
@@ -36,10 +36,7 @@ export const modifyPlaylist = async (playlist) => {
     body: JSON.stringify(playlist)
   };
 
-  return fetch(
-    `${UbeatEngine.rootUrl}playlists/${playlist.id}`,
-    param
-  )
+  return fetch(`${UbeatEngine.rootUrl}playlists/${playlist.id}`, param)
     .then(response => response.json())
     .then(json => {
       return json;
@@ -47,4 +44,15 @@ export const modifyPlaylist = async (playlist) => {
     .catch(() => {
       console.error("unable to modify this playlist");
     });
+};
+
+export const deleteTrack = async (playlistId, songId) => {
+  return fetch(
+    `${UbeatEngine.rootUrl}playlists/${playlistId}/tracks/${songId}`,
+    {
+      method: "DELETE"
+    }
+  ).catch(() => {
+    console.error("Unable to delete this track from the playlist.");
+  });
 };

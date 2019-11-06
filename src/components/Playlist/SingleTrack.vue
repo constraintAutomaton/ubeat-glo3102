@@ -1,13 +1,20 @@
 <template>
-  <li>
+  <li class="trackInfo" v-on:click="playSong">
     <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
     <span class="songTitle">{{ track.trackName }}</span>
-    <span class="artistName">{{ track.artistName }}</span>
+    <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
+    <font-awesome-icon
+      class="deleteTrack"
+      :icon="['fas', 'minus-circle']"
+      @click="deleteSong(track.trackId)"
+    />
   </li>
 </template>
 
 <script>
+// import { deleteTrack } from "../../lib/util/utilPlaylist";
+
 export default {
   name: "Track",
   props: {
@@ -27,9 +34,31 @@ export default {
         ":" +
         seconds.toString().padStart(2, "0")
       );
+    },
+
+    playSong() {
+      this.$songEvent.$emit("data", {
+        songTitle: this.track.trackName,
+        songLink: this.track.songLink,
+        artist: this.track.artistName,
+        album: this.album
+      });
+    },
+
+    deleteSong(trackId) {
+        console.log("in single track", trackId);
+      this.$emit("deleteSong", trackId);
     }
   }
 };
 </script>
+<style src="./../../css/Track.css"></style>
 
-<style scoped></style>
+<style scoped>
+.deleteTrack {
+  min-width: 1.5em;
+  margin-left: 10px;
+  z-index: 10;
+  font-size: 1.2rem;
+}
+</style>

@@ -17,7 +17,8 @@
     "howler": "^2.1.2",
     "materialize-css": "^1.0.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.1.2"
+    "vue-router": "^3.1.2",
+    "vuejs-dialog": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
