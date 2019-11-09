@@ -3,9 +3,11 @@
  * Further usages are in the util class corresponding to the component.
  */
 
-export default class UbeatApiInterface {
+export default class ApiInterface {
   constructor(isSecure = true) {
-    this.rootUrl = "https://ubeat.herokuapp.com/";
+    this.rootUrlUbeat = "https://ubeat.herokuapp.com/";
+    this.rootUrlDiscogs = "https://api.discogs.com/";
+    this.discogsTokken = "kGpyEfufJNVCCSjcBrtQFmJMxcrlSXrtfxgBfzHI";
     this.userTest = {
       name: "User Test",
       email: "valerie.boivin.7@ulaval.ca",
@@ -13,7 +15,7 @@ export default class UbeatApiInterface {
       password: "Equipe7ulaval"
     };
     if (!isSecure) {
-      this.rootUrl += "unsecure/";
+      this.rootUrlUbeat += "unsecure/";
     }
   }
 
@@ -27,11 +29,11 @@ export default class UbeatApiInterface {
     };
     p_query = p_query.replace(new RegExp(" ", "g"), "%20");
     const rep = await fetch(
-      `${this.rootUrl}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+      `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
       param
     );
     if (rep.ok) {
-      return await rep.json();
+      return rep.json();
     } else {
       console.error(rep);
       return {};
@@ -57,7 +59,7 @@ export default class UbeatApiInterface {
     p_getTracksOrAlbum =
       p_getTracksOrAlbum != "" ? p_getTracksOrAlbum + "/" : "";
     const rep = await fetch(
-      `${this.rootUrl}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
+      `${this.rootUrlUbeat}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
       param
     );
     if (rep.ok) {
@@ -78,5 +80,20 @@ export default class UbeatApiInterface {
   }
   async getArtistAlbumById(p_id) {
     return await this._getAlbumOrArtistById("artists", p_id, "albums");
+  }
+  async getHighResImage(p_query, p_type, p_artist) {
+    let url = `${this.rootUrlDiscogs}database/search?token=${this.discogsTokken}&q=${p_query}`;
+    url =
+      p_type === "album"
+        ? url + `&format=album&artist=${p_artist}`
+        : url + `&artist=${p_artist}`;
+    const rep = await fetch(url);
+    if (rep.ok) {
+      const data = await rep.json();
+      return data.results[0].cover_image;
+    } else {
+      console.error(rep);
+      return {};
+    }
   }
 }

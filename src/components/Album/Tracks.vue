@@ -6,7 +6,7 @@
     <ul>
       <TrackItem
         v-for="track in trackList"
-        v-bind:key="track.trackNumber"
+        v-bind:key="track.songTitle"
         v-bind:trackNumber="track.trackNumber"
         v-bind:songTitle="track.songTitle"
         v-bind:trackDuration="track.trackDuration"

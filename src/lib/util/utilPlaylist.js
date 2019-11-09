@@ -1,8 +1,8 @@
-import UbeatApiInterface from "./../UbeatApiInterface";
+import ApiInterface from "./../ApiInterface";
 import { stringify } from "cli-highlight";
 
 const isSecure = false;
-const UbeatEngine = new UbeatApiInterface(isSecure);
+const apiEngine = new ApiInterface(isSecure);
 
 export const getPlaylists = async () => {
   const param = {
@@ -14,7 +14,7 @@ export const getPlaylists = async () => {
   };
 
   return fetch(
-    `${UbeatEngine.rootUrl}users/${UbeatEngine.userTest.id}/playlists`,
+    `${apiEngine.rootUrlUbeat}users/${apiEngine.userTest.id}/playlists`,
     param
   )
     .then(response => response.json())
@@ -36,7 +36,7 @@ export const modifyPlaylist = async playlist => {
     body: JSON.stringify(playlist)
   };
 
-  return fetch(`${UbeatEngine.rootUrl}playlists/${playlist.id}`, param)
+  return fetch(`${apiEngine.rootUrlUbeat}playlists/${playlist.id}`, param)
     .then(response => response.json())
     .then(json => {
       return json;
@@ -48,7 +48,7 @@ export const modifyPlaylist = async playlist => {
 
 export const deleteTrack = async (playlistId, songId) => {
   return fetch(
-    `${UbeatEngine.rootUrl}playlists/${playlistId}/tracks/${songId}`,
+    `${apiEngine.rootUrlUbeat}playlists/${playlistId}/tracks/${songId}`,
     {
       method: "DELETE"
     }
