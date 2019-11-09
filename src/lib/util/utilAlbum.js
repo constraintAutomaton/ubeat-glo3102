@@ -19,7 +19,7 @@ export const getAlbumInfo = async p_album => {
     "album",
     formated.artist
   );
-  formated["image"] = highResImage;
+  formated["image"] = highResImage != undefined ? highResImage : "";
   console.log(formated);
   return [formated, result.collectionId];
 

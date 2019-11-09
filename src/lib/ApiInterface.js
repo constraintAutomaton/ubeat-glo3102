@@ -82,18 +82,43 @@ export default class ApiInterface {
     return await this._getAlbumOrArtistById("artists", p_id, "albums");
   }
   async getHighResImage(p_query, p_type, p_artist) {
-    let url = `${this.rootUrlDiscogs}database/search?token=${this.discogsTokken}&q=${p_query}`;
-    url =
-      p_type === "album"
-        ? url + `&format=album&artist=${p_artist}`
-        : url + `&artist=${p_artist}`;
-    const rep = await fetch(url);
-    if (rep.ok) {
-      const data = await rep.json();
-      return data.results[0].cover_image;
+    if (p_type === "album") {
+      let url = `${this.rootUrlDiscogs}database/search?token=${this.discogsTokken}&q=${p_query}`;
+      url += `&format=album&artist=${p_artist}`;
+
+      const rep = await fetch(url);
+      if (rep.ok) {
+        const data = await rep.json();
+
+        return data.results[0].cover_image;
+      } else {
+        console.error(rep);
+        return {};
+      }
     } else {
-      console.error(rep);
-      return {};
+      let url = `${this.rootUrlDiscogs}database/search?token=${this.discogsTokken}&q=${p_query}`;
+      url += "&type=artist";
+      const rep_search = await fetch(url);
+
+      if (rep_search.ok) {
+        const data = await rep_search.json();
+
+        const id = data.results[1].id;
+        url = `${this.rootUrlDiscogs}artists/${id}?token=${this.discogsTokken}`;
+        console.log(url);
+
+        const rep = await fetch(url);
+        if (rep.ok) {
+          const data = await rep.json();
+          return data.images[0].uri;
+        } else {
+          console.error(rep);
+          return {};
+        }
+      } else {
+        console.error(rep_search);
+        return {};
+      }
     }
   }
 }
