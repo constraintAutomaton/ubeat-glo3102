@@ -90,7 +90,7 @@ export default class ApiInterface {
       if (rep.ok) {
         const data = await rep.json();
 
-        return data.results[0].cover_image;
+        return data.results[0] != undefined ? data.results[0].cover_image : {};
       } else {
         console.error(rep);
         return {};
@@ -103,7 +103,7 @@ export default class ApiInterface {
       if (rep_search.ok) {
         const data = await rep_search.json();
 
-        const id = data.results[1].id;
+        const id = data.results[1].id != undefined ? data.results[1].id : "";
         url = `${this.rootUrlDiscogs}artists/${id}?token=${this.discogsTokken}`;
         console.log(url);
 
