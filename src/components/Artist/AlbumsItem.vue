@@ -1,8 +1,8 @@
 <template>
   <li class="col s6 m4 l2">
-    <a>
+    <router-link :to="'/album/' + albumTitle">
       <img v-bind:src="albumImage" />
-    </a>
+    </router-link>
     <h3 class="albumTitle">
       <a>{{albumTitle}}</a>
     </h3>
