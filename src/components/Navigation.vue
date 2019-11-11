@@ -151,14 +151,6 @@
           Playlists
         </router-link>
       </li>
-      <li v-for="playlist in user.playlists" v-bind:key="playlist.id">
-        <router-link :to="playlist.page">
-          <i class="material-icons">
-            chevron_right
-          </i>
-          {{ playlist.name }}
-        </router-link>
-      </li>
       <li class="divider"></li>
       <li>
         <router-link to="/settings">
@@ -286,11 +278,7 @@ export default {
     return {
       user: {
         id: 1,
-        name: "Robin Desbois",
-        playlists: [
-          { id: 1, name: "Playlist1", page: "/playlist?name=playlist1" },
-          { id: 2, name: "Playlist2", page: "/playlist?name=playlist2" }
-        ]
+        name: "Robin Desbois"
       },
       searchText: ""
     };
