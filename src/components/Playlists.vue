@@ -2,13 +2,20 @@
   <div id="playlistsPage" class="container">
     <h1>My Playlists</h1>
     <template v-for="(playlist, index) in playlists">
-      <single-playlist :playlist="playlist" :indexNumber="index.toString()"></single-playlist>
+      <single-playlist
+        :playlist="playlist"
+        :indexNumber="index.toString()"
+        :key="index"
+        ref="singlePlaylist"
+        @deletePlaylist="deletePlaylistById"
+      ></single-playlist>
     </template>
+    <a class="btn-floating btn-large waves-effect waves-light right" v-on:click="newPlaylist"><i class="material-icons">add</i></a>
   </div>
 </template>
 
 <script>
-import { getPlaylists } from "./../lib/util/utilPlaylist";
+import { getPlaylists, addPlaylist, deletePlaylist } from "./../lib/util/utilPlaylist";
 import SinglePlaylist from "./Playlist/SinglePlaylist";
 
 export default {
@@ -27,7 +34,38 @@ export default {
   mounted() {},
 
   async created() {
-    this.playlists = await getPlaylists();
+    this.refreshPlaylists();
+  },
+  methods: {
+    async refreshPlaylists() {
+      this.playlists = await getPlaylists();
+    },
+    async newPlaylist() {
+      const response = await addPlaylist("New Playlist");
+      await this.refreshPlaylists();
+      this.modifyPlaylistById(response.id);
+    },
+    async deletePlaylistById(playlist) {
+      this.$dialog
+        .confirm(`Delete this playlist \"${playlist.name}\"?`, {customClass:'ubeatDelete'})
+
+        .then(async (dialog) => {
+          try {
+            const response = await deletePlaylist(playlist.id);
+            this.refreshPlaylists();
+          } catch (e) {
+            console.log(e);
+          }
+        })
+        .catch(function() {
+        });
+    },
+    modifyPlaylistById(playlistId) {
+      this.$refs.singlePlaylist.forEach(singlePlaylist => {
+        if(singlePlaylist.playlist.id == playlistId)
+          singlePlaylist.modifyTitle();
+      });
+    }
   }
 };
 </script>

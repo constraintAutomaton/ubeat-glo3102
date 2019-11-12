@@ -24,9 +24,14 @@
       >
       </textarea>
       <font-awesome-icon
-        class="modifyIcon"
+        class="icons"
         :icon="['fa', 'pencil-alt']"
         @click="modifyTitle"
+      />
+      <font-awesome-icon
+        class="icons"
+        :icon="['fa', 'trash-alt']"
+        @click="deletePlaylistById"
       />
     </div>
     <ul class="playlistTracks">
@@ -40,6 +45,7 @@
 <script>
 import SingleTrack from "./SingleTrack";
 import { modifyPlaylist, deleteTrack } from "../../lib/util/utilPlaylist";
+
 
 export default {
   name: "SinglePlaylist",
@@ -65,6 +71,7 @@ export default {
       );
       inputField.removeAttribute("disabled");
       inputField.focus();
+      // inputField.select();
     },
 
     /**
@@ -149,6 +156,10 @@ export default {
         })
         .catch(function() {
         });
+    },
+
+    deletePlaylistById() {
+      this.$emit("deletePlaylist", this.playlist);
     }
   },
 
@@ -189,7 +200,7 @@ export default {
   color: var(--primaryAccentColor);
 }
 
-.modifyIcon {
+.icons {
   top: 6px;
   position: relative;
   color: var(--darkGrey);

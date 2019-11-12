@@ -27,7 +27,8 @@ import {
   faPauseCircle,
   faPlusCircle,
   faCheckCircle,
-  faTimesCircle
+  faTimesCircle,
+  faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -44,7 +45,8 @@ library.add(
   faPauseCircle,
   faPlusCircle,
   faCheckCircle,
-  faTimesCircle
+  faTimesCircle,
+  faTrashAlt
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
