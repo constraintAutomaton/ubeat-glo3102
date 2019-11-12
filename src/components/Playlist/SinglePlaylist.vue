@@ -207,6 +207,10 @@ export default {
   font-size: 16px;
 }
 
+.collapseHandleIcon:hover {
+  cursor: pointer;
+}
+
 .collapsed .playlistTracks {
   visibility: hidden;
 }

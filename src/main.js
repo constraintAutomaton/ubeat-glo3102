@@ -24,7 +24,10 @@ import {
   faAngleRight,
   faAngleDown,
   faMinusCircle,
-  faPauseCircle
+  faPauseCircle,
+  faPlusCircle,
+  faCheckCircle,
+  faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -38,7 +41,10 @@ library.add(
   faAngleRight,
   faAngleDown,
   faMinusCircle,
-  faPauseCircle
+  faPauseCircle,
+  faPlusCircle,
+  faCheckCircle,
+  faTimesCircle
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

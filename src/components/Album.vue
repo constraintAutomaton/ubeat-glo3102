@@ -28,12 +28,14 @@ export default {
       },
       trackInfo: [
         {
+          trackObj: undefined,
           trackNumber: 1,
           songTitle: "bar",
           trackDuration: "99:00",
           songLink: "./"
         },
         {
+          trackObj: undefined,
           trackNumber: 2,
           songTitle: "bar",
           trackDuration: "99:00",

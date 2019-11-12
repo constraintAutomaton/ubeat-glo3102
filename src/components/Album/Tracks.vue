@@ -7,6 +7,7 @@
       <TrackItem
         v-for="track in trackList"
         v-bind:key="track.songTitle"
+        v-bind:trackObj="track.trackObj"
         v-bind:trackNumber="track.trackNumber"
         v-bind:songTitle="track.songTitle"
         v-bind:trackDuration="track.trackDuration"
@@ -26,12 +27,14 @@ export default {
       default: () => {
         return [
           {
+            trackObj: undefined,
             trackNumber: 1,
             songTitle: "foo",
             trackDuration: "0:00",
             songLink: "./",
           },
           {
+            trackObj: undefined,
             trackNumber: 2,
             songTitle: "bar",
             trackDuration: "1:00",

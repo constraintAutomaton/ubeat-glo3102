@@ -33,6 +33,7 @@ export const getTrackInfo = async (p_id, nb_track = -1) => {
       : searchResults.results.slice(0, nb_track);
   const formated = results.map(el => {
     return {
+      trackObj: el,
       trackNumber: el.trackNumber,
       songTitle: el.trackName,
       trackDuration: convertMillisToTrackTime(el.trackTimeMillis),

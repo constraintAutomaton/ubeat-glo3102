@@ -7,6 +7,7 @@
       <font-awesome-icon id="mainPause" class="playIcon mainPlayButton" :icon="['fas', 'pause-circle']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
+    <add-to-playlist-box v-bind:playingTrackObj="trackObj" ></add-to-playlist-box>
     </div>
     <div class="playInformation">
       <p>{{songTitle}}</p>
@@ -16,10 +17,12 @@
 </template>
 
 <script>
+import AddToPlaylistBox from "./Playlist/AddToPlaylistBox";
 import { Howl } from "howler";
 export default {
   data() {
     return {
+      trackObj: undefined,
       songTitle: "Name of the song",
       songLink: "",
       artist: "Artist",
@@ -34,9 +37,13 @@ export default {
   beforeDestroy() {
     this.$songEvent.$off("data");
   },
+  components: {
+    AddToPlaylistBox
+  },
   methods: {
     ChangePlayingSong(info) {
       this.song != undefined ? this.song.stop() : "";
+      this.trackObj = info.trackObj;
       this.songTitle = info.songTitle;
       this.songLink = info.songLink;
       this.artist = info.artist;

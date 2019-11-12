@@ -46,6 +46,23 @@ export const modifyPlaylist = async playlist => {
     });
 };
 
+export const addTrackToPlaylist = async (playlistId, trackObj) => {
+  const param = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(trackObj)
+  };
+
+  return fetch(
+    `${apiEngine.rootUrlUbeat}playlists/${playlistId}/tracks`, param
+  ).catch(() => {
+    console.error("Unable to add this track to the playlist.");
+  });
+};
+
 export const deleteTrack = async (playlistId, songId) => {
   return fetch(
     `${apiEngine.rootUrlUbeat}playlists/${playlistId}/tracks/${songId}`,

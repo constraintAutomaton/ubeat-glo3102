@@ -11,6 +11,9 @@
 <script>
 export default {
   props: {
+    trackObj : {
+      default: undefined
+    },
     trackNumber: {
       type: Number,
       default: -1
@@ -39,6 +42,7 @@ export default {
   methods: {
     playSong() {
       this.$songEvent.$emit("data", {
+        trackObj: this.trackObj,
         songTitle: this.songTitle,
         songLink: this.songLink,
         artist: this.artist,
