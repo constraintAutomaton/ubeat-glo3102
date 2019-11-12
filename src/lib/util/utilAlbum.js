@@ -19,8 +19,8 @@ export const getAlbumInfo = async p_album => {
     "album",
     formated.artist
   );
-  formated["image"] = highResImage != {} ? highResImage : "";
-  console.log(formated);
+
+  formated["image"] = highResImage != "" ? highResImage : result.artworkUrl100;
   return [formated, result.collectionId];
 
   //return searchResult;

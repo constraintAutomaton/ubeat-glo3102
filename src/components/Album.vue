@@ -45,10 +45,10 @@ export default {
     };
   },
   async mounted() {
+    console.log(this.$route.params.name);
     if (this.$route.params.name) {
       const albumSearch = await getAlbumInfo(this.$route.params.name);
       this.albumInfo = albumSearch[0];
-      console.info(this.albumInfo);
       const id = albumSearch[1];
       this.trackInfo = await getTrackInfo(id);
     }
