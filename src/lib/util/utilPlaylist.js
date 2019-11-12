@@ -56,3 +56,37 @@ export const deleteTrack = async (playlistId, songId) => {
     console.error("Unable to delete this track from the playlist.");
   });
 };
+
+export const addPlaylist = async (playlistName) => {
+  const param = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "name" : playlistName,
+      "owner" : apiEngine.userTest.email
+    })
+  };
+
+  return fetch(`${apiEngine.rootUrlUbeat}playlists`, param)
+    .then(response => response.json())
+    .then(json => {
+      return json;
+    })
+    .catch(() => {
+      console.error("unable to add this playlist.");
+    });
+};
+
+export const deletePlaylist = async (playlistId) => {
+  return fetch(
+    `${apiEngine.rootUrlUbeat}playlists/${playlistId}`,
+    {
+      method: "DELETE"
+    }
+  ).catch(() => {
+    console.error("Unable to delete this playlist.");
+  });
+};
