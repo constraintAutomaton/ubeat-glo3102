@@ -10,7 +10,9 @@
         @deletePlaylist="deletePlaylistById"
       ></single-playlist>
     </template>
-    <a class="btn-floating btn-large waves-effect waves-light right" v-on:click="newPlaylist"><i class="material-icons">add</i></a>
+    <div id="newPlaylist">
+      <a class="btn btn-floating btn-large waves-effect waves-light" v-on:click="newPlaylist"><i class="material-icons">add</i></a>
+    </div>
   </div>
 </template>
 
@@ -70,4 +72,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+#newPlaylist{
+  text-align: right;
+}
+
+#newPlaylist .btn{
+  position: inherit;
+}
+</style>
