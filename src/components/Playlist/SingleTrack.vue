@@ -58,7 +58,6 @@ export default {
 .deleteTrack {
   min-width: 1.5em;
   margin-left: 10px;
-  z-index: 10;
   font-size: 1.2rem;
 }
 </style>

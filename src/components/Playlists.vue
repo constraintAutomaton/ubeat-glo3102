@@ -80,5 +80,6 @@ export default {
 
 #newPlaylist .btn{
   position: inherit;
+  background-color: var(--primaryAccentColor);
 }
 </style>
