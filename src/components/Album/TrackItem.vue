@@ -5,6 +5,7 @@
     <span class="trackNumber">{{ trackNumber }}</span>
     <span class="songTitle">{{ songTitle }}</span>
     <span class="songArtist">{{ artist }}</span>
+    <a class="waves-effect waves-light"><i class="material-icons right">playlist_add</i></a>
     <span class="trackDuration">{{ trackDuration }}</span>
   </li>
 </template>
