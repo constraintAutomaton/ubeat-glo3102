@@ -32,6 +32,8 @@
 import AddToPlaylistBox from "./Playlist/AddToPlaylistBox";
 import { Howl } from "howler";
 export default {
+  name: "PlayContainer.vue",
+
   data() {
     return {
       trackObj: undefined,
@@ -80,8 +82,7 @@ export default {
         document.getElementById("mainPause").style.display = "block";
       }
     }
-  },
-  name: "PlayContainer.vue"
+  }
 };
 </script>
 

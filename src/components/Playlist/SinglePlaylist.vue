@@ -71,7 +71,6 @@ export default {
       );
       inputField.removeAttribute("disabled");
       inputField.focus();
-      // inputField.select();
     },
 
     /**

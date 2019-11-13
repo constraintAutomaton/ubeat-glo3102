@@ -13,7 +13,6 @@
 </template>
 
 <script>
-// import { deleteTrack } from "../../lib/util/utilPlaylist";
 
 export default {
   name: "Track",
@@ -46,7 +45,6 @@ export default {
     },
 
     deleteSong(trackId) {
-        console.log("in single track", trackId);
       this.$emit("deleteSong", trackId);
     }
   }

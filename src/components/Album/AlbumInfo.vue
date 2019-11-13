@@ -22,7 +22,7 @@
         {{albumInfo.numberOfTrack}}
       </p>
       <div class="badgeContainer">
-        <a v-bind:href="linkItune" target="_blank" rel="noopener">
+        <a v-bind:href="albumInfo.linkItune" target="_blank" rel="noopener">
           <img
             class="itunesBadge"
             src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
