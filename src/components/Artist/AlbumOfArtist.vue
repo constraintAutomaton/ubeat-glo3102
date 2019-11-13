@@ -9,7 +9,7 @@
         v-for="album in albumList"
         v-bind:key="album.albumTitle"
         v-bind:albumTitle="album.albumTitle"
-        v-bind:albumYear=album.albumYear
+        v-bind:albumYear="album.albumYear"
         v-bind:albumImage="album.albumImage"
       ></AlbumsItem>
     </ul>
