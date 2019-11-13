@@ -209,6 +209,11 @@ export default {
   border-radius: 100%;
   width: 26px;
   height: 26px;
+  margin: 0 5px;
+}
+
+.icons:last-child {
+  margin-right: 0;
 }
 
 .collapseHandleIcon {

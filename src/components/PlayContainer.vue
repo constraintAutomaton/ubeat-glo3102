@@ -3,15 +3,27 @@
     <div class="playOptions">
       <font-awesome-icon class="playIcon" :icon="['fas', 'sync']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'backward']" />
-      <font-awesome-icon id="mainPlay" class="playIcon mainPlayButton" :icon="['fas', 'play-circle']" />
-      <font-awesome-icon id="mainPause" class="playIcon mainPlayButton" :icon="['fas', 'pause-circle']" />
+      <font-awesome-icon
+        id="mainPlay"
+        class="playIcon mainPlayButton"
+        :icon="['fas', 'play-circle']"
+        @click="playSong"
+      />
+      <font-awesome-icon
+        id="mainPause"
+        class="playIcon mainPlayButton"
+        :icon="['fas', 'pause-circle']"
+        @click="pauseSong"
+      />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
-    <add-to-playlist-box v-bind:playingTrackObj="trackObj" ></add-to-playlist-box>
+      <add-to-playlist-box
+        v-bind:playingTrackObj="trackObj"
+      ></add-to-playlist-box>
     </div>
     <div class="playInformation">
-      <p>{{songTitle}}</p>
-      <p>{{artist}}</p>
+      <p>{{ songTitle }}</p>
+      <p>{{ artist }}</p>
     </div>
   </div>
 </template>
@@ -51,13 +63,26 @@ export default {
       this.song = new Howl({
         src: [this.songLink]
       });
-      this.song.play();
-      document.getElementById('mainPlay').style.display = 'none';
-      document.getElementById('mainPause').style.display = 'block';
+      this.playSong();
+    },
+
+    pauseSong() {
+      this.song.pause();
+      document.getElementById("mainPause").style.display = "none";
+      document.getElementById("mainPlay").style.display = "block";
+    },
+
+    playSong() {
+      if (typeof this.song !== "undefined") {
+        console.log(this.song);
+        this.song.play(this.song.id);
+        document.getElementById("mainPlay").style.display = "none";
+        document.getElementById("mainPause").style.display = "block";
+      }
     }
   },
   name: "PlayContainer.vue"
 };
 </script>
 
-<style src ="./../css/PlayContainer.css"></style>
+<style src="./../css/PlayContainer.css"></style>
