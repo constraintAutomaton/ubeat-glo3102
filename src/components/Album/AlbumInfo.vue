@@ -31,7 +31,7 @@
         </a>
       </div>
       <div class="AlbumToPlaylist">
-        <a class="waves-effect waves-light btn-large"><i class="material-icons right">playlist_add</i>Add to playlist</a>
+        <a class="waves-effect waves-light addPlaylist"><i class="material-icons right">playlist_add</i>Add to playlist</a>
       </div>
     </div>
   </section>
