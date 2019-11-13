@@ -7,7 +7,8 @@
     <span class="trackDuration">{{ trackDuration }}</span>
   </li>
 </template>
-
+<style src="./../../css/TrackItem.css">
+</style>
 <script>
 export default {
   props: {
@@ -53,64 +54,3 @@ export default {
 };
 </script>
 
-<style scoped>
-.trackInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--primaryAccentColor);
-  position: relative;
-  height: 40px;
-  color: #fff;
-  margin-bottom: 0;
-  border-bottom: solid var(--darkerAccentColor) 1px;
-  padding: 5px 10px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.trackInfo:last-child {
-  border-bottom: none;
-}
-
-.trackInfo:hover {
-  cursor: pointer;
-  background-color: var(--darkerAccentColor);
-  color: var(--darkGrey);
-}
-
-.trackInfo .songTitle,
-.trackInfo .songArtist {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.playTrackIcon {
-  font-size: 1.3rem;
-}
-
-.playTrackIcon,
-.trackNumber {
-  width: 3%;
-  min-width: 1.5em;
-}
-.trackInfo .songTitle {
-  flex-grow: 2;
-  max-width: 90%;
-}
-
-.trackDuration {
-  width: 8%;
-  min-width: 3em;
-  text-align: right;
-}
-
-.songArtist {
-  width: 25%;
-}
-.playTrackIcon,
-.trackNumber,
-.songArtist .songTitle {
-  margin-right: 10px;
-}
-</style>

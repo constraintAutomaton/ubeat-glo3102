@@ -28,7 +28,9 @@ export const getAlbumInfo = async (p_id, nb_album = -1) => {
       ? searchResults.results.splice(1, searchResults.length - 1)
       : searchResults.results.slice(1, nb_album + 1);
   const formated = results.map(el => {
-    const index = el.collectionName.search(/(\(|\[)/)-1;
+    let index = el.collectionName.search(/(\(|\[)/) - 1;
+    index = index < 0 ? el.collectionName.length : index;
+
     return {
       albumTitle: el.collectionName.substring(0, index),
       albumImage: el.artworkUrl100,
