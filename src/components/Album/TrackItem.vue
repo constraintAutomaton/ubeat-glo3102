@@ -1,6 +1,7 @@
 <template>
   <li class="trackInfo" v-on:click="playSong">
     <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
+    <font-awesome-icon class="pauseTrackIcon" :icon="['fas', 'pause-circle']" />
     <span class="trackNumber">{{ trackNumber }}</span>
     <span class="songTitle">{{ songTitle }}</span>
     <span class="songArtist">{{ artist }}</span>

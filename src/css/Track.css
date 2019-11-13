@@ -32,8 +32,13 @@
 .playTrackIcon {
   font-size: 1.3rem;
 }
+.pauseTrackIcon {
+    font-size: 1.3rem;
+    display: none;
+  }
 
 .playTrackIcon,
+.pauseTrackIcon,
 .trackNumber {
   width: 3%;
   min-width: 1.5em;
@@ -53,6 +58,7 @@
   width: 25%;
 }
 .playTrackIcon,
+.pauseTrackIcon,
 .trackNumber,
 .songArtist .songTitle {
   margin-right: 10px;
