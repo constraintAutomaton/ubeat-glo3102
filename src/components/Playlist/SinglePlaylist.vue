@@ -223,27 +223,27 @@ export default {
 }
 
 .collapsed .playlistTracks {
-  visibility: hidden;
+  display: none;
 }
 
 .collapsed .iconAngleDown {
-  visibility: hidden;
+  display: none;
 }
 
 .collapsed .iconAngleRight {
-  visibility: visible;
+  display: block;
 }
 
 .expanded .playlistTracks {
-  visibility: visible;
+  display: block;
 }
 
 .expanded .iconAngleDown {
-  visibility: visible;
+  display: block;
 }
 
 .expanded .iconAngleRight {
-  visibility: hidden;
+  display: none;
 }
 
 button:focus {

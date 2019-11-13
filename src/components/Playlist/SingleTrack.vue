@@ -39,7 +39,7 @@ export default {
     playSong() {
       this.$songEvent.$emit("data", {
         songTitle: this.track.trackName,
-        songLink: this.track.songLink,
+        songLink: this.track.previewUrl,
         artist: this.track.artistName,
         album: this.album
       });
