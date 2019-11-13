@@ -90,10 +90,10 @@ export default class ApiInterface {
       if (rep.ok) {
         const data = await rep.json();
 
-        return data.results[0] != undefined ? data.results[0].cover_image : {};
+        return data.results[0] != undefined ? data.results[0].cover_image : "";
       } else {
         console.error(rep);
-        return {};
+        return "";
       }
     } else {
       let url = `${this.rootUrlDiscogs}database/search?token=${this.discogsTokken}&q=${p_query}`;
@@ -105,19 +105,18 @@ export default class ApiInterface {
 
         const id = data.results[1].id != undefined ? data.results[1].id : "";
         url = `${this.rootUrlDiscogs}artists/${id}?token=${this.discogsTokken}`;
-        console.log(url);
 
         const rep = await fetch(url);
         if (rep.ok) {
           const data = await rep.json();
-          return data.images[0].uri;
+          return data.images === undefined ? "" : data.images[0].uri;
         } else {
           console.error(rep);
-          return {};
+          return "";
         }
       } else {
         console.error(rep_search);
-        return {};
+        return "";
       }
     }
   }

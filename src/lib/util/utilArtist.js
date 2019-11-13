@@ -13,11 +13,11 @@ export const getArtistInfo = async p_artist => {
     artistLink: result.artistLinkUrl
   };
   const highResImage = await apiEngine.getHighResImage(
-    //p_artist,
-    //"artiste",
-    //p_artist
+    p_artist,
+    "artiste",
+    p_artist
   );
-  formated["imgArtist"] = highResImage != {} ? highResImage : "";
+  formated["imgArtist"] = highResImage != "" ? highResImage : "";
 
   return [formated, result.artistId];
 };
@@ -28,21 +28,13 @@ export const getAlbumInfo = async (p_id, nb_album = -1) => {
       ? searchResults.results.splice(1, searchResults.length - 1)
       : searchResults.results.slice(1, nb_album + 1);
   const formated = results.map(el => {
+    const index = el.collectionName.search(/(\(|\[)/)-1;
     return {
-      albumTitle: el.collectionName,
+      albumTitle: el.collectionName.substring(0, index),
       albumImage: el.artworkUrl100,
       albumYear: new Date(el.releaseDate).getFullYear()
     };
   });
-  //for (let i = 0; i < formated.length; i++) {
-    //let highResImage = await apiEngine.getHighResImage(
-      //results[i].collectionName,
-      //"album",
-     // results[i].artistName
-    //);
-    //highResImage = highResImage != {} ? highResImage : "";
-   // formated[i]["albumImage"] = await highResImage;
-  //}
-  console.log(formated);
+
   return formated;
 };
