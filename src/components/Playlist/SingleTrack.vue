@@ -1,10 +1,13 @@
 <template>
   <li class="trackInfo" v-on:click="playSong">
     <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
+    <span v-if="!insidePlaylist" class="trackNumber">{{ track.trackNumber }}</span>
     <span class="songTitle">{{ track.trackName }}</span>
     <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
+    <a v-if="!insidePlaylist" class="waves-effect waves-light"><i class="material-icons right">playlist_add</i></a>
     <font-awesome-icon
+      v-else
       class="deleteTrack"
       :icon="['fas', 'minus-circle']"
       @click="deleteSong(track.trackId)"
@@ -13,17 +16,21 @@
 </template>
 
 <script>
-
 export default {
   name: "Track",
   props: {
-    track: {}
+    track: {},
+    insidePlaylist: {
+      type: Boolean,
+      default: false
+    }
   },
   created() {
     this.track.trackDuration = this.getTrackTime();
   },
   methods: {
     getTrackTime() {
+    	console.log(this.track.trackTimeMillis);
       const trackTime = new Date(this.track.trackTimeMillis);
       let minutes = trackTime.getUTCMinutes();
       let seconds = trackTime.getSeconds();
@@ -40,7 +47,7 @@ export default {
         songTitle: this.track.trackName,
         songLink: this.track.previewUrl,
         artist: this.track.artistName,
-        album: this.album
+        album: this.track.collectionName
       });
     },
 

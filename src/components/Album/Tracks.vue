@@ -1,64 +1,41 @@
 <template>
   <section class="tracks">
-    <h2 class="listTitle">
-      <a>{{title}}</a>
-    </h2>
+<!--    <h2 class="listTitle">-->
+<!--&lt;!&ndash;      <a>{{// track.collectionName}}</a>&ndash;&gt;-->
+<!--    </h2>-->
     <ul>
-      <TrackItem
+<!--      <TrackItem-->
+<!--        v-for="track in trackList"-->
+<!--        v-bind:key="track.songTitle"-->
+<!--        v-bind:trackObj="track.trackObj"-->
+<!--        v-bind:trackNumber="track.trackNumber"-->
+<!--        v-bind:songTitle="track.songTitle"-->
+<!--        v-bind:trackDuration="track.trackDuration"-->
+<!--        v-bind:songLink="track.songLink"-->
+<!--        v-bind:artist="artist"-->
+<!--        v-bind:album="album"-->
+<!--      ></TrackItem>-->
+
+      <single-track
         v-for="track in trackList"
-        v-bind:key="track.songTitle"
-        v-bind:trackObj="track.trackObj"
-        v-bind:trackNumber="track.trackNumber"
-        v-bind:songTitle="track.songTitle"
-        v-bind:trackDuration="track.trackDuration"
-        v-bind:songLink="track.songLink"
-        v-bind:artist="artist"
-        v-bind:album="album"
-      ></TrackItem>
+        :key="track.id"
+        :track="track"
+      ></single-track>
     </ul>
   </section>
 </template>
 <script>
 import TrackItem from "./TrackItem.vue";
+import SingleTrack from "../Playlist/SingleTrack";
 export default {
   props: {
     trackList: {
-      type: Array,
-      default: () => {
-        return [
-          {
-            trackObj: undefined,
-            trackNumber: 1,
-            songTitle: "foo",
-            trackDuration: "0:00",
-            songLink: "./",
-          },
-          {
-            trackObj: undefined,
-            trackNumber: 2,
-            songTitle: "bar",
-            trackDuration: "1:00",
-            songLink: "./",
-          }
-        ];
-      }
-    },
-    album:{
-      type:String,
-      default:""
-    },artist:{
-      type:String,
-      default:""
-    },
-    title: {
-      type: String,
-      default: () => {
-        return "Tracks";
-      }
+      type: Array
     }
   },
   components: {
-    TrackItem
+    TrackItem,
+      SingleTrack
   }
 };
 </script>

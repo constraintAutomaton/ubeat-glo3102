@@ -36,7 +36,12 @@
     </div>
     <ul class="playlistTracks">
       <template v-for="track in playlist.tracks">
-        <single-track :track="track" @deleteSong="deleteSong"> </single-track>
+        <single-track
+          :track="track"
+          @deleteSong="deleteSong"
+          :insidePlaylist="true"
+        >
+        </single-track>
       </template>
     </ul>
   </div>
@@ -45,7 +50,6 @@
 <script>
 import SingleTrack from "./SingleTrack";
 import { modifyPlaylist, deleteTrack } from "../../lib/util/utilPlaylist";
-
 
 export default {
   name: "SinglePlaylist",
@@ -140,9 +144,12 @@ export default {
 
     deleteSong(trackId) {
       this.$dialog
-        .confirm(`Delete this track from the playlist \"${this.playlist.name}\"?`, {customClass:'ubeatDelete'})
+        .confirm(
+          `Delete this track from the playlist \"${this.playlist.name}\"?`,
+          { customClass: "ubeatDelete" }
+        )
 
-        .then(async (dialog) => {
+        .then(async dialog => {
           try {
             await deleteTrack(this.playlist.id, trackId);
             const trackIndex = this.playlist.tracks.findIndex(
@@ -153,8 +160,7 @@ export default {
             alert(e);
           }
         })
-        .catch(function() {
-        });
+        .catch(function() {});
     },
 
     deletePlaylistById() {
@@ -256,12 +262,12 @@ button:focus {
   color: #fff;
 }
 
- .dg-pull-right {
-   float: right;
- }
- .dg-btn--ok {
-   color: #009688;
-   background-color: #fefefe;
-   border-color: #009688;
- }
+.dg-pull-right {
+  float: right;
+}
+.dg-btn--ok {
+  color: #009688;
+  background-color: #fefefe;
+  border-color: #009688;
+}
 </style>

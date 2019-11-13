@@ -6,13 +6,15 @@ const apiEngine = new ApiInterface(isSecure);
 export const getAlbumInfo = async p_album => {
   const searchResults = await apiEngine.searchAlbum(p_album, 1);
   const result = searchResults.results[0];
+  console.log("RESULT ALBUM", result);
   let formated = {
     albumName: result.collectionName,
     artist: result.artistName,
     genre: result.primaryGenreName,
     release: new Date(result.releaseDate).getFullYear(),
     numberOfTrack: result.trackCount,
-    linkItune: result.collectionViewUrl
+    linkItune: result.collectionViewUrl,
+    trackList: await getTracklist(result.collectionId)
   };
   const highResImage = await apiEngine.getHighResImage(
     p_album,
@@ -25,6 +27,29 @@ export const getAlbumInfo = async p_album => {
 
   //return searchResult;
 };
+
+export const getTracklist = async  album_id => {
+  const param = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  };
+
+  return fetch(
+    `${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`,
+    param
+  )
+    .then(response => response.json())
+    .then(json => {
+      return json.results;
+    })
+    .catch(() => {
+      console.error("Unable to get album's tracks");
+    });
+}
+
 export const getTrackInfo = async (p_id, nb_track = -1) => {
   const searchResults = await apiEngine.getAlbumTrackById(p_id);
   const results =

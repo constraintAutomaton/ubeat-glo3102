@@ -1,10 +1,11 @@
 <template>
   <div id="albumPage" class="container">
     <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
+    <h2 class="listTitle">
+      {{albumInfo.albumName}}
+    </h2>
     <Tracks
-      v-bind:trackList="trackInfo"
-      v-bind:artist="albumInfo.artist"
-      v-bind:album="albumInfo.album"
+      v-bind:trackList="albumInfo.trackList"
     ></Tracks>
   </div>
 </template>
@@ -18,13 +19,6 @@ export default {
   data() {
     return {
       albumInfo: {
-        albumName: "bar",
-        image: "./../../assets/logo.png",
-        artist: "foo",
-        genre: "bar",
-        release: 1984,
-        numberOfTrack: 2501,
-        linkItune: "./"
       },
       trackInfo: [
         {
@@ -49,6 +43,7 @@ export default {
     if (this.$route.params.name) {
       const albumSearch = await getAlbumInfo(this.$route.params.name);
       this.albumInfo = albumSearch[0];
+      console.log(this.albumInfo);
       const id = albumSearch[1];
       this.trackInfo = await getTrackInfo(id);
     }
