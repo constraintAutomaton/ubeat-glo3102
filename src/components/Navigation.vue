@@ -20,7 +20,7 @@
                 <i class="material-icons left hide-on-med-and-down">
                   person
                 </i>
-                Artistffff
+                Artist
               </router-link>
             </li>
             <li class="hide-on-small-only">
