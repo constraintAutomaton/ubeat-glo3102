@@ -1,10 +1,28 @@
 <template>
-  <li class="trackInfo" v-on:click="playSong">
-    <font-awesome-icon class="playTrackIcon" :icon="['fas', 'play-circle']" />
+  <li class="trackInfo">
+    <font-awesome-icon
+      v-on:click="playSong"
+      v-if="!playing"
+      class="playTrackIcon"
+      :icon="['fas', 'play-circle']"
+    />
+    <font-awesome-icon
+      v-on:click="pauseSong"
+      v-if="playing"
+      class="playTrackIcon"
+      :icon="['fas', 'pause-circle']"
+    />
+    <span v-if="!insidePlaylist" class="trackNumber">{{
+      track.trackNumber
+    }}</span>
     <span class="songTitle">{{ track.trackName }}</span>
     <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
+    <a v-if="!insidePlaylist" class="waves-effect waves-light"
+      ><i class="material-icons right">playlist_add</i></a
+    >
     <font-awesome-icon
+      v-else
       class="deleteTrack"
       :icon="['fas', 'minus-circle']"
       @click="deleteSong(track.trackId)"
@@ -13,18 +31,27 @@
 </template>
 
 <script>
-// import { deleteTrack } from "../../lib/util/utilPlaylist";
-
 export default {
   name: "Track",
   props: {
-    track: {}
+    track: {},
+    insidePlaylist: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      playing: false
+    };
   },
   created() {
     this.track.trackDuration = this.getTrackTime();
+    this.$songEvent.$on("switchSong", this.changePlayingStatus);
   },
   methods: {
     getTrackTime() {
+      console.log(this.track.trackTimeMillis);
       const trackTime = new Date(this.track.trackTimeMillis);
       let minutes = trackTime.getUTCMinutes();
       let seconds = trackTime.getSeconds();
@@ -41,13 +68,22 @@ export default {
         songTitle: this.track.trackName,
         songLink: this.track.previewUrl,
         artist: this.track.artistName,
-        album: this.album
+        album: this.track.collectionName
       });
+      this.playing = !this.playing;
     },
 
     deleteSong(trackId) {
-        console.log("in single track", trackId);
       this.$emit("deleteSong", trackId);
+    },
+
+    pauseSong() {
+      this.$songEvent.$emit("pauseSong", {});
+      this.playing = false;
+    },
+
+    changePlayingStatus() {
+      this.playing = false;
     }
   }
 };

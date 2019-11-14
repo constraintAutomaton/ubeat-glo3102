@@ -32,6 +32,8 @@
 import AddToPlaylistBox from "./Playlist/AddToPlaylistBox";
 import { Howl } from "howler";
 export default {
+  name: "PlayContainer.vue",
+
   data() {
     return {
       trackObj: undefined,
@@ -44,10 +46,12 @@ export default {
   },
   created() {
     this.$songEvent.$on("data", this.ChangePlayingSong);
+    this.$songEvent.$on("pauseSong", this.pauseSong);
   },
 
   beforeDestroy() {
     this.$songEvent.$off("data");
+    this.$songEvent.$off("pauseSong");
   },
   components: {
     AddToPlaylistBox
@@ -63,13 +67,16 @@ export default {
       this.song = new Howl({
         src: [this.songLink]
       });
+      this.$songEvent.$emit("switchSong", {});
       this.playSong();
     },
 
     pauseSong() {
-      this.song.pause();
-      document.getElementById("mainPause").style.display = "none";
-      document.getElementById("mainPlay").style.display = "block";
+      if (typeof this.song !== "undefined") {
+        this.song.pause();
+        document.getElementById("mainPause").style.display = "none";
+        document.getElementById("mainPlay").style.display = "block";
+      }
     },
 
     playSong() {
@@ -80,8 +87,7 @@ export default {
         document.getElementById("mainPause").style.display = "block";
       }
     }
-  },
-  name: "PlayContainer.vue"
+  }
 };
 </script>
 

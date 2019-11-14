@@ -1,6 +1,6 @@
 <template>
   <li class="col s6 m4 l2">
-    <router-link :to="'/album/' + albumTitle">
+    <router-link :to="'/album/'+ albumTitle">
       <img v-bind:src="albumImage" />
 
       <h3 class="albumTitle">
@@ -25,6 +25,10 @@ export default {
     albumImage: {
       type: String,
       default: "./"
+    },
+    albumId: {
+      type: Number,
+      default: undefined
     }
   }
 };

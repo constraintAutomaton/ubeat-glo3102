@@ -51,7 +51,6 @@
 import SingleTrack from "./SingleTrack";
 import { modifyPlaylist, deleteTrack } from "../../lib/util/utilPlaylist";
 
-
 export default {
   name: "SinglePlaylist",
   props: {
@@ -75,7 +74,6 @@ export default {
     modifyTitle() {
       this.$refs.playlistName.readOnly = false;
       this.$refs.playlistName.focus();
-      // this.$refs.playlistName.select();
     },
 
     /**
@@ -112,9 +110,12 @@ export default {
 
     deleteSong(trackId) {
       this.$dialog
-        .confirm(`Delete this track from the playlist \"${this.playlist.name}\"?`, {customClass:'ubeatDelete'})
+        .confirm(
+          `Delete this track from the playlist \"${this.playlist.name}\"?`,
+          { customClass: "ubeatDelete" }
+        )
 
-        .then(async (dialog) => {
+        .then(async dialog => {
           try {
             await deleteTrack(this.playlist.id, trackId);
             const trackIndex = this.playlist.tracks.findIndex(
@@ -125,8 +126,7 @@ export default {
             alert(e);
           }
         })
-        .catch(function() {
-        });
+        .catch(function() {});
     },
 
     deletePlaylist() {
@@ -224,12 +224,12 @@ button:focus {
   color: #fff;
 }
 
- .dg-pull-right {
-   float: right;
- }
- .dg-btn--ok {
-   color: #009688;
-   background-color: #fefefe;
-   border-color: #009688;
- }
+.dg-pull-right {
+  float: right;
+}
+.dg-btn--ok {
+  color: #009688;
+  background-color: #fefefe;
+  border-color: #009688;
+}
 </style>
