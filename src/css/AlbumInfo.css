@@ -1,0 +1,6 @@
+p > a {
+  text-decoration: underline;
+}
+p > a:hover {
+  color: var(--primaryAccentColor);
+}

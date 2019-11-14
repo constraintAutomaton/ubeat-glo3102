@@ -7,7 +7,7 @@
       <h1>{{albumInfo.albumName}}</h1>
       <p class>
         <span>Artist:</span>
-        {{albumInfo.artist}}
+        <a v-bind:href="`./#/artist/${albumInfo.artist}`">{{albumInfo.artist}}</a>
       </p>
       <p class>
         <span>Genre:</span>
@@ -31,11 +31,14 @@
         </a>
       </div>
       <div class="AlbumToPlaylist">
-        <a class="waves-effect waves-light addPlaylist"><i class="material-icons right">playlist_add</i>Add to playlist</a>
+        <a class="waves-effect waves-light addPlaylist">
+          <i class="material-icons right">playlist_add</i>Add to playlist
+        </a>
       </div>
     </div>
   </section>
 </template>
+<style src="./../../css/AlbumInfo.css"></style>
 
 <script>
 export default {

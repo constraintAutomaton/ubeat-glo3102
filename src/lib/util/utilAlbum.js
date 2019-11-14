@@ -4,9 +4,11 @@ const isSecure = false;
 const apiEngine = new ApiInterface(isSecure);
 
 export const getAlbumInfo = async p_album => {
-  const searchResults = await apiEngine.searchAlbum(p_album, 1);
+  const searchResults =
+    typeof p_album === "string"
+      ? await apiEngine.searchAlbum(p_album, 1)
+      : await apiEngine.getAlbumById(Number(p_album));
   const result = searchResults.results[0];
-  console.log("RESULT ALBUM", result);
   let formated = {
     albumName: result.collectionName,
     artist: result.artistName,
@@ -28,7 +30,7 @@ export const getAlbumInfo = async p_album => {
   //return searchResult;
 };
 
-export const getTracklist = async  album_id => {
+export const getTracklist = async album_id => {
   const param = {
     method: "GET",
     headers: {
@@ -37,10 +39,7 @@ export const getTracklist = async  album_id => {
     }
   };
 
-  return fetch(
-    `${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`,
-    param
-  )
+  return fetch(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`, param)
     .then(response => response.json())
     .then(json => {
       return json.results;
@@ -48,7 +47,7 @@ export const getTracklist = async  album_id => {
     .catch(() => {
       console.error("Unable to get album's tracks");
     });
-}
+};
 
 export const getTrackInfo = async (p_id, nb_track = -1) => {
   const searchResults = await apiEngine.getAlbumTrackById(p_id);

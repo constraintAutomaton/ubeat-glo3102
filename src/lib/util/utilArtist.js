@@ -8,7 +8,6 @@ export const getArtistInfo = async p_artist => {
   const result = searchResults.results[0];
   let formated = {
     artistName: result.artistName,
-    //imgArtist: result.achercher,
     genre: result.primaryGenreName,
     artistLink: result.artistLinkUrl
   };
@@ -28,13 +27,14 @@ export const getAlbumInfo = async (p_id, nb_album = -1) => {
       ? searchResults.results.splice(1, searchResults.length - 1)
       : searchResults.results.slice(1, nb_album + 1);
   const formated = results.map(el => {
-    let index = el.collectionName.search(/(\(|\[)/) - 1;
+    let index = el.collectionName.search(/(\(|\[)/) - 1; // look for ( or [
     index = index < 0 ? el.collectionName.length : index;
 
     return {
       albumTitle: el.collectionName.substring(0, index),
       albumImage: el.artworkUrl100,
-      albumYear: new Date(el.releaseDate).getFullYear()
+      albumYear: new Date(el.releaseDate).getFullYear(),
+      albumId: el.collectionId
     };
   });
 

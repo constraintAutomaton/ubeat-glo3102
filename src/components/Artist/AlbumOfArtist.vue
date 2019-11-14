@@ -11,6 +11,7 @@
         v-bind:albumTitle="album.albumTitle"
         v-bind:albumYear="album.albumYear"
         v-bind:albumImage="album.albumImage"
+        v-bind:albumId="album.albumId"
       ></AlbumsItem>
     </ul>
   </div>

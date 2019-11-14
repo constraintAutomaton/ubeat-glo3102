@@ -1,12 +1,8 @@
 <template>
   <div id="albumPage" class="container">
     <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
-    <h2 class="listTitle">
-      {{albumInfo.albumName}}
-    </h2>
-    <Tracks
-      v-bind:trackList="albumInfo.trackList"
-    ></Tracks>
+    <h2 class="listTitle">{{albumInfo.albumName}}</h2>
+    <Tracks v-bind:trackList="albumInfo.trackList"></Tracks>
   </div>
 </template>
 
@@ -18,8 +14,7 @@ import { getAlbumInfo, getTrackInfo } from "./../lib/util/utilAlbum";
 export default {
   data() {
     return {
-      albumInfo: {
-      },
+      albumInfo: {},
       trackInfo: [
         {
           trackObj: undefined,
@@ -39,9 +34,9 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$route.params.name);
+    console.log(this.$route.query);
     if (this.$route.params.name) {
-      const albumSearch = await getAlbumInfo(this.$route.params.name);
+      const albumSearch = await getAlbumInfo(Number(this.$route.query.id));
       this.albumInfo = albumSearch[0];
       console.log(this.albumInfo);
       const id = albumSearch[1];
