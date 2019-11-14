@@ -34,9 +34,12 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$route.query);
     if (this.$route.params.name) {
-      const albumSearch = await getAlbumInfo(Number(this.$route.query.id));
+      const query =
+        this.$route.query.id === undefined
+          ? this.$route.params.name
+          : Number(this.$route.query.id);
+      const albumSearch = await getAlbumInfo(query);
       this.albumInfo = albumSearch[0];
       console.log(this.albumInfo);
       const id = albumSearch[1];
