@@ -27,7 +27,7 @@
                   artistName: "Mick Jenkins",
                   imgArtist: "https://is5-ssl.mzstatic.com/image/thumb/Features128/v4/56/73/e8/5673e8e8-b81b-0548-0eb7-7c72c6756bda/mzl.isfkrmim.jpg/400x400bb.jpg",
                   genre: "Hip-Hop/Rap",
-                  linkItune: "https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
+                  artistLink: "https://geo.music.apple.com/ca/artist/mick-jenkins/885270234?mt=1&app=music"
               },
               albumInfo: [
                   { albumTitle: "Pieces of a man", albumYear : 2018, albumImage: "https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" },

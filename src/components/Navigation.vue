@@ -16,11 +16,11 @@
               </router-link>
             </li>
             <li class="hide-on-small-only">
-              <router-link to="/artist">
+              <router-link to="/artistList">
                 <i class="material-icons left hide-on-med-and-down">
                   person
                 </i>
-                Artist
+                Artistffff
               </router-link>
             </li>
             <li class="hide-on-small-only">

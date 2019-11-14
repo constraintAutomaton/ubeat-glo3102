@@ -1,6 +1,6 @@
 <template>
   <li class="col s6 m4 l2">
-    <router-link :to="`/album/${albumTitle}?id=${albumId}`">
+    <router-link :to="'/album/'+ albumTitle">
       <img v-bind:src="albumImage" />
 
       <h3 class="albumTitle">
