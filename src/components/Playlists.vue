@@ -1,11 +1,10 @@
 <template>
   <div id="playlistsPage" class="container">
     <h1>My Playlists</h1>
-    <template v-for="(playlist, index) in playlists">
+    <template v-for="playlist in playlists">
       <single-playlist
         :playlist="playlist"
-        :indexNumber="index.toString()"
-        :key="index"
+        :key="playlist.id"
         ref="singlePlaylist"
         @deletePlaylist="deletePlaylistById"
       ></single-playlist>
@@ -75,6 +74,7 @@ export default {
 <style scoped>
 
 #newPlaylist{
+  margin-top: 10px;
   text-align: right;
 }
 

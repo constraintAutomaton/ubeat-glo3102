@@ -1,42 +1,47 @@
 <template>
-  <div class="collapsed">
+  <div v-bind:class="{ collapsed: isCollapsed }">
     <div class="playlistNameWrapper">
       <font-awesome-icon
-        class="iconAngleRight collapseHandleIcon"
+        v-bind:class="{ iconAngleRightHidden: !isCollapsed }"
+        class="collapseHandleIcon"
         :icon="['fas', 'angle-right']"
-        @click="expandPlaylist"
+        @click="togglePlaylist"
       />
       <font-awesome-icon
-        class="iconAngleDown collapseHandleIcon"
+        v-bind:class="{ iconAngleDownHidden: isCollapsed }"
+        class="collapseHandleIcon"
         :icon="['fas', 'angle-down']"
-        @click="collapsePlaylist"
+        @click="togglePlaylist"
       />
       <textarea
-        :id="`playlistName${indexNumber}`"
+        ref="playlistName"
         class="playlistNameInput"
         placeholder="Enter a playlist title"
         rows="1"
-        disabled
-        v-on:keydown="saveNewTitle"
-        v-on:focusout="saveNewTitle"
-        v-on:keyup="addAutoResize"
+        readonly
+        @click="togglePlaylist"
+        @keydown.enter="saveNewTitle"
+        @focusout="saveNewTitle"
+        @keyup="addAutoResize"
         v-model="playlist.name"
       >
       </textarea>
-      <font-awesome-icon
-        class="icons"
-        :icon="['fa', 'pencil-alt']"
-        @click="modifyTitle"
-      />
-      <font-awesome-icon
-        class="icons"
-        :icon="['fa', 'trash-alt']"
-        @click="deletePlaylistById"
-      />
+      <a class="btn btn-small icons" @click="modifyTitle">
+        <font-awesome-icon
+          class=""
+          :icon="['fa', 'pencil-alt']"
+        />
+      </a>
+      <a class="btn btn-small icons" @click="deletePlaylist">
+        <font-awesome-icon
+          class=""
+          :icon="['fa', 'trash-alt']"
+        />
+      </a>
     </div>
     <ul class="playlistTracks">
       <template v-for="track in playlist.tracks">
-        <single-track :track="track" @deleteSong="deleteSong"> </single-track>
+        <single-track :track="track" @deleteSong="deleteSong" :key="track.id"> </single-track>
       </template>
     </ul>
   </div>
@@ -52,13 +57,15 @@ export default {
   props: {
     playlist: {
       type: Object
-    },
-    indexNumber: {
-      type: String
     }
   },
   components: {
     SingleTrack
+  },
+  data(){
+    return{
+      isCollapsed : true
+    }
   },
   methods: {
     /**
@@ -66,12 +73,9 @@ export default {
      */
 
     modifyTitle() {
-      let inputField = document.getElementById(
-        `playlistName${this.indexNumber}`
-      );
-      inputField.removeAttribute("disabled");
-      inputField.focus();
-      // inputField.select();
+      this.$refs.playlistName.readOnly = false;
+      this.$refs.playlistName.focus();
+      // this.$refs.playlistName.select();
     },
 
     /**
@@ -80,20 +84,8 @@ export default {
      */
 
     saveNewTitle(event) {
-      let inputField = document.getElementById(
-        `playlistName${this.indexNumber}`
-      );
-
-      if (event.type === "focusout") {
-        this.callPutAPI(inputField.value);
-        event.target.setAttribute("disabled", "");
-      }
-      let keycode = event.keyCode ? event.keyCode : event.which;
-      if (keycode === 13) {
-        event.preventDefault();
-        this.callPutAPI(inputField.value);
-        inputField.setAttribute("disabled", "");
-      }
+      this.callPutAPI();
+      this.$refs.playlistName.readOnly = true;
     },
 
     addAutoResize(event) {
@@ -101,41 +93,20 @@ export default {
         event.target.style.height = "auto";
         event.target.style.height = event.target.scrollHeight + "px";
       } else {
-        document.querySelectorAll("textarea").forEach(function(element) {
-          element.style.boxSizing = "border-box";
-          element.style.height = "inherit";
-          let offset = element.offsetHeight - element.clientHeight;
-          element.style.height = element.scrollHeight + offset + "px";
-        });
+        let element = this.$refs.playlistName;
+        element.style.boxSizing = "border-box";
+        element.style.height = "inherit";
+        let offset = element.offsetHeight - element.clientHeight;
+        element.style.height = element.scrollHeight + offset + "px";
       }
     },
 
-    expandPlaylist(event) {
-      let playlistElem = document.getElementById(
-        `playlistName${this.indexNumber}`
-      ).parentElement.parentElement;
-
-      if (playlistElem.classList.contains("collapsed")) {
-        playlistElem.classList.remove("collapsed");
-      }
-
-      playlistElem.classList.add("expanded");
+    togglePlaylist(event) {
+      if(this.$refs.playlistName.readOnly)
+        this.isCollapsed = !this.isCollapsed;
     },
 
-    collapsePlaylist(event) {
-      let playlistElem = document.getElementById(
-        `playlistName${this.indexNumber}`
-      ).parentElement.parentElement;
-
-      if (playlistElem.classList.contains("expanded")) {
-        playlistElem.classList.remove("expanded");
-      }
-
-      playlistElem.classList.add("collapsed");
-    },
-
-    async callPutAPI(newName) {
-      this.playlist.name = newName;
+    async callPutAPI() {
       await modifyPlaylist(this.playlist);
     },
 
@@ -158,7 +129,7 @@ export default {
         });
     },
 
-    deletePlaylistById() {
+    deletePlaylist() {
       this.$emit("deletePlaylist", this.playlist);
     }
   },
@@ -179,6 +150,14 @@ export default {
   width: calc(100% - 26px);
 }
 
+.playlistNameWrapper textarea:read-only {
+  user-select: none;
+}
+
+.playlistNameWrapper textarea:hover:read-only {
+  text-decoration: underline;
+}
+
 .playlistNameInput {
   border: none;
   /*width: auto;*/
@@ -196,20 +175,20 @@ export default {
   padding-right: 10px;
 }
 
-.playlistNameInput:disabled {
+.playlistNameInput:read-only {
   color: var(--primaryAccentColor);
+  cursor: pointer;
 }
 
 .icons {
-  top: 6px;
-  position: relative;
-  color: var(--darkGrey);
-  background-color: #38384226;
-  padding: 7px;
-  border-radius: 100%;
-  width: 26px;
-  height: 26px;
-  margin: 0 5px;
+  margin: 1px;
+  color: white;
+  background-color: var(--primaryAccentColor);
+}
+
+.icons:hover {
+  background-color: var(--darkerAccentColor);
+  color: white;
 }
 
 .icons:last-child {
@@ -231,23 +210,11 @@ export default {
   display: none;
 }
 
-.collapsed .iconAngleDown {
+.iconAngleDownHidden {
   display: none;
 }
 
-.collapsed .iconAngleRight {
-  display: block;
-}
-
-.expanded .playlistTracks {
-  display: block;
-}
-
-.expanded .iconAngleDown {
-  display: block;
-}
-
-.expanded .iconAngleRight {
+.iconAngleRightHidden {
   display: none;
 }
 
