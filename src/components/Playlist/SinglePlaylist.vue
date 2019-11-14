@@ -41,7 +41,7 @@
     </div>
     <ul class="playlistTracks">
       <template v-for="track in playlist.tracks">
-        <single-track :track="track" @deleteSong="deleteSong" :key="track.id"> </single-track>
+        <single-track :track="track" :insidePlaylist="true" @deleteSong="deleteSong" :key="track.id"> </single-track>
       </template>
     </ul>
   </div>
