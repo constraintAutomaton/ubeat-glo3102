@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContainer container">
     <h2 class="listTitle">
       <a>{{title}}</a>
     </h2>
@@ -23,17 +23,17 @@
             artistList: {
                 type: Array,
                 default: ()=>{return [
-                    { artistName: "celine Dion", genre : "ffff", artistImage: "https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" },
-                    { artistName: "Garou" , genre : "gggg", artistImage: "https://i1.sndcdn.com/artworks-3e86379b-ae93-443b-887a-52b0a8b05a93-0-t500x500.jpg" },
-                    { artistName: "manu Dibango", genre : "jjjj", artistImage: "https://i1.sndcdn.com/artworks-000127868569-v269fn-t500x500.jpg" },
-                    { artistName: "Helene segara", genre : "kkkk", artistImage: "https://i1.sndcdn.com/artworks-c65a3566-53c4-4cd1-9b24-2a14c90efed4-0-t500x500.jpg" },
-                    { artistName: "America", genre : "oooo", artistImage: "https://i1.sndcdn.com/artworks-c65a3566-53c4-4cd1-9b24-2a14c90efed4-0-t500x500.jpg" },
+                    { artistName: "The Jelly Jam", genre : "Rock", artistImage: "https://img.discogs.com/7z0aS65XsMHo9otn8wHnAevXCHQ=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-113965-1330518379.jpeg.jpg" },
+                    //{ artistName: "Timberlake" , genre : "Pop", artistImage: "https://img.discogs.com/URDL1jhUNB_4DmTV5vJlCiGzTy8=/fit-in/600x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-235513-1310035764.jpeg.jpg" },
+                    { artistName: "Helene Segara", genre : "French Pop", artistImage: "https://img.discogs.com/IxLuWezmCpqcaMsb_TchJF-dnSQ=/277x261/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-1726706-1478510872-8932.jpeg.jpg" },
+                    { artistName: "Bob Dylan", genre : "Rock", artistImage: "https://img.discogs.com/LIBB7FAvEkji0W658_ETe5UMlQE=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-482143-1501973076-3537.jpeg.jpg" },
+                    //{ artistName: "Beastie Boys", genre : "Hip-Hop/Rap", artistImage: "https://img.discogs.com/jR0e9VlZJK0i6EaE52ws7lVZ3Ic=/300x300/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(40)/discogs-images/A-10783-1449311945-7861.jpeg.jpg" },
 
                 ];}
             },
             title:{
                 type:String,
-                default:"Artiste"
+                default:"Artists"
             }
         },
         components: {
