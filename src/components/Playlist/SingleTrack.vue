@@ -68,12 +68,7 @@ export default {
     },
 
     playSong() {
-      this.$songEvent.$emit("data", {
-        songTitle: this.track.trackName,
-        songLink: this.track.previewUrl,
-        artist: this.track.artistName,
-        album: this.track.collectionName
-      });
+      this.$songEvent.$emit("data", this.track);
       this.playing = !this.playing;
     },
 

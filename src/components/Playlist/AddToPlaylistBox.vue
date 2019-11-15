@@ -83,7 +83,7 @@ export default {
                     listElem.appendChild(errorImage);
             }
             
-
+            this.$songEvent.$emit("playlistUpdated");
         },
 
         hideAddSongUI() {

@@ -32,7 +32,9 @@ export default {
     SinglePlaylist
   },
 
-  mounted() {},
+  mounted() {
+    this.$songEvent.$on("playlistUpdated", this.refreshPlaylists);
+  },
 
   async created() {
     this.refreshPlaylists();

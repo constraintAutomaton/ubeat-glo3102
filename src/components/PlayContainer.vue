@@ -18,7 +18,7 @@
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
       <add-to-playlist-box
-        v-bind:playingTrackObj="trackObj"
+        :playingTrackObj="trackObj"
       ></add-to-playlist-box>
     </div>
     <div class="playInformation">
@@ -57,13 +57,13 @@ export default {
     AddToPlaylistBox
   },
   methods: {
-    ChangePlayingSong(info) {
+    ChangePlayingSong(track) {
       this.song != undefined ? this.song.stop() : "";
-      this.trackObj = info.trackObj;
-      this.songTitle = info.songTitle;
-      this.songLink = info.songLink;
-      this.artist = info.artist;
-      this.album = info.album;
+      this.trackObj = track;
+      this.songTitle = track.trackName;
+      this.songLink = track.previewUrl;
+      this.artist = track.artistName;
+      this.album = track.collectionName;
       this.song = new Howl({
         src: [this.songLink]
       });
@@ -81,7 +81,6 @@ export default {
 
     playSong() {
       if (typeof this.song !== "undefined") {
-        console.log(this.song);
         this.song.play(this.song.id);
         document.getElementById("mainPlay").style.display = "none";
         document.getElementById("mainPause").style.display = "block";
