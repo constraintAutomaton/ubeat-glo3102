@@ -27,7 +27,7 @@
       :icon="['fas', 'minus-circle']"
       @click="deleteSong(track.trackId)"
     />
-    <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="[track]" />
+    <AddToPlaylistsDialog v-if="!insidePlaylist" ref="addToPlaylistDialog" :tracks="[track]" />
   </li>
 </template>
 
