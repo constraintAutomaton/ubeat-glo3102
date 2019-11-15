@@ -1,9 +1,8 @@
 <template>
   <div id="albumPage" class="container">
-    <AlbumInfo v-bind:albumInfo="albumInfo" @addToPlaylist="openDialog"></AlbumInfo>
+    <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
     <h2 class="listTitle">{{albumInfo.albumName}}</h2>
-    <Tracks v-bind:trackList="albumInfo.trackList" @addToPlaylist="openDialog"></Tracks>
-    <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="tracksToAddPlaylist" />
+    <Tracks v-bind:trackList="albumInfo.trackList"></Tracks>
   </div>
 </template>
 
@@ -11,7 +10,6 @@
 <script>
 import AlbumInfo from "./Album/AlbumInfo.vue";
 import Tracks from "./Album/Tracks.vue";
-import AddToPlaylistsDialog from "./Playlist/AddToPlaylistsDialog.vue";
 import { getAlbumInfo, getTrackInfo } from "./../lib/util/utilAlbum";
 export default {
   data() {
@@ -44,21 +42,14 @@ export default {
           : Number(this.$route.query.id);
       const albumSearch = await getAlbumInfo(query);
       this.albumInfo = albumSearch[0];
-      console.log(this.albumInfo);
+      //console.log(this.albumInfo);
       const id = albumSearch[1];
       this.trackInfo = await getTrackInfo(id);
     }
   },
   components: {
     AlbumInfo,
-    Tracks,
-    AddToPlaylistsDialog
-  },
-  methods: {
-    openDialog(tracks) {
-      this.tracksToAddPlaylist = tracks;
-      this.$refs.addToPlaylistDialog.open();
-    }
+    Tracks
   }
 };
 </script>

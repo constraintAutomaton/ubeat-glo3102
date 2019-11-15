@@ -31,17 +31,23 @@
         </a>
       </div>
       <div class="AlbumToPlaylist">
-        <a class="waves-effect waves-light addPlaylist" @click="addToPlaylistClick">
+        <a class="waves-effect waves-light addPlaylist" @click="openDialog">
           <i class="material-icons right">playlist_add</i>Add to playlist
         </a>
       </div>
     </div>
+    <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="albumInfo.trackList" />
   </section>
 </template>
 <style src="./../../css/AlbumInfo.css"></style>
 
 <script>
+import AddToPlaylistsDialog from '../Playlist/AddToPlaylistsDialog.vue';
+
 export default {
+  components: {
+    AddToPlaylistsDialog
+  },
   props: {
     albumInfo: {
       type: Object,
@@ -63,8 +69,8 @@ export default {
     }
   },
   methods: {
-    addToPlaylistClick() {
-      this.$emit("addToPlaylist", this.albumInfo.trackList);
+    openDialog() {
+      this.$refs.addToPlaylistDialog.open();
     }
   }
 };

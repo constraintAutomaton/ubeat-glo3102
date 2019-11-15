@@ -18,7 +18,7 @@
     <span class="songTitle">{{ track.trackName }}</span>
     <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
-    <a v-if="!insidePlaylist" class="waves-effect waves-light" @click="addToPlaylistClick"
+    <a v-if="!insidePlaylist" class="waves-effect waves-light" @click="openDialog"
       ><i class="material-icons right">playlist_add</i></a
     >
     <font-awesome-icon
@@ -27,12 +27,17 @@
       :icon="['fas', 'minus-circle']"
       @click="deleteSong(track.trackId)"
     />
+    <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="[track]" />
   </li>
 </template>
 
 <script>
+import AddToPlaylistsDialog from '../Playlist/AddToPlaylistsDialog';
 export default {
   name: "Track",
+  components: {
+    AddToPlaylistsDialog
+  },
   props: {
     track: {},
     insidePlaylist: {
@@ -85,8 +90,8 @@ export default {
     changePlayingStatus() {
       this.playing = false;
     },
-    addToPlaylistClick() {
-      this.$emit("addToPlaylist", [this.track]);
+    openDialog() {
+      this.$refs.addToPlaylistDialog.open();
     }
   }
 };
