@@ -40,11 +40,23 @@
     }
   }
 
-  .playInformation p {
+  .info {
     margin: 0;
     line-height: 1.6;
     font-size: 0.9rem;
+    color: #8fd1d9;
+    cursor: default;
   }
+
+  .playInformation a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .playInformation p {
+    display: inline;
+  }
+
   @media screen and (max-width: 500px) {
     .playInformation p:last-child {
       margin-left: 5px;
@@ -56,6 +68,7 @@
 
   .playIcon {
     margin: 0 10px;
+    cursor: pointer;
   }
 
   .mainPlayButton {
