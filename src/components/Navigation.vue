@@ -3,12 +3,12 @@
     <div class="navbar-fixed">
       <nav class="grey darken-3">
         <div class="nav-wrapper navContainer">
-          <router-link to="/" class="navLogo">
+          <router-link :to="homePage" class="navLogo">
             UBeat
           </router-link>
           <ul class="right">
             <li class="hide-on-small-only">
-              <router-link to="/album">
+              <router-link :to="albumPage">
                 <i class="material-icons left hide-on-med-and-down">
                   album
                 </i>
@@ -16,7 +16,7 @@
               </router-link>
             </li>
             <li class="hide-on-small-only">
-              <router-link to="/artistList">
+              <router-link :to="artistPage">
                 <i class="material-icons left hide-on-med-and-down">
                   person
                 </i>
@@ -58,25 +58,17 @@
 
               <ul id="navDropdown" class="dropdown-content">
                 <li>
-                  <router-link to="/playlists">
+                  <router-link :to="playlistsPage">
                     <i class="material-icons navbar-icon">
                       play_circle_outline
                     </i>
                     Playlists
                   </router-link>
                 </li>
-                <li v-for="playlist in user.playlists" v-bind:key="playlist.id">
-                  <router-link :to="playlist.page">
-                    <i class="material-icons">
-                      chevron_right
-                    </i>
-                    {{ playlist.name }}
-                  </router-link>
-                </li>
                 <li class="divider"></li>
 
                 <li>
-                  <router-link to="/settings" class="navbar-item">
+                  <router-link :to="settingsPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       build
                     </i>
@@ -84,7 +76,7 @@
                   </router-link>
                 </li>
                 <li>
-                  <router-link to="/logout" class="navbar-item">
+                  <router-link :to="logoutPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       lock
                     </i>
@@ -105,7 +97,7 @@
 
     <ul id="sideNav" class="sidenav">
       <li>
-        <router-link to="/">
+        <router-link :to="homePage">
           <i class="material-icons">
             home
           </i>
@@ -113,7 +105,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/album">
+        <router-link :to="albumPage">
           <i class="material-icons">
             album
           </i>
@@ -121,7 +113,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/artist">
+        <router-link :to="artistPage">
           <i class="material-icons">
             person
           </i>
@@ -144,7 +136,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <router-link to="/playlists">
+        <router-link :to="playlistsPage">
           <i class="material-icons">
             play_circle_outline
           </i>
@@ -153,7 +145,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <router-link to="/settings">
+        <router-link :to="settingsPage">
           <i class="material-icons">
             build
           </i>
@@ -161,7 +153,7 @@
         </router-link>
       </li>
       <li>
-        <router-link to="/logout">
+        <router-link :to="logoutPage">
           <i class="material-icons">
             lock
           </i>
@@ -276,6 +268,12 @@ export default {
   },
   data() {
     return {
+      homePage: "/",
+      albumPage: "/album",
+      artistPage: "/artistList",
+      playlistsPage: "/playlists",
+      settingsPage: "/settings",
+      logoutPage: "/logout",
       user: {
         id: 1,
         name: "Robin Desbois"
