@@ -22,8 +22,8 @@
       ></add-to-playlist-box>
     </div>
     <div class="playInformation">
-      <p>{{ songTitle }}</p>
-      <p>{{ artist }}</p>
+      <div><p class="info">{{ songTitle }} - </p><a class="info" v-bind:href="`./#/album/${album}`">{{album}}</a></div>
+      <a class="info" v-bind:href="`./#/artist/${artist}`">{{artist}}</a>
     </div>
   </div>
 </template>
@@ -37,10 +37,10 @@ export default {
   data() {
     return {
       trackObj: undefined,
-      songTitle: "Name of the song",
+      songTitle: "",
       songLink: "",
-      artist: "Artist",
-      album: "Album",
+      artist: "",
+      album: "",
       song: undefined
     };
   },
