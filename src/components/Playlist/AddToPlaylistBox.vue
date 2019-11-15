@@ -115,12 +115,7 @@ export default {
     background-color: #2d2d2d;
     bottom: 40px;
     right: 0px;
-    }
-
-    #addToPlaylistBox li {
-    width: 200px;
-    padding-right: 0;
-    overflow: hidden;
+    border-radius: 10px;
     }
 
     #addToPlaylistButton {
@@ -130,6 +125,9 @@ export default {
     .playlistElem {
         padding: 0 10px 0 10px;
         cursor: default;
+        width: 200px;
+        margin: 3px 0 0 5px;
+        overflow: hidden;
     }
 
     .addButton {
@@ -148,5 +146,9 @@ export default {
 
     #addSongIcon {
         visibility: hidden;
+    }
+
+    .showing {
+        padding: 5px;
     }
 </style>
