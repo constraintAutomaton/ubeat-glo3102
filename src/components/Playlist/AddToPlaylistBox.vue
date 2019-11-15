@@ -1,6 +1,7 @@
 <template>
     <div id='addToPlaylistBox'>
-        <font-awesome-icon id="addToPlaylistButton" class="playIcon" v-on:click="addSongToPlaylist" :icon="['fas', 'plus-circle']" />
+        <i id="addToPlaylistButton" class="material-icons playIcon" @click="addSongToPlaylist">playlist_add</i>
+        <!--font-awesome-icon id="addToPlaylistButton" class="playIcon" v-on:click="addSongToPlaylist" :icon="['fas', 'plus-circle']" /-->
         <font-awesome-icon id="addSongIcon" class="addButton" :icon="['fas', 'plus-circle']" />
         <font-awesome-icon id="addSongSuccessIcon" class="addResult" :icon="['fas', 'check-circle']" />
         <font-awesome-icon id="addSongErrorIcon" class="addResult" :icon="['fas', 'times-circle']" />

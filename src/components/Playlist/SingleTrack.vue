@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     getTrackTime() {
-      console.log(this.track.trackTimeMillis);
       const trackTime = new Date(this.track.trackTimeMillis);
       let minutes = trackTime.getUTCMinutes();
       let seconds = trackTime.getSeconds();
