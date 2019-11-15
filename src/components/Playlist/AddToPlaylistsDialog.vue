@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog" :class="{ hidden: !isOpened }">
+  <div class="dialog" :class="{ hidden: !isOpened }" @click="userClick">
     <div class="dialogContent">
       <p>Save to...</p>
       <div v-for="playlist in playlists" :key="playlist.id">
@@ -72,17 +72,27 @@ export default {
       this.playlists = await getPlaylists();
     },
     async saveToPlaylist() {
-      this.tracks.forEach(track => {
-        this.$refs.playlistCheckbox.forEach(async chkBox => {
-          if(chkBox.checked) {
-            const response = await addTrackToPlaylist(chkBox.value, track);
-            if(response.status != 200)
-              this.showErrorToast();
-          }
+      let trackAdded = false;
+      if(this.tracks != null){
+        this.tracks.forEach(track => {
+          this.$refs.playlistCheckbox.forEach(async chkBox => {
+            if(chkBox.checked) {
+              trackAdded = true;
+              const response = await addTrackToPlaylist(chkBox.value, track);
+              if(response.status != 200)
+                this.showErrorToast();
+            }
+          });
         });
-      });
-      this.showSuccessToast();
+        if(trackAdded)
+          this.showSuccessToast();
+      }
       this.close();
+    },
+    userClick(event) {
+      if(event.target.classList.contains("dialog")) {
+        this.close();
+      }
     }
   },
   mounted() {
