@@ -18,7 +18,7 @@
     <span class="songTitle">{{ track.trackName }}</span>
     <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
-    <a v-if="!insidePlaylist" class="waves-effect waves-light"
+    <a v-if="!insidePlaylist" class="waves-effect waves-light" @click="addToPlaylistClick"
       ><i class="material-icons right">playlist_add</i></a
     >
     <font-awesome-icon
@@ -84,6 +84,9 @@ export default {
 
     changePlayingStatus() {
       this.playing = false;
+    },
+    addToPlaylistClick() {
+      this.$emit("addToPlaylist", [this.track]);
     }
   }
 };

@@ -20,6 +20,7 @@
         v-for="track in trackList"
         :key="track.id"
         :track="track"
+        @addToPlaylist="pushAddToPlaylist"
       ></single-track>
     </ul>
   </section>
@@ -36,6 +37,11 @@ export default {
   components: {
     TrackItem,
       SingleTrack
+  },
+  methods: {
+    pushAddToPlaylist(tracks) {
+      this.$emit("addToPlaylist", tracks);
+    }
   }
 };
 </script>

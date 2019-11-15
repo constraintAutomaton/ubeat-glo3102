@@ -31,7 +31,7 @@
         </a>
       </div>
       <div class="AlbumToPlaylist">
-        <a class="waves-effect waves-light addPlaylist">
+        <a class="waves-effect waves-light addPlaylist" @click="addToPlaylistClick">
           <i class="material-icons right">playlist_add</i>Add to playlist
         </a>
       </div>
@@ -55,6 +55,16 @@ export default {
           linkItune: "./"
         };
       }
+    }
+  },
+  data() {
+    return {
+      tracksToAddPlaylist: []
+    }
+  },
+  methods: {
+    addToPlaylistClick() {
+      this.$emit("addToPlaylist", this.albumInfo.trackList);
     }
   }
 };
