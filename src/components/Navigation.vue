@@ -270,7 +270,7 @@ export default {
     return {
       homePage: "/",
       albumPage: "/album",
-      artistPage: "/artistList",
+      artistPage: "/artist",
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",

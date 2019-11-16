@@ -1,8 +1,16 @@
 <template>
   <div id="albumPage" class="container">
-    <AlbumInfo v-bind:albumInfo="albumInfo"></AlbumInfo>
-    <h2 class="listTitle">{{albumInfo.albumName}}</h2>
-    <Tracks v-bind:trackList="albumInfo.trackList"></Tracks>
+    <div v-if="!albumId">
+      <AlbumOfArtist :title="'Featured Albums'"/>
+    </div>
+    <div v-else-if="this.albumInfo != null">
+      <AlbumInfo :albumInfo="albumInfo"></AlbumInfo>
+      <h2 class="listTitle">{{albumInfo.albumName}}</h2>
+      <Tracks :trackList="albumInfo.trackList"></Tracks>
+    </div>
+    <div v-else>
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -10,46 +18,35 @@
 <script>
 import AlbumInfo from "./Album/AlbumInfo.vue";
 import Tracks from "./Album/Tracks.vue";
-import { getAlbumInfo, getTrackInfo } from "./../lib/util/utilAlbum";
+import AlbumOfArtist from './Artist/AlbumOfArtist';
+import { getAlbumById } from "./../lib/util/utilAlbum";
 export default {
   data() {
     return {
-      albumInfo: {},
-      trackInfo: [
-        {
-          trackObj: undefined,
-          trackNumber: 1,
-          songTitle: "bar",
-          trackDuration: "99:00",
-          songLink: "./"
-        },
-        {
-          trackObj: undefined,
-          trackNumber: 2,
-          songTitle: "bar",
-          trackDuration: "99:00",
-          songLink: "./"
-        }
-      ],
-      tracksToAddPlaylist: []
+      albumInfo: null
     };
   },
-  async mounted() {
-    if (this.$route.params.name) {
-      const query =
-        this.$route.query.id === undefined
-          ? this.$route.params.name
-          : Number(this.$route.query.id);
-      const albumSearch = await getAlbumInfo(query);
-      this.albumInfo = albumSearch[0];
-      //console.log(this.albumInfo);
-      const id = albumSearch[1];
-      this.trackInfo = await getTrackInfo(id);
+  computed: {
+    albumId() {
+      this.loadAlbum();
+      return this.$route.params.id;
+    }
+  },
+  mounted() {
+      this.loadAlbum();
+  },
+  methods: {
+    async loadAlbum() {
+      if (this.$route.params.id) {
+        const album = await getAlbumById(this.$route.params.id);
+        this.albumInfo = album;
+      }
     }
   },
   components: {
     AlbumInfo,
-    Tracks
+    Tracks,
+    AlbumOfArtist
   }
 };
 </script>

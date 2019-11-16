@@ -104,7 +104,7 @@ export default class ApiInterface {
       if (rep_search.ok) {
         const data = await rep_search.json();
 
-        const id = data.results[1].id != undefined ? data.results[1].id : "";
+        const id = data.results[0].id != undefined ? data.results[0].id : "";
         url = `${this.rootUrlDiscogs}artists/${id}?token=${this.discogsTokken}`;
 
         const rep = await fetch(url);

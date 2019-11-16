@@ -1,12 +1,12 @@
 <template>
   <li class="col s6 m4 l2">
-    <router-link :to="'/album/'+ albumTitle">
-      <img v-bind:src="albumImage" />
+    <router-link :to="'/album/'+ albumId">
+      <img :src="albumImage" />
 
       <h3 class="albumTitle">
         <a>{{albumTitle}}</a>
       </h3>
-      <p>{{albumYear}}</p>
+      <p>{{releaseDate}}</p>
     </router-link>
   </li>
 </template>
@@ -19,8 +19,8 @@ export default {
       default: "abc"
     },
     albumYear: {
-      type: Number,
-      default: 2019
+      type: String,
+      default: ""
     },
     albumImage: {
       type: String,
@@ -29,6 +29,11 @@ export default {
     albumId: {
       type: Number,
       default: undefined
+    }
+  },
+  computed: {
+    releaseDate() {
+      return new Date(this.albumYear).getFullYear()
     }
   }
 };

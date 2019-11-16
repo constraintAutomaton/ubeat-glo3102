@@ -1,28 +1,28 @@
 <template>
   <section class="flexContent">
     <div class="albumImage">
-      <img class="responsiveImage" v-bind:src="albumInfo.image" alt="Album Image" />
+      <img class="responsiveImage" :src="albumInfo.highResImage" alt="Album Image" />
     </div>
     <div class="infoAlbum">
-      <h1>{{albumInfo.albumName}}</h1>
+      <h1>{{albumInfo.collectionName}}</h1>
       <p class>
         <span>Artist:</span>
-        <a v-bind:href="`./#/artist/${albumInfo.artist}`">{{albumInfo.artist}}</a>
+        <a v-bind:href="`./#/artist/${albumInfo.artistId}`">{{albumInfo.artistName}}</a>
       </p>
       <p class>
         <span>Genre:</span>
-        {{albumInfo.genre}}
+        {{albumInfo.primaryGenreName}}
       </p>
       <p class>
         <span>Release:</span>
-        {{albumInfo.release}}
+        {{releaseDate}}
       </p>
       <p class>
         <span>Number of tracks:</span>
-        {{albumInfo.numberOfTrack}}
+        {{albumInfo.trackCount}}
       </p>
       <div class="badgeContainer">
-        <a v-bind:href="albumInfo.linkItune" target="_blank" rel="noopener">
+        <a :href="albumInfo.collectionViewUrl" target="_blank" rel="noopener">
           <img
             class="itunesBadge"
             src="https://linkmaker.itunes.apple.com/en-us/badge-lrg.svg?releaseDate=&kind=artist&bubble=apple_music"
@@ -61,6 +61,11 @@ export default {
           linkItune: "./"
         };
       }
+    }
+  },
+  computed: {
+    releaseDate() {
+      return new Date(this.albumInfo.releaseDate).getFullYear();
     }
   },
   data() {

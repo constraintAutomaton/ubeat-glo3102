@@ -3,6 +3,32 @@ import ApiInterface from "./../ApiInterface";
 const isSecure = false;
 const apiEngine = new ApiInterface(isSecure);
 
+export const getArtistById = async (artistId) => {
+  const result = await apiEngine.getArtistById(artistId);
+
+  if(result.resultCount == 1){
+    let artist = result.results[0];
+
+    artist.highResImage = await apiEngine.getHighResImage(
+      artist.artistName,
+      "artiste",
+      artist.artistName
+    );
+    
+    let resultAlbums = await apiEngine.getArtistAlbumById(artistId);
+    if(resultAlbums.resultCount > 0)
+    {
+      artist.albums = resultAlbums.results;
+    }
+    
+    return artist;
+  }
+  else{
+    console.log("Unable to fetch artist: " + artistId);
+    return null;
+  }
+}
+
 export const getArtistInfo = async p_artist => {
   const searchResults = await apiEngine.searchArtiste(p_artist, 1);
   const result = searchResults.results[0];

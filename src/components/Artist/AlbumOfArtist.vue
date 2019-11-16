@@ -7,11 +7,11 @@
     <ul class="listAlbum flexContent row">
       <AlbumsItem
         v-for="album in albumList"
-        v-bind:key="album.albumTitle"
-        v-bind:albumTitle="album.albumTitle"
-        v-bind:albumYear="album.albumYear"
-        v-bind:albumImage="album.albumImage"
-        v-bind:albumId="album.albumId"
+        :key="album.collectionId"
+        :albumTitle="album.collectionName"
+        :albumYear="album.releaseDate"
+        :albumImage="album.artworkUrl100"
+        :albumId="album.collectionId"
       ></AlbumsItem>
     </ul>
   </div>
@@ -24,11 +24,9 @@
             albumList: {
                 type: Array,
                 default: ()=>{return [
-                    { albumTitle: "Pieces of a man", albumYear : 2018, albumImage: "https://i1.sndcdn.com/artworks-000428467479-2thnsz-t500x500.jpg" },
-                    { albumTitle: "Or More The Anxious" , albumYear: 2017, albumImage: "https://i1.sndcdn.com/artworks-3e86379b-ae93-443b-887a-52b0a8b05a93-0-t500x500.jpg" },
-                    { albumTitle: "The Healing Component", albumYear: 2016, albumImage: "https://i1.sndcdn.com/artworks-000127868569-v269fn-t500x500.jpg" },
-                    { albumTitle: "Wave[s]", albumYear: 2015, albumImage: "https://i1.sndcdn.com/artworks-c65a3566-53c4-4cd1-9b24-2a14c90efed4-0-t500x500.jpg" },
-                    { albumTitle: "The Water(s)", albumYear: 2014, albumImage: "https://i1.sndcdn.com/artworks-c65a3566-53c4-4cd1-9b24-2a14c90efed4-0-t500x500.jpg" },
+                    { collectionId: 1146894931, collectionName: "The Healing Component", releaseDate: "2016-09-23T07:00:00Z", artworkUrl100: "https://is2-ssl.mzstatic.com/image/thumb/Music22/v4/62/79/62/62796240-fd44-4ec0-f412-8a7809d1540c/source/100x100bb.jpg" },
+                    { collectionId: 1022614929, collectionName: "Wave[s]", releaseDate: "2015-08-21T07:00:00Z", artworkUrl100: "https://is4-ssl.mzstatic.com/image/thumb/Music4/v4/93/19/aa/9319aaa6-07dd-3cbc-49e1-29cda106000e/source/100x100bb.jpg" },
+                    { collectionId: 1280662726, collectionName: "The Water(s)", releaseDate: "2014-08-12T07:00:00Z", artworkUrl100: "https://is2-ssl.mzstatic.com/image/thumb/Music128/v4/1f/2d/e9/1f2de934-c3a9-2ebd-6e1f-9acf35a0deda/source/100x100bb.jpg" },
 
                 ];}
             },
