@@ -26,6 +26,7 @@
         </p>
         <a class="info" :href="`./#/album/${albumId}`">{{ album }}</a>
       </div>
+      <span class="hide-on-med-and-up"> - </span>
       <a class="info" :href="`./#/artist/${artistId}`">{{ artist }}</a>
     </div>
   </div>

@@ -97,7 +97,7 @@
 
     <ul id="sideNav" class="sidenav">
       <li>
-        <router-link :to="homePage">
+        <router-link class="sidenav-close" :to="homePage">
           <i class="material-icons">
             home
           </i>
@@ -105,7 +105,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="albumPage">
+        <router-link class="sidenav-close" :to="albumPage">
           <i class="material-icons">
             album
           </i>
@@ -113,7 +113,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="artistPage">
+        <router-link class="sidenav-close" :to="artistPage">
           <i class="material-icons">
             person
           </i>
@@ -136,7 +136,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <router-link :to="playlistsPage">
+        <router-link class="sidenav-close" :to="playlistsPage">
           <i class="material-icons">
             play_circle_outline
           </i>
@@ -145,7 +145,7 @@
       </li>
       <li class="divider"></li>
       <li>
-        <router-link :to="settingsPage">
+        <router-link class="sidenav-close" :to="settingsPage">
           <i class="material-icons">
             build
           </i>
@@ -153,7 +153,7 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="logoutPage">
+        <router-link class="sidenav-close" :to="logoutPage">
           <i class="material-icons">
             lock
           </i>
