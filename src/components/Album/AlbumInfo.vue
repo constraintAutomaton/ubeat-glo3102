@@ -4,22 +4,24 @@
       <img class="responsiveImage" :src="albumImage" alt="Album Image" />
     </div>
     <div class="infoAlbum">
-      <h1>{{albumInfo.collectionName}}</h1>
+      <h1>{{ albumInfo.collectionName }}</h1>
       <p class>
         <span>Artist: </span>
-        <a :href="`./#/artist/${albumInfo.artistId}`">{{albumInfo.artistName}}</a>
+        <a :href="`./#/artist/${albumInfo.artistId}`">
+          {{ albumInfo.artistName }}
+        </a>
       </p>
       <p class>
         <span>Genre:</span>
-        {{albumInfo.primaryGenreName}}
+        {{ albumInfo.primaryGenreName }}
       </p>
       <p class>
         <span>Release:</span>
-        {{releaseDate}}
+        {{ releaseDate }}
       </p>
       <p class>
         <span>Number of tracks:</span>
-        {{albumInfo.trackCount}}
+        {{ albumInfo.trackCount }}
       </p>
       <div class="badgeContainer">
         <a :href="albumInfo.collectionViewUrl" target="_blank" rel="noopener">
@@ -36,13 +38,16 @@
         </a>
       </div>
     </div>
-    <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="albumInfo.trackList" />
+    <AddToPlaylistsDialog
+      ref="addToPlaylistDialog"
+      :tracks="albumInfo.trackList"
+    />
   </section>
 </template>
 <style src="./../../css/AlbumInfo.css"></style>
 
 <script>
-import AddToPlaylistsDialog from '../Playlist/AddToPlaylistsDialog.vue';
+import AddToPlaylistsDialog from "../Playlist/AddToPlaylistsDialog.vue";
 
 export default {
   components: {
@@ -68,16 +73,17 @@ export default {
       return new Date(this.albumInfo.releaseDate).getFullYear();
     },
     albumImage() {
-      if(this.albumInfo.highResImage != "")
+      if (this.albumInfo.highResImage != "") {
         return this.albumInfo.highResImage;
-      else
+      } else {
         return this.albumInfo.artworkUrl100;
+      }
     }
   },
   data() {
     return {
       tracksToAddPlaylist: []
-    }
+    };
   },
   methods: {
     openDialog() {

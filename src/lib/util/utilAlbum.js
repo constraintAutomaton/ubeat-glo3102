@@ -3,9 +3,9 @@ import ApiInterface from "./../ApiInterface";
 const isSecure = false;
 const apiEngine = new ApiInterface(isSecure);
 
-export const getAlbumById = async (albumId) => {
+export const getAlbumById = async albumId => {
   const result = await apiEngine.getAlbumById(albumId);
-  if(result.resultCount == 1){
+  if (result.resultCount == 1) {
     let album = result.results[0];
 
     album.trackList = await getTracklist(album.collectionId);
@@ -14,10 +14,9 @@ export const getAlbumById = async (albumId) => {
       "album",
       album.artistName
     );
-    
+
     return album;
-  }
-  else{
+  } else {
     console.log("Unable to fetch album: " + albumId);
     return null;
   }
@@ -29,7 +28,7 @@ export const getAlbumInfo = async p_album => {
       ? await apiEngine.searchAlbum(p_album, 1)
       : await apiEngine.getAlbumById(Number(p_album));
   const result = searchResults.results[0];
-  
+
   let formated = {
     albumName: result.collectionName,
     artist: result.artistName,
@@ -59,7 +58,7 @@ export const getTracklist = async album_id => {
       "Content-Type": "application/json"
     }
   };
-  
+
   return fetch(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`, param)
     .then(response => response.json())
     .then(json => {

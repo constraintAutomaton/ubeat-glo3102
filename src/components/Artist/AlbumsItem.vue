@@ -1,12 +1,12 @@
 <template>
   <li class="col s6 m4 l2">
-    <router-link :to="'/album/'+ albumId">
+    <router-link :to="'/album/' + albumId">
       <img :src="albumImage" />
 
       <h3 class="albumTitle">
-        <a>{{albumTitle}}</a>
+        <a>{{ albumTitle }}</a>
       </h3>
-      <p>{{releaseDate}}</p>
+      <p>{{ releaseDate }}</p>
     </router-link>
   </li>
 </template>
@@ -33,11 +33,8 @@ export default {
   },
   computed: {
     releaseDate() {
-      return new Date(this.albumYear).getFullYear()
+      return new Date(this.albumYear).getFullYear();
     }
   }
 };
 </script>
-
-<style lang="css" scoped>
-</style>

@@ -17,13 +17,16 @@
       />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
-      <add-to-playlist-box
-        :playingTrackObj="trackObj"
-      ></add-to-playlist-box>
+      <add-to-playlist-box :playingTrackObj="trackObj" />
     </div>
     <div class="playInformation">
-      <div><p class="info">{{ songTitle }} - </p><a class="info" v-bind:href="`./#/album/${albumId}`">{{album}}</a></div>
-      <a class="info" v-bind:href="`./#/artist/${artistId}`">{{artist}}</a>
+      <div>
+        <p class="info">
+          <span>{{ songTitle }} - </span>
+        </p>
+        <a class="info" :href="`./#/album/${albumId}`">{{ album }}</a>
+      </div>
+      <a class="info" :href="`./#/artist/${artistId}`">{{ artist }}</a>
     </div>
   </div>
 </template>
