@@ -1,9 +1,9 @@
 <template>
   <div id="artistPage" class="container">
-    <div v-if="!artistId">
-      <ArtistList :title="'Featured Artists'" />
+    <div v-if="loading">
+      Loading...
     </div>
-    <div v-else-if="artistInfo != null">
+    <div v-if="artistInfo">
       <ArtistInfo
         :artistName="artistInfo.artistName"
         :imgArtist="artistInfo.highResImage"
@@ -17,8 +17,8 @@
         :albumList="artistInfo.albums"
       ></AlbumOfArtist>
     </div>
-    <div v-else>
-      Loading...
+    <div v-if="error">
+      {{ error }}
     </div>
   </div>
 </template>
@@ -28,30 +28,34 @@ import Tracks from "./Album/Tracks";
 import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
 import { getArtistById } from "../lib/util/utilArtist";
 import LatestReleases from "./Artist/LatestReleases";
-import ArtistList from "./Artist/ArtistList";
 
 export default {
   data() {
     return {
-      artistInfo: null
+      artistInfo: null,
+      loading: true,
+      error: null
     };
+  },
+  watch: {
+    $route: "loadArtist"
   },
   mounted() {
     this.loadArtist();
   },
-  computed: {
-    artistId() {
-      this.loadArtist();
-      return this.$route.params.id;
-    }
-  },
   methods: {
     async loadArtist() {
-      if (this.$route.params.id) {
+      this.error = this.artistInfo = null;
+      this.loading = true;
+
+      try {
         const artist = await getArtistById(this.$route.params.id);
         this.artistInfo = artist;
-      } else {
-        this.artistInfo = null;
+        this.loading = false;
+        this.error = false;
+      } catch (error) {
+        this.error = error;
+        this.loading = false;
       }
     }
   },
@@ -59,8 +63,7 @@ export default {
     LatestReleases,
     ArtistInfo,
     AlbumOfArtist,
-    Tracks,
-    ArtistList
+    Tracks
   }
 };
 </script>

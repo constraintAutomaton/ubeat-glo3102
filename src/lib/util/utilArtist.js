@@ -4,8 +4,11 @@ const isSecure = false;
 const apiEngine = new ApiInterface(isSecure);
 
 export const getArtistById = async artistId => {
-  const result = await apiEngine.getArtistById(artistId);
+  if (isNaN(artistId)) {
+    throw "The ID specified is not a number";
+  }
 
+  const result = await apiEngine.getArtistById(artistId);
   if (result.resultCount == 1) {
     let artist = result.results[0];
 
@@ -22,8 +25,7 @@ export const getArtistById = async artistId => {
 
     return artist;
   } else {
-    console.log("Unable to fetch artist: " + artistId);
-    return null;
+    throw "Failed to fetch artist: " + artistId + ". It does not exist!";
   }
 };
 
