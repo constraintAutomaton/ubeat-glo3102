@@ -1,7 +1,7 @@
 <template>
   <section class="flexContent">
     <div class="albumImage">
-      <img class="responsiveImage" :src="albumInfo.highResImage" alt="Album Image" />
+      <img class="responsiveImage" :src="albumImage" alt="Album Image" />
     </div>
     <div class="infoAlbum">
       <h1>{{albumInfo.collectionName}}</h1>
@@ -66,6 +66,12 @@ export default {
   computed: {
     releaseDate() {
       return new Date(this.albumInfo.releaseDate).getFullYear();
+    },
+    albumImage() {
+      if(this.albumInfo.highResImage != "")
+        return this.albumInfo.highResImage;
+      else
+        return this.albumInfo.artworkUrl100;
     }
   },
   data() {
