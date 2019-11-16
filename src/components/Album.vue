@@ -41,6 +41,9 @@ export default {
         const album = await getAlbumById(this.$route.params.id);
         this.albumInfo = album;
       }
+      else {
+        this.albumInfo = null;
+      }
     }
   },
   components: {
