@@ -10,7 +10,6 @@
         :genre="artistInfo.primaryGenreName"
         :artistLink="artistInfo.artistLinkUrl"
       ></ArtistInfo>
-      <LatestReleases></LatestReleases>
       <Tracks title="Popular tracks"></Tracks>
       <AlbumOfArtist
         title="Albums"
@@ -27,7 +26,6 @@ import ArtistInfo from "./Artist/ArtistInfo.vue";
 import Tracks from "./Album/Tracks";
 import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
 import { getArtistById } from "../lib/util/utilArtist";
-import LatestReleases from "./Artist/LatestReleases";
 
 export default {
   data() {
@@ -60,7 +58,6 @@ export default {
     }
   },
   components: {
-    LatestReleases,
     ArtistInfo,
     AlbumOfArtist,
     Tracks
