@@ -38,10 +38,15 @@ export default {
       this.error = this.albumInfo = null;
       this.loading = true;
 
-      const album = await getAlbumById(this.$route.params.id);
-      this.albumInfo = album;
-      this.loading = false;
-      this.error = false;
+      try {
+        const album = await getAlbumById(this.$route.params.id);
+        this.albumInfo = album;
+        this.loading = false;
+        this.error = false;
+      } catch (error) {
+        this.error = error;
+        this.loading = false;
+      }
     }
   },
   components: {

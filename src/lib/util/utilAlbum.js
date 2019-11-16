@@ -4,6 +4,10 @@ const isSecure = false;
 const apiEngine = new ApiInterface(isSecure);
 
 export const getAlbumById = async albumId => {
+  if (isNaN(albumId)) {
+    throw "The ID specified is not a number";
+  }
+
   const result = await apiEngine.getAlbumById(albumId);
   if (result.resultCount == 1) {
     let album = result.results[0];
@@ -17,8 +21,7 @@ export const getAlbumById = async albumId => {
 
     return album;
   } else {
-    console.log("Unable to fetch album: " + albumId);
-    return null;
+    throw "Failed to fetch album: " + albumId + ". It does not exist!";
   }
 };
 
