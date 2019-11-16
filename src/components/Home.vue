@@ -1,188 +1,21 @@
 <template>
   <div class="mainContainer container">
-    <h2 class="listTitle"><a>Top 50</a></h2>
-    <ul class="albumList flexContent row">
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>All music genres</a></h3>
-        <p>Top 50</p>
-      </li>
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000407556927-308w8o-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>Rock</a></h3>
-        <p>Top 50</p>
-      </li>
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000515405376-5tpu2f-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>R&B</a></h3>
-        <p>Top 50</p>
-      </li>
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000424060938-h6emj1-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>Blues</a></h3>
-        <p>Top 50</p>
-      </li>
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000087867383-j4snt5-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>Jazz</a></h3>
-        <p>Top 50</p>
-      </li>
-      <li class="col s6 m4 l2">
-        <img
-          src="https://i1.sndcdn.com/artworks-000003026332-oqfy71-t500x500.jpg"
-          alt="Album Image"
-        />
-        <h3 class="albumGenre"><a>Country</a></h3>
-        <p>Top 50</p>
-      </li>
-    </ul>
-
-    <h2 class="listTitle"><a>Most Popular Tracks</a></h2>
-    <ul class="trackList row">
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000596445971-jh3py0-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#1</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000407556927-308w8o-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#2</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000515405376-5tpu2f-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#3</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000424060938-h6emj1-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#4</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000087867383-j4snt5-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#5</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-      <li class="col s12 m6">
-        <div class="popularTrack">
-          <img
-            src="https://i1.sndcdn.com/artworks-000003026332-oqfy71-t500x500.jpg"
-            alt="Album Image"
-            class="left"
-          />
-          <img
-            src="https://www.ccfinc.ca/wp-content/uploads/play-button.png"
-            class="playButton"
-            alt="Play Icon"
-          />
-          <div class="trackDesc">
-            <h4 class="ranking">#6</h4>
-            <p>
-              <a class="artistText">Artist</a> -
-              <span class="trackNameText">TrackName</span>
-            </p>
-          </div>
-        </div>
-      </li>
-    </ul>
+    <ArtistList :title="'Featured Artists'" />
+    <AlbumOfArtist :title="'Featured Artists'" />
   </div>
 </template>
+
+<script>
+import AlbumOfArtist from "./Artist/AlbumOfArtist";
+import ArtistList from "./Artist/ArtistList";
+
+export default {
+  components: {
+    ArtistList,
+    AlbumOfArtist
+  }
+};
+</script>
 
 <style scoped>
 .albumList {

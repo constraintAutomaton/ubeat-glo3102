@@ -1,15 +1,15 @@
 <template>
   <div id="albumPage" class="container">
-    <div v-if="!albumId">
-      <AlbumOfArtist :title="'Featured Albums'"/>
+    <div v-if="loading">
+      Loading...
     </div>
-    <div v-else-if="this.albumInfo != null">
+    <div v-else-if="albumInfo">
       <AlbumInfo :albumInfo="albumInfo"></AlbumInfo>
-      <h2 class="listTitle">{{albumInfo.albumName}}</h2>
+      <h2 class="listTitle">{{ albumInfo.albumName }}</h2>
       <Tracks :trackList="albumInfo.trackList"></Tracks>
     </div>
-    <div v-else>
-      Loading...
+    <div v-else-if="error">
+      {{ error }}
     </div>
   </div>
 </template>
@@ -18,38 +18,35 @@
 <script>
 import AlbumInfo from "./Album/AlbumInfo.vue";
 import Tracks from "./Album/Tracks.vue";
-import AlbumOfArtist from './Artist/AlbumOfArtist';
 import { getAlbumById } from "./../lib/util/utilAlbum";
 export default {
   data() {
     return {
-      albumInfo: null
+      albumInfo: null,
+      error: null,
+      loading: true
     };
   },
-  computed: {
-    albumId() {
-      this.loadAlbum();
-      return this.$route.params.id;
-    }
+  watch: {
+    $route: "loadAlbum"
   },
   mounted() {
-      this.loadAlbum();
+    this.loadAlbum();
   },
   methods: {
     async loadAlbum() {
-      if (this.$route.params.id) {
-        const album = await getAlbumById(this.$route.params.id);
-        this.albumInfo = album;
-      }
-      else {
-        this.albumInfo = null;
-      }
+      this.error = this.albumInfo = null;
+      this.loading = true;
+
+      const album = await getAlbumById(this.$route.params.id);
+      this.albumInfo = album;
+      this.loading = false;
+      this.error = false;
     }
   },
   components: {
     AlbumInfo,
-    Tracks,
-    AlbumOfArtist
+    Tracks
   }
 };
 </script>
