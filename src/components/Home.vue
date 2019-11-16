@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer container">
     <ArtistList :title="'Featured Artists'" />
-    <AlbumOfArtist :title="'Featured Artists'" />
+    <AlbumOfArtist :title="'Featured Albums'" />
   </div>
 </template>
 
