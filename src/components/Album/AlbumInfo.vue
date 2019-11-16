@@ -6,13 +6,8 @@
     <div class="infoAlbum">
       <h1>{{albumInfo.collectionName}}</h1>
       <p class>
-<<<<<<< HEAD
-        <span>Artist:</span>
-        <a v-bind:href="`./#/artist/${albumInfo.artistId}`">{{albumInfo.artistName}}</a>
-=======
         <span>Artist: </span>
-        <a v-bind:href="`./#/artist/${albumInfo.artist}`">{{albumInfo.artist}}</a>
->>>>>>> 85712087aef861a6cc4228ccbb154f2057037f55
+        <a :href="`./#/artist/${albumInfo.artistId}`">{{albumInfo.artistName}}</a>
       </p>
       <p class>
         <span>Genre:</span>

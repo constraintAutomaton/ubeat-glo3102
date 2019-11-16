@@ -22,8 +22,8 @@
       ></add-to-playlist-box>
     </div>
     <div class="playInformation">
-      <div><p class="info">{{ songTitle }} - </p><a class="info" v-bind:href="`./#/album/${album}`">{{album}}</a></div>
-      <a class="info" v-bind:href="`./#/artist/${artist}`">{{artist}}</a>
+      <div><p class="info">{{ songTitle }} - </p><a class="info" v-bind:href="`./#/album/${albumId}`">{{album}}</a></div>
+      <a class="info" v-bind:href="`./#/artist/${artistId}`">{{artist}}</a>
     </div>
   </div>
 </template>
@@ -39,7 +39,9 @@ export default {
       trackObj: undefined,
       songTitle: "",
       songLink: "",
+      artistId: "",
       artist: "",
+      albumId: "",
       album: "",
       song: undefined
     };
@@ -62,7 +64,9 @@ export default {
       this.trackObj = track;
       this.songTitle = track.trackName;
       this.songLink = track.previewUrl;
+      this.artistId = track.artistId;
       this.artist = track.artistName;
+      this.albumId = track.collectionId;
       this.album = track.collectionName;
       this.song = new Howl({
         src: [this.songLink]
