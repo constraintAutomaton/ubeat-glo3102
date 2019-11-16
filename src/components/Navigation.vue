@@ -8,22 +8,6 @@
           </router-link>
           <ul class="right">
             <li class="hide-on-small-only">
-              <router-link :to="albumPage">
-                <i class="material-icons left hide-on-med-and-down">
-                  album
-                </i>
-                Album
-              </router-link>
-            </li>
-            <li class="hide-on-small-only">
-              <router-link :to="artistPage">
-                <i class="material-icons left hide-on-med-and-down">
-                  person
-                </i>
-                Artist
-              </router-link>
-            </li>
-            <li class="hide-on-small-only">
               <div class="customNavItem">
                 <a href="#" v-on:click="toggleSearch">
                   <i class="material-icons">
@@ -102,22 +86,6 @@
             home
           </i>
           Home
-        </router-link>
-      </li>
-      <li>
-        <router-link class="sidenav-close" :to="albumPage">
-          <i class="material-icons">
-            album
-          </i>
-          Album
-        </router-link>
-      </li>
-      <li>
-        <router-link class="sidenav-close" :to="artistPage">
-          <i class="material-icons">
-            person
-          </i>
-          Artist
         </router-link>
       </li>
       <li>
