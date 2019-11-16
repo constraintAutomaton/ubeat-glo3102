@@ -81,9 +81,20 @@
 .listAlbum li {
   margin-bottom: 1rem;
 }
+@media screen and (max-width: 500px) {
+  .listAlbum li p {
+    text-align: center;
+  }
+}
 
 .listAlbum img {
   max-width: 100%;
+}
+@media screen and (max-width: 500px) {
+  .listAlbum img {
+    display: flex;
+    margin: auto;
+  }
 }
 
 .listAlbum img:hover {
@@ -95,4 +106,9 @@
   font-size: 14px;
   margin-top: 0;
   margin-bottom: 0;
+}
+@media screen and (max-width: 500px) {
+  .albumTitle {
+    text-align: center;
+  }
 }

@@ -6,7 +6,7 @@
     <div class="infoAlbum">
       <h1>{{albumInfo.albumName}}</h1>
       <p class>
-        <span>Artist:</span>
+        <span>Artist: </span>
         <a v-bind:href="`./#/artist/${albumInfo.artist}`">{{albumInfo.artist}}</a>
       </p>
       <p class>
