@@ -45,7 +45,13 @@ export default {
             genre: "Rock",
             artistImage:
               "https://img.discogs.com/O0FYREyRzNxpM28-o06v4goTZn8=/567x577/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-59792-1319381469.jpeg.jpg"
-          }
+          },
+
+            { artistId: 116851,
+              artistName: "Blink 182",
+              genre: "Rock",
+                artistImage: "https://img.discogs.com/dY0QIjmA1OfnHTZt23klOT-XkFI=/600x440/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-80395-1427403437-4479.jpeg.jpg"
+            }
         ];
       }
     },

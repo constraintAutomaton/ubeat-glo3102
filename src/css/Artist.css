@@ -116,7 +116,7 @@
   cursor: pointer;
 }
 
-.releaseYear {
+.releaseYear, .musicGenre {
   font-size: 0.8rem;
   color: var(--mediumGrey);
 }
