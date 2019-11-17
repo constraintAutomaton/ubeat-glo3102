@@ -31,13 +31,12 @@
           <span>{{ songTitle }} </span>
         </p>
         <span class="hide-on-small-and-down"
-          >&nbsp;-&nbsp;<a class="info" :href="`./#/album/${albumId}`">{{
-            album
-          }}</a></span
-        >
+          >&nbsp;-&nbsp;
+          <router-link :to="'/album/' + albumId" tag="a" class="info">{{ album }} </router-link>
+        </span>
       </div>
       <span class="hide-on-med-and-up">&nbsp;-&nbsp;</span>
-      <a class="info" :href="`./#/artist/${artistId}`">{{ artist }}</a>
+      <router-link :to="'/artist/' + artistId" tag="a" class="info">{{ artist }} </router-link>
     </div>
   </div>
 </template>
