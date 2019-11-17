@@ -9,10 +9,8 @@
         @deletePlaylist="deletePlaylistById"
       ></single-playlist>
     </template>
-    <div id="newPlaylist">
+    <div class="newPlaylist">
       <a class="waves-effect waves-light btn" @click="newPlaylist"><i class="material-icons right">add</i>New playlist</a>
-
-<!--      <a class="btn btn-floating btn-large waves-effect waves-light" v-on:click="newPlaylist"><i class="material-icons">add</i></a>-->
     </div>
   </div>
 </template>
@@ -82,13 +80,7 @@ export default {
 
 <style scoped>
 
-#newPlaylist{
-  margin-top: 1rem;
+.newPlaylist{
   text-align: center;
-}
-
-#newPlaylist .btn{
-  color: #fff;
-  background-color: var(--darkGrey);
 }
 </style>

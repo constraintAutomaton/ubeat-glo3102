@@ -47,7 +47,7 @@
       </template>
     </ul>
 
-    <ul class="playlistTracks" v-else>
+    <ul class="playlistTracks emptyPlaylist" v-else>
       <li>No tracks added yet</li>
     </ul>
   </div>
@@ -184,6 +184,9 @@ export default {
 
 ul.playlistTracks {
   margin: 0 0 2rem;
+}
+.emptyPlaylist li {
+  margin-left: 22px;
 }
 
 .playlistNameInput {

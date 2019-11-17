@@ -33,10 +33,10 @@ export default {
   font-family: "Muli", sans-serif;
 }
 #app h1 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: 600;
   line-height: 1.125;
-  margin: 0 0 1rem 0;
+  margin: 1rem 0;
 }
 
 #app .col {

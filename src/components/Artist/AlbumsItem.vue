@@ -6,7 +6,7 @@
       <h3 class="albumTitle">
         <a>{{ albumTitle }}</a>
       </h3>
-      <p>{{ releaseDate }}</p>
+      <p class="releaseYear">{{ releaseDate }}</p>
     </router-link>
   </li>
 </template>

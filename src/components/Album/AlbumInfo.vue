@@ -32,7 +32,10 @@
           />
         </a>
       </div>
-      <a class="waves-effect waves-light btn" @click="openDialog"><i class="material-icons right">playlist_add</i>Add to playlist</a>
+      <div class="newPlaylist m1">
+        <a class="waves-effect waves-light btn" @click="openDialog"><i class="material-icons right">playlist_add</i>Add to playlist</a>
+      </div>
+<!--      <a class="waves-effect waves-light btn" @click="openDialog"><i class="material-icons right">playlist_add</i>Add to playlist</a>-->
 <!--      <div class="AlbumToPlaylist">-->
 <!--        <a class="waves-effect waves-light addPlaylist" @click="openDialog">-->
 <!--          <i class="material-icons right">playlist_add</i>Add to playlist-->

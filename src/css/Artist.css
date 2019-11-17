@@ -116,10 +116,15 @@
   cursor: pointer;
 }
 
+.releaseYear {
+  font-size: 0.8rem;
+  color: var(--mediumGrey);
+}
+
 .albumTitle {
-  font-size: 14px;
+  font-size: 0.9rem;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.5rem;
 }
 @media screen and (max-width: 500px) {
   .albumTitle {

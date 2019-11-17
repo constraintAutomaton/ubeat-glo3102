@@ -12,27 +12,35 @@
       class="playTrackIcon"
       :icon="['fas', 'pause-circle']"
     />
-    <span v-if="!insidePlaylist" class="trackNumber">{{
-      track.trackNumber
-    }}</span>
+    <span v-if="!insidePlaylist" class="trackNumber">
+      {{ track.trackNumber }}
+    </span>
     <span class="songTitle">{{ track.trackName }}</span>
     <span class="songArtist">{{ track.artistName }}</span>
     <span class="trackDuration">{{ track.trackDuration }}</span>
-    <a v-if="!insidePlaylist" class="waves-effect waves-light" @click="openDialog"
-      ><i class="material-icons right">playlist_add</i></a
+    <a
+      v-if="!insidePlaylist"
+      class="waves-effect waves-light"
+      @click="openDialog"
     >
+      <i class="material-icons right addIcon">playlist_add</i>
+    </a>
     <font-awesome-icon
       v-else
       class="deleteTrack"
       :icon="['fas', 'minus-circle']"
       @click="deleteSong(track.trackId)"
     />
-    <AddToPlaylistsDialog v-if="!insidePlaylist" ref="addToPlaylistDialog" :tracks="[track]" />
+    <AddToPlaylistsDialog
+      v-if="!insidePlaylist"
+      ref="addToPlaylistDialog"
+      :tracks="[track]"
+    />
   </li>
 </template>
 
 <script>
-import AddToPlaylistsDialog from '../Playlist/AddToPlaylistsDialog';
+import AddToPlaylistsDialog from "../Playlist/AddToPlaylistsDialog";
 export default {
   name: "Track",
   components: {

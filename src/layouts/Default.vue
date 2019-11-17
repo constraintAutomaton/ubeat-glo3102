@@ -44,7 +44,7 @@ export default {
 }
 
 .main-content {
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-bottom: 100px;
 }
 
@@ -81,17 +81,17 @@ p.musicStyle {
   font-weight: 500;
 }
 
-.ubeatDelete .dg-btn--cancel{
+.ubeatDelete .dg-btn--cancel {
   color: #fff;
   background-color: var(--mediumGrey);
 }
 
-.ubeatWarning .dg-btn--cancel{
+.ubeatWarning .dg-btn--cancel {
   display: none;
 }
 
 .ubeatDelete .dg-btn--ok,
-.ubeatWarning .dg-btn--ok{
+.ubeatWarning .dg-btn--ok {
   color: var(--primaryAccentColor);
   background-color: #fefefe;
   border-color: var(--primaryAccentColor);
@@ -102,10 +102,23 @@ p.musicStyle {
   background-color: var(--primaryAccentColor);
 }
 
-  .waves-effect{
-    display: inline-flex;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
+.waves-effect {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.newPlaylist{
+  margin-top: 1rem;
+}
+
+.newPlaylist .btn {
+  color: #fff;
+  background-color: var(--darkGrey);
+}
+.newPlaylist .btn:hover {
+  background-color: var(--darkerAccentColor);
+  color: #fff;
+}
 </style>
