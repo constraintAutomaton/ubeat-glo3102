@@ -5,21 +5,26 @@
       <div v-for="playlist in playlists" :key="playlist.id">
         <p>
           <label>
-            <input ref="playlistCheckbox" type="checkbox" :value="playlist.id" />
-            <span>{{playlist.name}}</span>
+            <input
+              ref="playlistCheckbox"
+              type="checkbox"
+              :value="playlist.id"
+              @click="saveToPlaylist"
+            />
+            <span>{{ playlist.name }}</span>
           </label>
         </p>
-      </div>
-      <div class="dialogFooter">
-        <a class="dialogButton waves-effect waves-light btn-small" @click="close">Cancel</a>
-        <a class="dialogButton waves-effect waves-light btn-small" @click="saveToPlaylist">Save</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getPlaylists, addTrackToPlaylist } from "../../lib/util/utilPlaylist";
+import {
+  getPlaylists,
+  addTrackToPlaylist,
+  deleteTrack
+} from "../../lib/util/utilPlaylist";
 
 export default {
   props: {
@@ -29,9 +34,9 @@ export default {
   },
   data() {
     return {
-      isOpened : false,
-      playlists : {}
-    }
+      isOpened: false,
+      playlists: {}
+    };
   },
   methods: {
     open() {
@@ -43,54 +48,81 @@ export default {
         chkBox.checked = false;
       });
     },
-    showSuccessToast() {
-      this.$toasted.show('Tracks added successfuly', {
-        position: 'bottom-left',
-        duration: 5000,
-        action : {
-            text : 'Close',
-            onClick : (e, toastObject) => {
-                toastObject.goAway(0);
-            }
+    showSuccessAdd(chkBox) {
+      this.$toasted.show("Track added successfully", {
+        position: "bottom-left",
+        duration: 4000,
+        action: {
+          text: "Undo",
+          onClick: (e, toastObject) => {
+            this.deleteTracks(chkBox.value);
+            chkBox.checked = false;
+            toastObject.goAway(0);
+          }
+        }
+      });
+    },
+    showSuccessDelete(chkBox) {
+      this.$toasted.show("Track removed successfully", {
+        position: "bottom-left",
+        duration: 4000,
+        action: {
+          text: "Undo",
+          onClick: (e, toastObject) => {
+            this.addTracks(chkBox.value);
+            chkBox.checked = true;
+            toastObject.goAway(0);
+          }
         }
       });
     },
     showErrorToast() {
-      this.$toasted.show('An error occured', {
-        position: 'bottom-left',
+      this.$toasted.show("An error occured", {
+        position: "bottom-left",
         duration: 5000,
-        action : {
-            text : 'Close',
-            onClick : (e, toastObject) => {
-                toastObject.goAway(0);
-            }
+        action: {
+          text: "Close",
+          onClick: (e, toastObject) => {
+            toastObject.goAway(0);
+          }
         },
-        type: 'error'
+        type: "error"
       });
     },
     async loadPlaylists() {
       this.playlists = await getPlaylists();
     },
-    async saveToPlaylist() {
-      let trackAdded = false;
-      if(this.tracks != null){
-        this.tracks.forEach(track => {
-          this.$refs.playlistCheckbox.forEach(async chkBox => {
-            if(chkBox.checked) {
-              trackAdded = true;
-              const response = await addTrackToPlaylist(chkBox.value, track);
-              if(response.status != 200)
-                this.showErrorToast();
-            }
-          });
-        });
-        if(trackAdded)
-          this.showSuccessToast();
+    async saveToPlaylist(event) {
+      if (this.tracks != null) {
+        const chkBox = event.target;
+
+        if (chkBox.checked) {
+          await this.addTracks(chkBox.value);
+          this.showSuccessAdd(chkBox);
+        } else {
+          this.deleteTracks(chkBox.value);
+          this.showSuccessDelete(chkBox);
+        }
       }
-      this.close();
+    },
+    async addTracks(playlistId) {
+      this.tracks.forEach(async track => {
+        const response = await addTrackToPlaylist(playlistId, track);
+        if (response.status != 200) {
+          this.showErrorToast();
+        }
+      });
+    },
+    async deleteTracks(playlistId) {
+      this.tracks.forEach(async track => {
+        const response = await deleteTrack(playlistId, track.trackId);
+        if (response.status != 200) {
+          this.showErrorToast();
+        }
+      });
     },
     userClick(event) {
-      if(event.target.classList.contains("dialog")) {
+      if (event.target.classList.contains("dialog")) {
         this.close();
       }
     }
@@ -98,11 +130,10 @@ export default {
   mounted() {
     this.loadPlaylists();
   }
-}
+};
 </script>
 
 <style scoped>
-
 .hidden {
   display: none;
 }
@@ -116,31 +147,15 @@ export default {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .dialogContent {
   background-color: white;
+  color: black;
   margin: 15% auto;
   padding: 20px;
   width: max-content;
 }
-
-.dialogButton {
-  background-color: var(--primaryAccentColor);
-  color: white;
-}
-
-.dialogButton:hover {
-  background-color: var(--darkerAccentColor);
-  color: white;
-}
-
-.dialogFooter {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
 </style>

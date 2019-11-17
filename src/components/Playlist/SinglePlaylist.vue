@@ -34,9 +34,7 @@
       </a>
     </div>
     <ul class="playlistTracks" v-if="this.playlist.tracks.length !== 0">
-      <template
-        v-for="track in playlist.tracks"
-      >
+      <template v-for="track in playlist.tracks">
         <single-track
           :track="track"
           :insidePlaylist="true"
@@ -89,7 +87,7 @@ export default {
      * or clicks out of element
      */
 
-    saveNewTitle(event) {
+    saveNewTitle() {
       if (
         this.playlist.name === "" ||
         typeof this.playlist.name === "undefined" ||
@@ -99,7 +97,7 @@ export default {
           .alert("The Playlist name is invalid!", {
             customClass: "ubeatWarning"
           })
-          .then(dialog => {
+          .then(() => {
             this.playlist.name = this.previousName;
             this.$refs.playlistName.focus();
           });
@@ -122,7 +120,7 @@ export default {
       }
     },
 
-    togglePlaylist(event) {
+    togglePlaylist() {
       if (this.$refs.playlistName.readOnly)
         this.isCollapsed = !this.isCollapsed;
     },
@@ -134,11 +132,11 @@ export default {
     deleteSong(trackId) {
       this.$dialog
         .confirm(
-          `Delete this track from the playlist \"${this.playlist.name}\"?`,
+          `Delete this track from the playlist "${this.playlist.name}"?`,
           { customClass: "ubeatDelete" }
         )
 
-        .then(async dialog => {
+        .then(async () => {
           try {
             await deleteTrack(this.playlist.id, trackId);
             const trackIndex = this.playlist.tracks.findIndex(
