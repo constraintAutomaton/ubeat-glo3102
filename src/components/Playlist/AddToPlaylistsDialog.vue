@@ -45,6 +45,7 @@ export default {
   methods: {
     open() {
       this.isOpened = true;
+      this.loadPlaylists();
     },
     close() {
       if(this.isOpened)
