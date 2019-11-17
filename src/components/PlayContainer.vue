@@ -17,7 +17,11 @@
       />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
-      <add-to-playlist-box :playingTrackObj="trackObj" />
+        <i id="addToPlaylistButton" class="material-icons playIcon" @click="openDialog">playlist_add</i>
+      <AddToPlaylistsDialog
+      ref="addToPlaylistDialog"
+      :tracks="[trackObj]"
+    />
     </div>
     <div class="playInformation">
       <div>
@@ -33,7 +37,7 @@
 </template>
 
 <script>
-import AddToPlaylistBox from "./Playlist/AddToPlaylistBox";
+import AddToPlaylistsDialog from "./Playlist/AddToPlaylistsDialog";
 import { Howl } from "howler";
 export default {
   name: "PlayContainer.vue",
@@ -60,7 +64,7 @@ export default {
     this.$songEvent.$off("pauseSong");
   },
   components: {
-    AddToPlaylistBox
+    AddToPlaylistsDialog
   },
   methods: {
     ChangePlayingSong(track) {
@@ -92,6 +96,12 @@ export default {
         this.song.play(this.song.id);
         document.getElementById("mainPlay").style.display = "none";
         document.getElementById("mainPause").style.display = "block";
+      }
+    },
+    openDialog() {
+      if(this.trackObj != undefined)
+      {
+        this.$refs.addToPlaylistDialog.open();
       }
     }
   }
