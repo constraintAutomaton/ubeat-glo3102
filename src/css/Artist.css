@@ -102,6 +102,7 @@
 }
 
 .listAlbum img {
+  margin-bottom: 0.25rem;
   width: 100%;
 }
 @media screen and (max-width: 500px) {
@@ -123,6 +124,7 @@
 
 .albumTitle {
   font-size: 0.9rem;
+  font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
