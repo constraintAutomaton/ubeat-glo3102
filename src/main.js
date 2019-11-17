@@ -8,6 +8,8 @@ import VuejsDialog from 'vuejs-dialog';
 
 import Toasted from 'vue-toasted';
 
+const _ = require('lodash');
+
 // include the default style
 import 'vuejs-dialog/dist/vuejs-dialog.min.css';
 
@@ -56,6 +58,7 @@ Vue.component("default-layout", Default);
 
 Vue.use(VuejsDialog);
 Vue.use(Toasted);
+Vue.use(_);
 
 Vue.config.productionTip = false;
 Vue.prototype.$songEvent = new Vue(); // Global event bus

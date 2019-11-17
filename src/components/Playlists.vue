@@ -1,6 +1,6 @@
 <template>
   <div id="playlistsPage" class="container">
-    <h1>My Playlists</h1>
+    <h2 class="listTitle">My Playlists</h2>
     <template v-for="playlist in playlists">
       <single-playlist
         :playlist="playlist"
@@ -10,7 +10,9 @@
       ></single-playlist>
     </template>
     <div id="newPlaylist">
-      <a class="btn btn-floating btn-large waves-effect waves-light" v-on:click="newPlaylist"><i class="material-icons">add</i></a>
+      <a class="waves-effect waves-light btn" @click="newPlaylist"><i class="material-icons right">add</i>New playlist</a>
+
+<!--      <a class="btn btn-floating btn-large waves-effect waves-light" v-on:click="newPlaylist"><i class="material-icons">add</i></a>-->
     </div>
   </div>
 </template>
@@ -18,6 +20,7 @@
 <script>
 import { getPlaylists, addPlaylist, deletePlaylist } from "./../lib/util/utilPlaylist";
 import SinglePlaylist from "./Playlist/SinglePlaylist";
+import {sortBy} from "lodash";
 
 export default {
   name: "Playlists.vue",
@@ -34,11 +37,15 @@ export default {
 
   mounted() {
     this.$songEvent.$on("playlistUpdated", this.refreshPlaylists);
+	  _.sortBy(this.playlists, [iteratees=[_.id]]);
   },
 
   async created() {
     this.refreshPlaylists();
   },
+
+    computed: {
+    },
   methods: {
     async refreshPlaylists() {
       this.playlists = await getPlaylists();
@@ -76,12 +83,12 @@ export default {
 <style scoped>
 
 #newPlaylist{
-  margin-top: 10px;
-  text-align: right;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 #newPlaylist .btn{
-  position: inherit;
-  background-color: var(--primaryAccentColor);
+  color: #fff;
+  background-color: var(--darkGrey);
 }
 </style>

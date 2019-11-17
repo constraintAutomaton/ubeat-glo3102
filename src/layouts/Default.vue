@@ -101,4 +101,11 @@ p.musicStyle {
   color: #fff;
   background-color: var(--primaryAccentColor);
 }
+
+  .waves-effect{
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 </style>

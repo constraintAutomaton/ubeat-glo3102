@@ -33,8 +33,10 @@
         <font-awesome-icon class="" :icon="['fa', 'trash-alt']" />
       </a>
     </div>
-    <ul class="playlistTracks">
-      <template v-for="track in playlist.tracks">
+    <ul class="playlistTracks" v-if="this.playlist.tracks.length !== 0">
+      <template
+        v-for="track in playlist.tracks"
+      >
         <single-track
           :track="track"
           :insidePlaylist="true"
@@ -43,6 +45,10 @@
         >
         </single-track>
       </template>
+    </ul>
+
+    <ul class="playlistTracks" v-else>
+      <li>No tracks added yet</li>
     </ul>
   </div>
 </template>
@@ -90,14 +96,13 @@ export default {
         !this.playlist.name.replace(/\s/g, "").length
       ) {
         this.$dialog
-          .confirm(`The Playlist name is invalid.`, {
+          .alert("The Playlist name is invalid!", {
             customClass: "ubeatWarning"
           })
           .then(dialog => {
             this.playlist.name = this.previousName;
             this.$refs.playlistName.focus();
-          })
-          .catch(function() {});
+          });
       } else {
         this.callPutAPI();
         this.$refs.playlistName.readOnly = true;
@@ -164,8 +169,9 @@ export default {
   display: inline-flex;
   /*width: 100%;*/
   margin-left: 20px;
+  padding-bottom: 1rem;
   position: relative;
-  width: calc(100% - 26px);
+  width: calc(100% - 20px);
 }
 
 .playlistNameWrapper textarea:read-only {
@@ -174,6 +180,10 @@ export default {
 
 .playlistNameWrapper textarea:hover:read-only {
   text-decoration: underline;
+}
+
+ul.playlistTracks {
+  margin: 0 0 2rem;
 }
 
 .playlistNameInput {
@@ -186,7 +196,8 @@ export default {
   resize: none;
   box-sizing: border-box;
   font-family: "Muli", sans-serif;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
   font-weight: 500;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -199,13 +210,13 @@ export default {
 }
 
 .icons {
-  margin: 1px;
+  margin-right: 5px;
   color: white;
-  background-color: var(--primaryAccentColor);
+  background-color: var(--mediumGrey);
 }
 
 .icons:hover {
-  background-color: var(--darkerAccentColor);
+  background-color: var(--darkGrey);
   color: white;
 }
 
@@ -216,7 +227,7 @@ export default {
 .collapseHandleIcon {
   position: absolute;
   left: -20px;
-  top: 10px;
+  top: 8px;
   font-size: 16px;
 }
 
