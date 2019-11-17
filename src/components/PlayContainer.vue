@@ -17,18 +17,24 @@
       />
       <font-awesome-icon class="playIcon" :icon="['fas', 'forward']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'random']" />
-        <i id="addToPlaylistButton" class="material-icons playIcon" @click="openDialog">playlist_add</i>
-      <AddToPlaylistsDialog
-      ref="addToPlaylistDialog"
-      :tracks="[trackObj]"
-    />
+      <i
+        id="addToPlaylistButton"
+        class="material-icons playIcon"
+        @click="openDialog"
+        >playlist_add</i
+      >
+      <AddToPlaylistsDialog ref="addToPlaylistDialog" :tracks="[trackObj]" />
     </div>
     <div class="playInformation">
       <div>
         <p class="info">
           <span>{{ songTitle }} </span>
         </p>
-        <span>&nbsp;-&nbsp;<a class="info hide-on-small-and-down" :href="`./#/album/${albumId}`">{{ album }}</a></span>
+        <span class="hide-on-small-and-down"
+          >&nbsp;-&nbsp;<a class="info" :href="`./#/album/${albumId}`">{{
+            album
+          }}</a></span
+        >
       </div>
       <span class="hide-on-med-and-up">&nbsp;-&nbsp;</span>
       <a class="info" :href="`./#/artist/${artistId}`">{{ artist }}</a>
@@ -79,13 +85,14 @@ export default {
       this.song = new Howl({
         src: [this.songLink]
       });
-      this.$songEvent.$emit("switchSong", {});
+      this.$songEvent.$emit("switchSong", this.trackObj.trackId);
       this.playSong();
     },
 
     pauseSong() {
       if (typeof this.song !== "undefined") {
         this.song.pause();
+        this.$songEvent.$emit("resumedSong", this.trackObj.trackId);
         document.getElementById("mainPause").style.display = "none";
         document.getElementById("mainPlay").style.display = "block";
       }
@@ -94,13 +101,13 @@ export default {
     playSong() {
       if (typeof this.song !== "undefined") {
         this.song.play(this.song.id);
+        this.$songEvent.$emit("pausedSong", this.trackObj.trackId);
         document.getElementById("mainPlay").style.display = "none";
         document.getElementById("mainPause").style.display = "block";
       }
     },
     openDialog() {
-      if(this.trackObj != undefined)
-      {
+      if (this.trackObj != undefined) {
         this.$refs.addToPlaylistDialog.open();
       }
     }
