@@ -1,6 +1,6 @@
 <template>
   <div class="dialog" :class="{ hidden: !isOpened }" @click="userClick">
-    <div class="dialogContent" v-on-clickaway="close">
+    <div class="dialogContent">
       <p>Save to...</p>
       <div v-for="playlist in playlists" :key="playlist.id">
         <p>
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway';
 import {
   getPlaylists,
   addTrackToPlaylist,
@@ -28,7 +27,6 @@ import {
 } from "../../lib/util/utilPlaylist";
 
 export default {
-  mixins: [ clickaway ],
   props: {
     tracks: {
       type: Array
@@ -40,12 +38,12 @@ export default {
       playlists: {}
     };
   },
+  watch: {
+    $route: "close"
+  },
   methods: {
     open() {
-      if(!this.isOpened)
-      {
-        this.isOpened = true;
-      }
+      this.isOpened = true;
     },
     close() {
       if(this.isOpened)
@@ -65,6 +63,7 @@ export default {
           onClick: (e, toastObject) => {
             this.deleteTracks(chkBox.value);
             chkBox.checked = false;
+            this.$songEvent.$emit("playlistUpdated");
             toastObject.goAway(0);
           }
         }
@@ -79,6 +78,7 @@ export default {
           onClick: (e, toastObject) => {
             this.addTracks(chkBox.value);
             chkBox.checked = true;
+            this.$songEvent.$emit("playlistUpdated");
             toastObject.goAway(0);
           }
         }
@@ -111,6 +111,7 @@ export default {
         } else {
           this.deleteTracks(chkBox.value);
           this.showSuccessDelete(chkBox);
+          this.$songEvent.$emit("playlistUpdated");
         }
       }
     },
@@ -131,9 +132,9 @@ export default {
       });
     },
     userClick(event) {
-      //if (!event.target.classList.contains("dialog")) {
-      //  this.close();
-      //}
+      if (event.target.classList.contains("dialog")) {
+        this.close();
+      }
     }
   },
   mounted() {
@@ -149,7 +150,7 @@ export default {
 
 .dialog {
   position: fixed;
-  z-index: 10;
+  z-index: 200;
   padding-top: 100px;
   left: 0;
   top: 0;
