@@ -18,7 +18,13 @@
     <div class="mainSongInfo">
       <span class="songTitle">{{ track.trackName }}</span>
       <span class="songArtist">
-        <router-link :to="'/artist/' + track.artistId" tag="span" class="artistLink">{{ track.artistName }}</router-link>
+        <router-link
+          :to="'/artist/' + track.artistId"
+          tag="span"
+          class="artistLink"
+        >
+          {{ track.artistName }}
+        </router-link>
       </span>
     </div>
     <span class="trackDuration">{{ track.trackDuration }}</span>
@@ -65,6 +71,8 @@ export default {
   created() {
     this.track.trackDuration = this.getTrackTime();
     this.$songEvent.$on("switchSong", this.changePlayingStatus);
+    this.$songEvent.$on("pausedSong", this.changePlayingStatus);
+    this.$songEvent.$on("resumedSong", this.changePlayingStatus);
   },
   methods: {
     getTrackTime() {
@@ -110,12 +118,16 @@ export default {
     },
 
     pauseSong() {
-      this.$songEvent.$emit("pauseSong", {});
+      this.$songEvent.$emit("pauseSong", this.track.trackId);
       this.playing = false;
     },
 
-    changePlayingStatus() {
-      this.playing = false;
+    changePlayingStatus(songId) {
+      if (this.track.trackId === songId) {
+        this.playing = !this.playing;
+      } else {
+        this.playing = false;
+      }
     },
     openDialog() {
       this.$refs.addToPlaylistDialog.open();
