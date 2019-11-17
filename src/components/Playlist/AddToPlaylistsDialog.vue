@@ -1,6 +1,6 @@
 <template>
   <div class="dialog" :class="{ hidden: !isOpened }" @click="userClick">
-    <div class="dialogContent">
+    <div class="dialogContent" v-on-clickaway="close">
       <p>Save to...</p>
       <div v-for="playlist in playlists" :key="playlist.id">
         <p>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
 import {
   getPlaylists,
   addTrackToPlaylist,
@@ -27,6 +28,7 @@ import {
 } from "../../lib/util/utilPlaylist";
 
 export default {
+  mixins: [ clickaway ],
   props: {
     tracks: {
       type: Array
@@ -40,13 +42,19 @@ export default {
   },
   methods: {
     open() {
-      this.isOpened = true;
+      if(!this.isOpened)
+      {
+        this.isOpened = true;
+      }
     },
     close() {
-      this.isOpened = false;
-      this.$refs.playlistCheckbox.forEach(async chkBox => {
-        chkBox.checked = false;
-      });
+      if(this.isOpened)
+      {
+        this.isOpened = false;
+        this.$refs.playlistCheckbox.forEach(async chkBox => {
+          chkBox.checked = false;
+        });
+      }
     },
     showSuccessAdd(chkBox) {
       this.$toasted.show("Track added successfully", {
@@ -99,6 +107,7 @@ export default {
         if (chkBox.checked) {
           await this.addTracks(chkBox.value);
           this.showSuccessAdd(chkBox);
+          this.$songEvent.$emit("playlistUpdated");
         } else {
           this.deleteTracks(chkBox.value);
           this.showSuccessDelete(chkBox);
@@ -122,9 +131,9 @@ export default {
       });
     },
     userClick(event) {
-      if (event.target.classList.contains("dialog")) {
-        this.close();
-      }
+      //if (!event.target.classList.contains("dialog")) {
+      //  this.close();
+      //}
     }
   },
   mounted() {
