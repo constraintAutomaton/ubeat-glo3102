@@ -1,18 +1,32 @@
 .imgArtist {
   width: 35%;
+  padding-top: 35%;
+  position: relative;
   margin-right: 2rem;
 }
 @media screen and (max-width: 500px) {
   .imgArtist,
   .infoArtist {
     width: 100%;
+    padding-top: 0;
     margin: 0 0 2rem 0;
     text-align: center;
   }
 }
 .imgArtist img {
   max-width: 275px;
+  max-height: 275px;
   border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .imgArtist img {
+    position: relative;
+  }
 }
 
 .latestReleases li {

@@ -93,7 +93,7 @@ export const addPlaylist = async (playlistName) => {
       return json;
     })
     .catch(() => {
-      console.error("unable to add this playlist.");
+      console.error("Unable to add this playlist.");
     });
 };
 

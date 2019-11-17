@@ -27,21 +27,21 @@
       >
       </textarea>
       <a class="btn btn-small icons" @click="modifyTitle">
-        <font-awesome-icon
-          class=""
-          :icon="['fa', 'pencil-alt']"
-        />
+        <font-awesome-icon class="" :icon="['fa', 'pencil-alt']" />
       </a>
       <a class="btn btn-small icons" @click="deletePlaylist">
-        <font-awesome-icon
-          class=""
-          :icon="['fa', 'trash-alt']"
-        />
+        <font-awesome-icon class="" :icon="['fa', 'trash-alt']" />
       </a>
     </div>
     <ul class="playlistTracks">
       <template v-for="track in playlist.tracks">
-        <single-track :track="track" :insidePlaylist="true" @deleteSong="deleteSong" :key="track.id"> </single-track>
+        <single-track
+          :track="track"
+          :insidePlaylist="true"
+          @deleteSong="deleteSong"
+          :key="track.id"
+        >
+        </single-track>
       </template>
     </ul>
   </div>
@@ -61,10 +61,11 @@ export default {
   components: {
     SingleTrack
   },
-  data(){
-    return{
-      isCollapsed : true
-    }
+  data() {
+    return {
+      isCollapsed: true,
+      previousName: "New Playlist"
+    };
   },
   methods: {
     /**
@@ -72,6 +73,7 @@ export default {
      */
 
     modifyTitle() {
+      this.previousName = this.playlist.name;
       this.$refs.playlistName.readOnly = false;
       this.$refs.playlistName.focus();
     },
@@ -82,8 +84,24 @@ export default {
      */
 
     saveNewTitle(event) {
-      this.callPutAPI();
-      this.$refs.playlistName.readOnly = true;
+      if (
+        this.playlist.name === "" ||
+        typeof this.playlist.name === "undefined" ||
+        !this.playlist.name.replace(/\s/g, "").length
+      ) {
+        this.$dialog
+          .confirm(`The Playlist name is invalid.`, {
+            customClass: "ubeatWarning"
+          })
+          .then(dialog => {
+            this.playlist.name = this.previousName;
+            this.$refs.playlistName.focus();
+          })
+          .catch(function() {});
+      } else {
+        this.callPutAPI();
+        this.$refs.playlistName.readOnly = true;
+      }
     },
 
     addAutoResize(event) {
@@ -100,7 +118,7 @@ export default {
     },
 
     togglePlaylist(event) {
-      if(this.$refs.playlistName.readOnly)
+      if (this.$refs.playlistName.readOnly)
         this.isCollapsed = !this.isCollapsed;
     },
 

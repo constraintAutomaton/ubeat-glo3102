@@ -69,22 +69,29 @@ p.musicStyle {
   border-bottom: 1px solid;
 }
 
-.ubeatDelete {
+.ubeatDelete,
+.ubeatWarning {
   font-family: var(--mainFont);
 }
 
-.ubeatDelete .dg-btn {
+.ubeatDelete .dg-btn,
+.ubeatWarning .dg-btn {
   font-size: 1rem;
   letter-spacing: 0.03em;
   font-weight: 500;
 }
 
-.ubeatDelete .dg-btn--cancel {
+.ubeatDelete .dg-btn--cancel{
   color: #fff;
   background-color: var(--mediumGrey);
 }
 
-.ubeatDelete .dg-btn--ok {
+.ubeatWarning .dg-btn--cancel{
+  display: none;
+}
+
+.ubeatDelete .dg-btn--ok,
+.ubeatWarning .dg-btn--ok{
   color: var(--primaryAccentColor);
   background-color: #fefefe;
   border-color: var(--primaryAccentColor);
