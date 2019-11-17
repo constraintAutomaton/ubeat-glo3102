@@ -10,8 +10,7 @@
         :genre="artistInfo.primaryGenreName"
         :artistLink="artistInfo.artistLinkUrl"
       ></ArtistInfo>
-      <Tracks title="Popular tracks"></Tracks>
-      <AlbumOfArtist
+           <AlbumOfArtist
         title="Albums"
         :albumList="artistInfo.albums"
       ></AlbumOfArtist>
@@ -23,7 +22,6 @@
 </template>
 <script>
 import ArtistInfo from "./Artist/ArtistInfo.vue";
-import Tracks from "./Album/Tracks";
 import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
 import { getArtistById } from "../lib/util/utilArtist";
 
@@ -60,7 +58,6 @@ export default {
   components: {
     ArtistInfo,
     AlbumOfArtist,
-    Tracks
   }
 };
 </script>

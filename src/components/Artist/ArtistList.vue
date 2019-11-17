@@ -30,21 +30,21 @@ export default {
             artistName: "The Jelly Jam",
             genre: "Rock",
             artistImage:
-              "https://img.discogs.com/7z0aS65XsMHo9otn8wHnAevXCHQ=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-113965-1330518379.jpeg.jpg"
+              "https://img.discogs.com/uoVr2ZYuq6AuK7INsgq6mGalC7c=/600x420/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-571447-1201427443.jpeg.jpg"
           },
           {
             artistId: 14784710,
             artistName: "Helene Segara",
             genre: "French Pop",
             artistImage:
-              "https://img.discogs.com/IxLuWezmCpqcaMsb_TchJF-dnSQ=/277x261/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-1726706-1478510872-8932.jpeg.jpg"
+              "https://img.discogs.com/stLUW1vf4LDDf4sWIInWzRFGMfA=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-534290-1485012309-9804.jpeg.jpg"
           },
           {
             artistId: 462006,
             artistName: "Bob Dylan",
             genre: "Rock",
             artistImage:
-              "https://img.discogs.com/LIBB7FAvEkji0W658_ETe5UMlQE=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-482143-1501973076-3537.jpeg.jpg"
+              "https://img.discogs.com/O0FYREyRzNxpM28-o06v4goTZn8=/567x577/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-59792-1319381469.jpeg.jpg"
           }
         ];
       }
