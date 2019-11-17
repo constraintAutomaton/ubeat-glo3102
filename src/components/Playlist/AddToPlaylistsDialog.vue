@@ -140,7 +140,7 @@ export default {
 
 .dialog {
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   padding-top: 100px;
   left: 0;
   top: 0;
@@ -149,6 +149,7 @@ export default {
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
+  cursor: auto;
 }
 
 .dialogContent {
