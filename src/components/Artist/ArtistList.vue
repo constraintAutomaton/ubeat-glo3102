@@ -60,12 +60,10 @@ export default {
             artistImage:
               "https://img.discogs.com/_DKfwBpwbuk-MEcdayjYYZSkopQ=/598x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-528609-1538032320-7712.jpeg.jpg"
           },
-          {
-            artistId: 129974,
-            artistName: "Shania Twain",
-            genre: "Country",
-            artistImage:
-              "https://img.discogs.com/ess2Io6TUmpdZczdNnKbZE0hw78=/600x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-130060-1482993306-6867.jpeg.jpg"
+          { artistId: 116851,
+            artistName: "Blink 182",
+            genre: "Rock",
+            artistImage: "https://img.discogs.com/dY0QIjmA1OfnHTZt23klOT-XkFI=/600x440/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-80395-1427403437-4479.jpeg.jpg"
           }
         ];
       }
