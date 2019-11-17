@@ -4,13 +4,11 @@
   align-items: center;
   background-color: var(--primaryAccentColor);
   position: relative;
-  height: 40px;
+  min-height: 2.5rem;
   color: #fff;
   margin-bottom: 0;
   border-bottom: solid var(--darkerAccentColor) 1px;
   padding: 5px 10px;
-  padding-top: 0px;
-  padding-bottom: 0px;
 }
 
 .trackInfo:last-child {
@@ -21,6 +19,22 @@
   cursor: pointer;
   background-color: var(--darkerAccentColor);
   color: var(--darkGrey);
+}
+
+.mainSongInfo{
+  width: 75%;
+  display: inline-flex;
+}
+
+@media screen and (max-width: 499px) {
+  .trackInfo .songTitle,
+  .trackInfo .songArtist{
+    width: 100%;
+  }
+  .mainSongInfo {
+    flex-wrap: wrap;
+    width: 55%;
+  }
 }
 
 .trackInfo .songTitle,
@@ -43,20 +57,22 @@
   width: 3%;
   min-width: 1.5em;
 }
-.trackInfo .songTitle {
-  flex-grow: 2;
-  max-width: 90%;
-}
 
+@media screen and (min-width: 500px) {
+  .trackInfo .songTitle {
+    flex-grow: 2;
+    max-width: 90%;
+  }
+  .songArtist {
+    width: 25%;
+  }
+}
 .trackDuration {
   width: 8%;
   min-width: 3em;
   text-align: right;
 }
 
-.songArtist {
-  width: 25%;
-}
 .playTrackIcon,
 .pauseTrackIcon,
 .trackNumber,

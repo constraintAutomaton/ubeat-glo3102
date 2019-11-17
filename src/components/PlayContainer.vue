@@ -22,11 +22,11 @@
     <div class="playInformation">
       <div>
         <p class="info">
-          <span>{{ songTitle }} - </span>
+          <span>{{ songTitle }} </span>
         </p>
-        <a class="info" :href="`./#/album/${albumId}`">{{ album }}</a>
+        <span>&nbsp;-&nbsp;<a class="info hide-on-small-and-down" :href="`./#/album/${albumId}`">{{ album }}</a></span>
       </div>
-      <span class="hide-on-med-and-up"> - </span>
+      <span class="hide-on-med-and-up">&nbsp;-&nbsp;</span>
       <a class="info" :href="`./#/artist/${artistId}`">{{ artist }}</a>
     </div>
   </div>

@@ -15,8 +15,10 @@
     <span v-if="!insidePlaylist" class="trackNumber">
       {{ track.trackNumber }}
     </span>
-    <span class="songTitle">{{ track.trackName }}</span>
-    <span class="songArtist">{{ track.artistName }}</span>
+    <div class="mainSongInfo">
+      <span class="songTitle">{{ track.trackName }}</span>
+      <router-link :to="'/artist/' + track.artistId" tag="span" class="songArtist">{{ track.artistName }}</router-link>
+    </div>
     <span class="trackDuration">{{ track.trackDuration }}</span>
     <a
       v-if="!insidePlaylist"
@@ -101,9 +103,15 @@ export default {
 <style src="./../../css/Track.css"></style>
 
 <style scoped>
-.deleteTrack {
-  min-width: 1.5em;
+.deleteTrack,
+.addIcon {
   margin-left: 10px;
   font-size: 1.2rem;
+}
+
+@media screen and (min-width: 500px) {
+  .deleteTrack {
+    min-width: 1.5em;
+  }
 }
 </style>
