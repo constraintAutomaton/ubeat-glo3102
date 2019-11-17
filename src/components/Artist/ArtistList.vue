@@ -46,12 +46,25 @@ export default {
             artistImage:
               "https://img.discogs.com/O0FYREyRzNxpM28-o06v4goTZn8=/567x577/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-59792-1319381469.jpeg.jpg"
           },
-
-            { artistId: 116851,
-              artistName: "Blink 182",
-              genre: "Rock",
-                artistImage: "https://img.discogs.com/dY0QIjmA1OfnHTZt23klOT-XkFI=/600x440/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-80395-1427403437-4479.jpeg.jpg"
-            }
+          {
+            artistId: 3996865,
+            artistName: "Metallica",
+            genre: "Metal",
+            artistImage:
+              "https://img.discogs.com/bM6UIFFR7TYuPUsZjgitgaKVpds=/600x435/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-18839-1555854164-2387.jpeg.jpg"
+          },
+          {
+            artistId: 78950408,
+            artistName: "La Compagnie Créole",
+            genre: "World",
+            artistImage:
+              "https://img.discogs.com/_DKfwBpwbuk-MEcdayjYYZSkopQ=/598x600/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-528609-1538032320-7712.jpeg.jpg"
+          },
+          { artistId: 116851,
+            artistName: "Blink 182",
+            genre: "Rock",
+            artistImage: "https://img.discogs.com/dY0QIjmA1OfnHTZt23klOT-XkFI=/600x440/smart/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/A-80395-1427403437-4479.jpeg.jpg"
+          }
         ];
       }
     },
