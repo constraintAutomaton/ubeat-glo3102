@@ -76,7 +76,7 @@ export default {
     },
     modifyPlaylistById(playlistId) {
       this.$refs.singlePlaylist.forEach(singlePlaylist => {
-        if (singlePlaylist.playlist.id == playlistId)
+        if (singlePlaylist.playlist.id === playlistId)
           singlePlaylist.modifyTitle();
       });
     }
