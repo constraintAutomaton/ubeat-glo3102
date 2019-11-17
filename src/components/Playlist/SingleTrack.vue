@@ -1,13 +1,13 @@
 <template>
-  <li class="trackInfo">
+  <li class="trackInfo" @click="liClick">
     <font-awesome-icon
-      v-on:click="playSong"
+      @click="playSong"
       v-if="!playing"
       class="playTrackIcon"
       :icon="['fas', 'play-circle']"
     />
     <font-awesome-icon
-      v-on:click="pauseSong"
+      @click="pauseSong"
       v-if="playing"
       class="playTrackIcon"
       :icon="['fas', 'pause-circle']"
@@ -17,15 +17,17 @@
     </span>
     <div class="mainSongInfo">
       <span class="songTitle">{{ track.trackName }}</span>
-      <router-link :to="'/artist/' + track.artistId" tag="span" class="songArtist">{{ track.artistName }}</router-link>
+      <span class="songArtist">
+        <router-link :to="'/artist/' + track.artistId" tag="span" class="artistLink">{{ track.artistName }}</router-link>
+      </span>
     </div>
     <span class="trackDuration">{{ track.trackDuration }}</span>
     <a
       v-if="!insidePlaylist"
-      class="waves-effect waves-light"
+      class="waves-effect waves-light playlistAdd"
       @click="openDialog"
     >
-      <i class="material-icons right addIcon">playlist_add</i>
+      <i class="material-icons right addIcon playlistAdd">playlist_add</i>
     </a>
     <font-awesome-icon
       v-else
@@ -76,10 +78,31 @@ export default {
         seconds.toString().padStart(2, "0")
       );
     },
+    liClick(event) {
+      const element = event.target;
+      const elementTag = element.tagName;
+      
+      if (
+          elementTag != "svg" &&
+          elementTag != "path" &&
+          elementTag != "P" &&
+          !element.classList.contains("artistLink") &&
+          !element.classList.contains("playlistAdd") &&
+          !element.classList.contains("dialog") &&
+          !element.classList.contains("dialogContent")
+          )
+      {
+        if (!this.playing) {
+          this.playSong();
+        } else {
+          this.pauseSong();
+        }
+      }
+    },
 
     playSong() {
-      this.$songEvent.$emit("data", this.track);
-      this.playing = !this.playing;
+        this.$songEvent.$emit("data", this.track);
+        this.playing = !this.playing;
     },
 
     deleteSong(trackId) {
@@ -107,6 +130,11 @@ export default {
 .addIcon {
   margin-left: 10px;
   font-size: 1.2rem;
+}
+
+.artistLink:hover {
+  text-decoration: underline;
+  color: #fff;
 }
 
 @media screen and (min-width: 500px) {
