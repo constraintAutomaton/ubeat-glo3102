@@ -89,7 +89,7 @@ export default {
     liClick(event) {
       const element = event.target;
       const elementTag = element.tagName;
-      
+
       if (
           elementTag != "svg" &&
           elementTag != "path" &&
@@ -142,6 +142,10 @@ export default {
 .addIcon {
   margin-left: 10px;
   font-size: 1.2rem;
+}
+
+.artistLink{
+  text-decoration: underline;
 }
 
 .artistLink:hover {
