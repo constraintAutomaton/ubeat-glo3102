@@ -25,6 +25,7 @@ import {
   addTrackToPlaylist,
   deleteTrack
 } from "../../lib/util/utilPlaylist";
+import _ from "lodash";
 
 export default {
   props: {
@@ -99,6 +100,7 @@ export default {
     },
     async loadPlaylists() {
       this.playlists = await getPlaylists();
+      this.playlists = _.sortBy(this.playlists, ["id"]);
     },
     async saveToPlaylist(event) {
       if (this.tracks != null) {
