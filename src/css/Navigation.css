@@ -1,0 +1,71 @@
+.dropdownOpen {
+    display: block;
+    opacity: 1;
+    position: relative;
+  }
+  .navLogo {
+    font-weight: bold;
+    font-size: 2.1rem;
+  }
+  
+  #sideNavSearchInput {
+    font-size: 100%;
+  }
+  
+  .customNavItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  @media only screen and (max-width: 699px) and (min-width: 600px) {
+    .navContainer {
+      padding-left: 20px;
+    }
+  
+    #navSearchContainer {
+      width: 130px;
+    }
+  }
+  
+  @media only screen and (max-width: 993px) and (min-width: 700px) {
+    .navContainer {
+      padding-left: 20px;
+    }
+  
+    #navSearchContainer {
+      width: 200px;
+    }
+  }
+  
+  @media only screen and (min-width: 993px) {
+    #navSearchContainer {
+      width: 130px;
+    }
+  
+    .navContainer {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+  
+  @media only screen and (min-width: 1093px) {
+    #navSearchContainer {
+      width: 200px;
+    }
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .navContainer {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 20px;
+    }
+  }
+  
+  .nav-wrapper .input-field input[type="search"] {
+    width: calc(100% - 1rem);
+    margin: 0 0 0 0;
+    padding: 5px 5px 5px 1rem;
+    border-radius: 5rem;
+    height: 2rem;
+  }
