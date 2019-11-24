@@ -4,15 +4,13 @@ import router from "./router";
 
 import Default from "./layouts/Default.vue";
 
-import VuejsDialog from 'vuejs-dialog';
+import VuejsDialog from "vuejs-dialog";
 
-import Toasted from 'vue-toasted';
-
-const _ = require('lodash');
+import Toasted from "vue-toasted";
+import _ from "lodash";
 
 // include the default style
-import 'vuejs-dialog/dist/vuejs-dialog.min.css';
-
+import "vuejs-dialog/dist/vuejs-dialog.min.css";
 
 import "materialize-css";
 import "materialize-css/dist/css/materialize.css";

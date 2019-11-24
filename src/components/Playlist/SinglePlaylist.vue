@@ -113,10 +113,12 @@ export default {
         event.target.style.height = event.target.scrollHeight + "px";
       } else {
         let element = this.$refs.playlistName;
-        element.style.boxSizing = "border-box";
-        element.style.height = "inherit";
-        let offset = element.offsetHeight - element.clientHeight;
-        element.style.height = element.scrollHeight + offset + "px";
+        if (typeof element !== "undefined") {
+          element.style.boxSizing = "border-box";
+          element.style.height = "inherit";
+          let offset = element.offsetHeight - element.clientHeight;
+          element.style.height = element.scrollHeight + offset + "px";
+        }
       }
     },
 

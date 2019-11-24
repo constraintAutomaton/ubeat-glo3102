@@ -10,15 +10,21 @@
       ></single-playlist>
     </template>
     <div class="newPlaylist">
-      <a class="waves-effect waves-light btn" @click="newPlaylist"><i class="material-icons right">add</i>New playlist</a>
+      <a class="waves-effect waves-light btn" @click="newPlaylist"
+        ><i class="material-icons right">add</i>New playlist</a
+      >
     </div>
   </div>
 </template>
 
 <script>
-import { getPlaylists, addPlaylist, deletePlaylist } from "./../lib/util/utilPlaylist";
+import {
+  getPlaylists,
+  addPlaylist,
+  deletePlaylist
+} from "./../lib/util/utilPlaylist";
 import SinglePlaylist from "./Playlist/SinglePlaylist";
-import {sortBy} from "lodash";
+import _ from "lodash";
 
 export default {
   name: "Playlists.vue",
@@ -35,18 +41,17 @@ export default {
 
   mounted() {
     this.$songEvent.$on("playlistUpdated", this.refreshPlaylists);
-	  _.sortBy(this.playlists, [iteratees=[_.id]]);
   },
 
   async created() {
     this.refreshPlaylists();
   },
 
-    computed: {
-    },
+  computed: {},
   methods: {
     async refreshPlaylists() {
       this.playlists = await getPlaylists();
+      this.playlists = _.sortBy(this.playlists, ["id"]);
     },
     async newPlaylist() {
       const response = await addPlaylist("New Playlist");
@@ -55,9 +60,11 @@ export default {
     },
     async deletePlaylistById(playlist) {
       this.$dialog
-        .confirm(`Delete this playlist \"${playlist.name}\"?`, {customClass:'ubeatDelete'})
+        .confirm(`Delete this playlist \"${playlist.name}\"?`, {
+          customClass: "ubeatDelete"
+        })
 
-        .then(async (dialog) => {
+        .then(async dialog => {
           try {
             const response = await deletePlaylist(playlist.id);
             this.refreshPlaylists();
@@ -65,12 +72,11 @@ export default {
             console.log(e);
           }
         })
-        .catch(function() {
-        });
+        .catch(function() {});
     },
     modifyPlaylistById(playlistId) {
       this.$refs.singlePlaylist.forEach(singlePlaylist => {
-        if(singlePlaylist.playlist.id == playlistId)
+        if (singlePlaylist.playlist.id === playlistId)
           singlePlaylist.modifyTitle();
       });
     }
@@ -79,8 +85,7 @@ export default {
 </script>
 
 <style scoped>
-
-.newPlaylist{
+.newPlaylist {
   text-align: center;
 }
 </style>

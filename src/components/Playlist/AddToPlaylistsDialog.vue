@@ -25,6 +25,7 @@ import {
   addTrackToPlaylist,
   deleteTrack
 } from "../../lib/util/utilPlaylist";
+import _ from "lodash";
 
 export default {
   props: {
@@ -38,15 +39,22 @@ export default {
       playlists: {}
     };
   },
+  watch: {
+    $route: "close"
+  },
   methods: {
     open() {
       this.isOpened = true;
+      this.loadPlaylists();
     },
     close() {
-      this.isOpened = false;
-      this.$refs.playlistCheckbox.forEach(async chkBox => {
-        chkBox.checked = false;
-      });
+      if(this.isOpened)
+      {
+        this.isOpened = false;
+        this.$refs.playlistCheckbox.forEach(async chkBox => {
+          chkBox.checked = false;
+        });
+      }
     },
     showSuccessAdd(chkBox) {
       this.$toasted.show("Track added successfully", {
@@ -57,6 +65,7 @@ export default {
           onClick: (e, toastObject) => {
             this.deleteTracks(chkBox.value);
             chkBox.checked = false;
+            this.$songEvent.$emit("playlistUpdated");
             toastObject.goAway(0);
           }
         }
@@ -71,6 +80,7 @@ export default {
           onClick: (e, toastObject) => {
             this.addTracks(chkBox.value);
             chkBox.checked = true;
+            this.$songEvent.$emit("playlistUpdated");
             toastObject.goAway(0);
           }
         }
@@ -91,6 +101,7 @@ export default {
     },
     async loadPlaylists() {
       this.playlists = await getPlaylists();
+      this.playlists = _.sortBy(this.playlists, ["id"]);
     },
     async saveToPlaylist(event) {
       if (this.tracks != null) {
@@ -99,9 +110,11 @@ export default {
         if (chkBox.checked) {
           await this.addTracks(chkBox.value);
           this.showSuccessAdd(chkBox);
+          this.$songEvent.$emit("playlistUpdated");
         } else {
           this.deleteTracks(chkBox.value);
           this.showSuccessDelete(chkBox);
+          this.$songEvent.$emit("playlistUpdated");
         }
       }
     },
@@ -140,7 +153,7 @@ export default {
 
 .dialog {
   position: fixed;
-  z-index: 10;
+  z-index: 200;
   padding-top: 100px;
   left: 0;
   top: 0;
