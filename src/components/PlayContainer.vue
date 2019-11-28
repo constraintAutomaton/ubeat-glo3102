@@ -1,5 +1,12 @@
 <template>
   <div id="playContainer">
+    <div id="playBar">
+      <span id="timer">0:00</span>
+      <div class="audio-progress">
+        <div id="progress"></div>
+      </div>
+      <span id="duration">0:00</span>
+    </div>
     <div class="playOptions">
       <font-awesome-icon class="playIcon" :icon="['fas', 'sync']" />
       <font-awesome-icon class="playIcon" :icon="['fas', 'backward']" />
@@ -32,11 +39,15 @@
         </p>
         <span class="hide-on-small-and-down"
           >&nbsp;-&nbsp;
-          <router-link :to="'/album/' + albumId" tag="a" class="info">{{ album }} </router-link>
+          <router-link :to="'/album/' + albumId" tag="a" class="info"
+            >{{ album }}
+          </router-link>
         </span>
       </div>
       <span class="hide-on-med-and-up">&nbsp;-&nbsp;</span>
-      <router-link :to="'/artist/' + artistId" tag="a" class="info">{{ artist }} </router-link>
+      <router-link :to="'/artist/' + artistId" tag="a" class="info"
+        >{{ artist }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -59,6 +70,7 @@ export default {
       song: undefined
     };
   },
+
   created() {
     this.$songEvent.$on("data", this.ChangePlayingSong);
     this.$songEvent.$on("pauseSong", this.pauseSong);
@@ -81,9 +93,13 @@ export default {
       this.artist = track.artistName;
       this.albumId = track.collectionId;
       this.album = track.collectionName;
+      console.log("LINK", this.songLink);
       this.song = new Howl({
-        src: [this.songLink]
+        src: [this.songLink],
+        onplay: this.updateSongProgress
       });
+      console.log("SONG", this.song);
+
       this.$songEvent.$emit("switchSong", this.trackObj.trackId);
       this.playSong();
     },
@@ -109,9 +125,34 @@ export default {
       if (this.trackObj != undefined) {
         this.$refs.addToPlaylistDialog.open();
       }
+    },
+
+    updateSongProgress() {
+      this.song.audioPlayed = true;
+      let time = Math.round(this.song.duration());
+      let songDurationSpan = document.getElementById("duration");
+      songDurationSpan.textContent = this.formatTime(time);
+      requestAnimationFrame(this.updateTimeTracker.bind(this));
+    },
+
+    formatTime(secs) {
+      let minutes = Math.floor(secs / 60) || 0;
+      let seconds = secs - minutes * 60 || 0;
+      return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    },
+    updateTimeTracker() {
+      let seek = this.song.seek() || 0;
+      document.getElementById("timer").textContent = this.formatTime(Math.round(seek));
+      document.getElementById("progress").style.width =
+        ((seek / this.song.duration()) * 100 || 0) + "%";
+
+      if (this.song.playing()) {
+        requestAnimationFrame(this.updateTimeTracker.bind(this));
+      }
     }
   }
 };
 </script>
 
-<style src="./../css/PlayContainer.css"></style>
+<style src="./../css/PlayContainer.css">
+</style>

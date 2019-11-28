@@ -1,18 +1,18 @@
 #playContainer {
-    width: 100%;
-    height: 80px;
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    background-color: #2d2d2d;
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-    padding: 16px 32px;
-    z-index: 999;
-  }
+  width: 100%;
+  height: 95px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #2d2d2d;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  padding: 16px 32px;
+  z-index: 999;
+}
 
 .playOptions {
   min-width: 33%;
@@ -21,78 +21,106 @@
   justify-content: center;
 }
 
-  @media screen and (max-width: 500px) {
-    .playOptions {
-      width: 100%;
-    }
+@media screen and (max-width: 500px) {
+  .playOptions {
+    width: 100%;
   }
+}
 
+.playInformation {
+  min-width: 33%;
+  color: #8fd1d9;
+}
+
+@media screen and (max-width: 1024px) {
   .playInformation {
-    min-width: 33%;
-    color: #8fd1d9;
+    flex-grow: 2;
   }
+}
 
-  @media screen and (max-width: 768px) {
-    .playInformation{
-      flex-grow: 2;
-    }
+@media screen and (max-width: 500px) {
+  .playInformation {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
+}
 
-  @media screen and (max-width: 500px) {
-    .playInformation {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
+.info {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  color: #8fd1d9;
+  cursor: default;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.playInformation a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.playInformation p {
+  display: inline;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 500px) {
+  .playInformation p:last-child {
+    margin-left: 5px;
   }
-
-  .info {
-    margin: 0;
-    line-height: 1.6;
-    font-size: 0.9rem;
-    color: #8fd1d9;
-    cursor: default;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  .playInformation p:last-child:before {
+    content: " – ";
   }
+}
 
-  .playInformation a {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+.playIcon {
+  margin: 0 10px;
+  cursor: pointer;
+}
 
-  .playInformation p {
-    display: inline;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+.mainPlayButton {
+  font-size: 2.5rem;
+}
 
-  @media screen and (max-width: 500px) {
-    .playInformation p:last-child {
-      margin-left: 5px;
-    }
-    .playInformation p:last-child:before {
-      content: " – ";
-    }
-  }
+#mainPause {
+  display: none;
+}
 
-  .playIcon {
-    margin: 0 10px;
-    cursor: pointer;
-  }
-
+@media screen and (max-width: 500px) {
   .mainPlayButton {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
-
-  #mainPause{
-    display: none;
-  }
-
-  @media screen and (max-width: 500px) {
-    .mainPlayButton {
-      font-size: 1.5rem;
-    }
-  }
+}
+#playBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  color: var(--extraLightColor);
+  font-weight: 200;
+  font-size: 11px;
+  letter-spacing: 0.05rem;
+}
+.audio-progress {
+  width: 100%;
+  height: 0.3rem;
+  position: relative;
+  margin: 0 10px;
+  background-color: var(--mediumGrey);
+}
+#progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, var(--lighterAccentColor), var(--darkerAccentColor));
+  /*background-color: var(--lighterAccentColor);*/
+  z-index: 1;
+}
