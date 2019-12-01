@@ -23,7 +23,7 @@ export default class ApiInterface {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/x-www-form-urlencoded"
       },
       body: JSON.stringify({
         email: email,
@@ -36,6 +36,27 @@ export default class ApiInterface {
     } else {
       return { data: "erreur de connexion" };
     }
+  }
+  async signup(name, email, password){
+    const param = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: JSON.stringify({
+        email: email,
+        name:name,
+        password: password
+      })
+    };
+    const rep = await fetch(`${this.rootUrlUbeat} /signup`, param);
+    if (rep.ok) {
+      return await rep.json();
+    } else {
+      return { data: "erreur de connexion" };
+    }
+  }
   }
 
   async search(p_query, p_type = "", p_limite = 10) {
