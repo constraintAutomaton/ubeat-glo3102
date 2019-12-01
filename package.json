@@ -17,6 +17,7 @@
     "howler": "^2.1.2",
     "lodash": "^4.17.15",
     "materialize-css": "^1.0.0",
+    "password-validator": "^5.0.3",
     "vue": "^2.6.10",
     "vue-clickaway": "^2.2.2",
     "vue-router": "^3.1.2",
