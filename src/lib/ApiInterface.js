@@ -18,6 +18,25 @@ export default class ApiInterface {
       this.rootUrlUbeat += "unsecure/";
     }
   }
+  async login(email, password) {
+    const param = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      })
+    };
+    const rep = await fetch(`${this.rootUrlUbeat}/login`, param);
+    if (rep.ok) {
+      return await rep.json();
+    } else {
+      return { data: "erreur de connexion" };
+    }
+  }
 
   async search(p_query, p_type = "", p_limite = 10) {
     const param = {
