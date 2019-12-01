@@ -37,7 +37,7 @@ export default class ApiInterface {
       return { data: "erreur de connexion" };
     }
   }
-  async signup(name, email, password){
+  async signup(name, email, password) {
     const param = {
       method: "POST",
       headers: {
@@ -46,7 +46,7 @@ export default class ApiInterface {
       },
       body: JSON.stringify({
         email: email,
-        name:name,
+        name: name,
         password: password
       })
     };
@@ -56,7 +56,6 @@ export default class ApiInterface {
     } else {
       return { data: "erreur de connexion" };
     }
-  }
   }
 
   async search(p_query, p_type = "", p_limite = 10) {
