@@ -50,13 +50,28 @@
                   </router-link>
                 </li>
                 <li class="divider"></li>
-
                 <li>
                   <router-link :to="settingsPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       build
                     </i>
                     Settings
+                  </router-link>
+                </li>
+                <li>
+                  <router-link :to="signupPage" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      build
+                    </i>
+                    Sign Up
+                  </router-link>
+                </li>
+                <li>
+                  <router-link :to="loginPage" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      build
+                    </i>
+                    Login
                   </router-link>
                 </li>
                 <li>
@@ -121,6 +136,22 @@
         </router-link>
       </li>
       <li>
+        <router-link class="sidenav-close" :to="signupPage">
+          <i class="material-icons">
+            lock
+          </i>
+          Sign Up
+        </router-link>
+      </li>
+      <li>
+      <li>
+        <router-link class="sidenav-close" :to="loginPage">
+          <i class="material-icons">
+            lock
+          </i>
+          Login
+        </router-link>
+      </li>
         <router-link class="sidenav-close" :to="logoutPage">
           <i class="material-icons">
             lock
@@ -238,6 +269,8 @@ export default {
     return {
       homePage: "/",
       albumPage: "/album",
+      loginPage: "/login",
+        signupPage: "/signup",
       artistPage: "/artist",
       playlistsPage: "/playlists",
       settingsPage: "/settings",

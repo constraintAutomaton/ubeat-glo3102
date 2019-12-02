@@ -4,7 +4,13 @@ import Home from "@/components/Home";
 import Album from "@/components/Album";
 import Artist from "@/components/Artist";
 import Playlists from "@/components/Playlists";
+import SignUp from "../components/SignUp";
+import Login from "../components/Login";
+import vuetify from 'vuetify'
 
+import('../../node_modules/vuetify/dist/vuetify.min.css');
+
+Vue.use(vuetify);
 Vue.use(Router);
 
 export default new Router({
@@ -13,6 +19,16 @@ export default new Router({
       path: "/",
       name: "Home",
       component: Home
+    },
+    {
+      path: "/signup",
+      name: "SignUp",
+      component: SignUp
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
     },
     {
       path: "/artist",
