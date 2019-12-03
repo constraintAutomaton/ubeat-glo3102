@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer container">
-    <h2><a>Found Tracks</a></h2>
-    <Tracks class="listTitle" :trackList="this.trackResults.results"></Tracks>
+    <h2 class="listTitle"><a>Found Tracks</a></h2>
+    <Tracks :trackList="this.trackResults.results"></Tracks>
     <ArtistList :artistList="this.artistsResults.results" :title="'Found Artists'" />
     <AlbumOfArtist :albumList="this.albumResults.results" :title="'Found Albums'" />
   </div>
