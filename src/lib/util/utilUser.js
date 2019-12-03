@@ -1,4 +1,8 @@
-import ApiInterface from "../ApiInterface";
+import ApiInterface from "./../ApiInterface";
 
+const engine = ApiInterface(false);
 
-export const getCurrentUser
+export const createUser = async (name, email, password)=>{
+  const rep = await engine.signup(name, email, password);
+  console.log(rep);
+};

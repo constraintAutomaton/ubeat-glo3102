@@ -1,38 +1,42 @@
 <template>
+
   <div id="signupPage" class="container">
-    <form>
+    <div id="signup-form">
       <h3>Signup</h3>
       <p>
         <label for="username"> Enter your username</label>
-        <input type="text" id="username" name="inputName" required>
+        <input type="text" id="username" name="inputName" v-model="inputName" required>
       </p>
       <p>
         <label for="email"> Enter your email adress </label>
-        <input type="email" id="email" name="inputEmail" required>
+        <input type="email" id="email" name="inputEmail" v-model="inputEmail" required>
+        <p> test {{inputEmail}}</p>
       </p>
       <p>
         <label for="password"> Enter your password</label>
-        <input type="password" id="password" name="inputPasseword" required>
+        <input type="password" id="password" name="inputPasseword" v-model="inputPassword" required>
       </p>
       <p>
         <label for="password"> Repeat your Password</label>
-        <input type="password" id="repeatPassword" name="inputRepeatPasseword" required>
+        <input type="password" id="repeatPassword" name="inputRepeatPasseword" v-model="inputRepeatPassword" required>
       </p>
       <div >
-        <button id="signuBtn" v-on:click="signup(inputName, inputEmail, inputPassword, inputRepeatPassword)">SIGNUP</button>
+        <button id="signuBtn" v-on:click="signup">SIGNUP</button>
       </div>
+
       <v-snackbar
         :color="color"
         v-model="snackbar"
       > {{snackText}}
         <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
       </v-snackbar>
-    </form>
+    </div>
   </div>
 </template>
 
 <script>
-
+//import {createUser} from "./../lib/util/utilUser";
+import ApiInterface from "./../lib/ApiInterface";
     export default {
         data(){
             return {
@@ -46,32 +50,23 @@
             };
         },
         methods: {
-            async signup(name, email, password, passeword2){
-                if(password===passeword2){
-                    await createNewUser(name, email, password).then((rep)=>{
-                        this.snackText = `Successful sign up, welcome, ${rep.data.name}`;
-                        this.color = 'success';
-                        this.snackbar = true;
-                        setTimeout(() => {
-                            window.location.hash = '/login';
-                        }, 2000);
+            signup: async function(event){
 
-                    }).catch((err)=>{
-                        this.snackText = ` failed! ${err.response.statusText}`;
-                        this.color = 'error';
-                        this.snackbar = true;
 
-                    })
-                }else{
-                    this.snackText = 'Passwords do not match';
-                    this.color = 'error';
-                    this.snackbar = true;
+                if(this.inputPassword===this.inputRepeatPassword){
+                    console.log(event);
+                    console.log("test");
 
-                }
+                    const engine =new ApiInterface(false);
+
+                    const rep = await engine.signup(this.inputName, this.inputEmail, this.inputPassword);
+                    console.log(rep);
 
             }
+
         }
-    };
+    }
+    }
 </script>
 
 <style scoped>
@@ -79,4 +74,11 @@ button {
   height: 35px;
   background-color: #2ab7a9;
 }
+  #signup-form{
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-items:center;
+  }
+
 </style>

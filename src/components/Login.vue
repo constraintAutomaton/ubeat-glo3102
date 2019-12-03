@@ -4,11 +4,11 @@
         <h3>Login</h3>
         <p>
           <label for="email"> Votre Adresse email</label>
-          <input type="email" id="email" name="inputEmail" required>
+          <input type="email" id="email" name="inputEmail" v-model="email" required>
         </p>
         <p>
           <label for="password"> Votre Adresse password</label>
-          <input type="password" id="password" name="inputPasseword" required>
+          <input type="password" id="password" name="inputPasseword" v-model="password" required>
         </p>
         <div>
           <button onclick="login()">Login</button>
