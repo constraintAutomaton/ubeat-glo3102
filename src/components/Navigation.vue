@@ -238,6 +238,8 @@
 </style>
 
 <script>
+import router from './../router/index.js'
+
 export default {
   methods: {
     toggleDropdown: () => {
@@ -249,8 +251,9 @@ export default {
     hideDropdown: () => {
       document.getElementById("navDropdown").classList.remove("dropdownOpen");
     },
-    search: function() {
-      console.log(this.searchText);
+    search: async function() {
+      const query = this.searchText.replace(new RegExp(" ", "g"), "%20");
+      router.push({ name: 'SearchResult', params: { query: query }});
       this.searchText = "";
       this.toggleSearch();
     },
