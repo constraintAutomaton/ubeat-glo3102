@@ -59,6 +59,14 @@
                   </router-link>
                 </li>
                 <li>
+                  <router-link :to="userPage" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      account_circle
+                    </i>
+                    Profile
+                  </router-link>
+                </li>
+                <li>
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       build
@@ -136,6 +144,14 @@
         </router-link>
       </li>
       <li>
+        <router-link class="sidenav-close" :to="userPage">
+          <i class="material-icons">
+            account_circle
+          </i>
+          Profile
+        </router-link>
+      </li>
+      <li>
         <router-link class="sidenav-close" :to="signupPage">
           <i class="material-icons">
             lock
@@ -144,7 +160,6 @@
         </router-link>
       </li>
       <li>
-      <li>
         <router-link class="sidenav-close" :to="loginPage">
           <i class="material-icons">
             lock
@@ -152,6 +167,7 @@
           Login
         </router-link>
       </li>
+      <li>
         <router-link class="sidenav-close" :to="logoutPage">
           <i class="material-icons">
             lock
@@ -278,6 +294,7 @@ export default {
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",
+      userPage: "/users/1",
       user: {
         id: 1,
         name: "Robin Desbois"
