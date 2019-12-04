@@ -294,7 +294,7 @@ export default {
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",
-      userPage: "/users/5aad63e11a50230004d038c2",
+      userPage: "/users/5db9a4fbd0c7f00004015499",
       user: {
         id: 1,
         name: "Robin Desbois"

@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
+  <div id="userPage" class="container">
     <div v-if="loading">
       Loading...
     </div>
     <div v-if="userInfo">
       <div class="userInfos">
-        <p>
+        <h1>
             {{userInfo.name}}
-        </p>
+        </h1>
         <p>
             {{userInfo.email}}
         </p>
@@ -15,6 +15,7 @@
       </div>   
       <div class="userPlaylists">
         <h2 class="listTitle">Playlists</h2>
+        <li v-for="playlist in listePlaylists" :key="playlist.id">{{ playlist.name }}</li>
       </div>
       <div class="userFriends">
         <h2 class="listTitle">Friends</h2>
@@ -28,20 +29,24 @@
 
 <script>
 import { getUserById } from "../lib/util/utilUser";
+import { getPlaylistsByUserId } from "../lib/util/utilPlaylist";
 
 export default {
   data() {
     return {
       userInfo: null,
+      listePlaylists: null,
       loading: true,
       error: null
     };
   },
   watch: {
-    $route: "loadUser"
+    $route: "loadUser",
+    $route: "loadPlaylists"
   },
   mounted() {
     this.loadUser();
+    this.loadPlaylists();
   },
   methods: {
     async loadUser() {
@@ -57,10 +62,27 @@ export default {
         this.error = error;
         this.loading = false;
       }
+    },
+    async loadPlaylists() {
+      this.error = this.listePlaylists = null;
+      this.loading = true;
+
+      try {
+        const playlist = await getPlaylistsByUserId(this.$route.params.id);      
+        this.listePlaylists = playlist;
+        this.loading = false;
+        this.error = false;
+      } catch (error) {
+        this.error = error;
+        this.loading = false;
+      }
     }
   },
 };
 </script>
 
 <style scoped>
+  .userPlaylists li {
+      list-style-type: none;
+  }
 </style>
