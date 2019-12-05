@@ -19,6 +19,11 @@
       </div>
       <div class="userFriends">
         <h2 class="listTitle">Friends</h2>
+        <li v-for="friend in friends" :key="friend.id">
+          <router-link class="sidenav-close" :to="{ path: friend.id }">
+            {{ friend.name }}
+          </router-link>
+        </li>
       </div>
     </div>
     <div v-if="error">
@@ -56,6 +61,7 @@ export default {
       try {
         const user = await getUserById(this.$route.params.id);
         this.userInfo = user;
+        this.friends = user.following;
         this.loading = false;
         this.error = false;
       } catch (error) {
