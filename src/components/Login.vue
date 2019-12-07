@@ -1,6 +1,6 @@
 <template>
   <div id="loginPage" class="container">
-      <form>
+      <div id="login-form">
         <h3>Login</h3>
         <p>
           <label for="email"> Votre Adresse email</label>
@@ -11,7 +11,7 @@
           <input type="password" id="password" name="inputPasseword" v-model="password" required>
         </p>
         <div>
-          <button onclick="login()">Login</button>
+          <button onclick="login">Login</button>
           <p>First time user? <router-link to="/signup">Register</router-link></p>
         </div>
         <v-snackbar
@@ -20,7 +20,7 @@
         > {{snackText}}
           <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
         </v-snackbar>
-      </form>
+      </div>
 
 
   </div>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-
+import ApiInterface from "../lib/ApiInterface";
     export default {
         data() {
             return {
@@ -41,26 +41,26 @@
             };
         },
         methods:{
-            async login(email, pass) {
-                await utilUser.getCurrentUser(email, pass).then((rep) => {
-                    this.snackText = `Login successful, welcome, ${rep.data.name}`;
-                    this.color = 'success';
-                    this.snackbar = true;
+            login: async function(even){
+            console.log(even);
+            const engine =new ApiInterface(false);
+            const rep = await engine.login(this.email, this.password);
+            console.log(rep);
 
-                }).catch(() => {
-                    this.snackText = 'Username and password are wrong!';
-                    this.color = 'error';
-                    this.snackbar = true;
-                });
-            },
-        }
-
-        }
+        },
+  }
+};
 </script>
 
 <style scoped>
-button{
+  button{
   height: 35px;
   background-color: #2ab7a9;
+}
+#login-form{
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  justify-items:center;
 }
 </style>

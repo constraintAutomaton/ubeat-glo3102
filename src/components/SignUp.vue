@@ -21,7 +21,7 @@
         <input type="password" id="repeatPassword" name="inputRepeatPasseword" v-model="inputRepeatPassword" required>
       </p>
       <div >
-        <button id="signuBtn" v-on:click="signup">SIGNUP</button>
+        <button id="signupBtn" v-on:click="signup">SIGNUP</button>
       </div>
 
       <v-snackbar
@@ -70,7 +70,7 @@ import ApiInterface from "./../lib/ApiInterface";
 </script>
 
 <style scoped>
-button {
+#signupBtn {
   height: 35px;
   background-color: #2ab7a9;
 }

@@ -54,7 +54,7 @@ export default class ApiInterface {
     if (rep.ok) {
       return await rep.json();
     } else {
-      return { data: "erreur de connexion" };
+      return { data: "erreur de connexioncccccccc" };
     }
   }
 
