@@ -2,7 +2,7 @@
  * This class handle the raw request to the Ubeat Api
  * Further usages are in the util class corresponding to the component.
  */
-
+import formurlencoded from "form-urlencoded"
 export default class ApiInterface {
   constructor(isSecure = true) {
     this.rootUrlUbeat = "https://ubeat.herokuapp.com/";
@@ -19,18 +19,20 @@ export default class ApiInterface {
     }
   }
   async login(email, password) {
+    const body = formurlencoded({
+      email: email,
+      name: name,
+      password: password
+    });
     const param = {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
+      body:body
     };
-    const rep = await fetch(`${this.rootUrlUbeat}/login`, param);
+    const rootUrl = this.rootUrlUbeat.substring(0,this.rootUrlUbeat.indexOf("unsecure"))
+    const rep = await fetch(`${rootUrl}login`, param);
     if (rep.ok) {
       return await rep.json();
     } else {
@@ -38,23 +40,24 @@ export default class ApiInterface {
     }
   }
   async signup(name, email, password) {
+    const body = formurlencoded({
+      email: email,
+      name: name,
+      password: password
+    });
     const param = {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: JSON.stringify({
-        email: email,
-        name: name,
-        password: password
-      })
+      body:body
     };
-    const rep = await fetch(`${this.rootUrlUbeat} /signup`, param);
+    const rootUrl = this.rootUrlUbeat.substring(0,this.rootUrlUbeat.indexOf("unsecure"))
+    const rep = await fetch(`${rootUrl}signup`, param);
     if (rep.ok) {
       return await rep.json();
     } else {
-      return { data: "erreur de connexioncccccccc" };
+      return { data: rep };
     }
   }
   async getUserById(p_id) {

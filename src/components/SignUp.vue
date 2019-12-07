@@ -5,16 +5,16 @@
       <h3>Signup</h3>
       <p>
         <label for="username"> Enter your username</label>
-        <input type="text" id="username" name="inputName" v-model="inputName" required>
+        <input type="text" id="name" name="name" v-model="inputName" required>
       </p>
       <p>
         <label for="email"> Enter your email adress </label>
-        <input type="email" id="email" name="inputEmail" v-model="inputEmail" required>
+        <input type="email" id="email" name="email" v-model="inputEmail" required>
         <p> test {{inputEmail}}</p>
       </p>
       <p>
         <label for="password"> Enter your password</label>
-        <input type="password" id="password" name="inputPasseword" v-model="inputPassword" required>
+        <input type="password" id="password" name="password" v-model="inputPassword" required>
       </p>
       <p>
         <label for="password"> Repeat your Password</label>
@@ -46,7 +46,7 @@ import ApiInterface from "./../lib/ApiInterface";
                 inputName: '',
                 inputEmail: '',
                 inputPassword: '',
-                inputRepeatPassword: '',
+                inputRepeatPassword: ''
             };
         },
         methods: {
@@ -58,9 +58,14 @@ import ApiInterface from "./../lib/ApiInterface";
                     console.log("test");
 
                     const engine =new ApiInterface(false);
-
-                    const rep = await engine.signup(this.inputName, this.inputEmail, this.inputPassword);
-                    console.log(rep);
+                    console.log(this.inputName,this.inputEmail,this.inputPassword);
+                    //const rep = await engine.signup(this.inputName, this.inputEmail, this.inputPassword);
+                    //console.log(rep);
+                    await engine.signup(this.inputName, this.inputEmail, this.inputPassword).then(() =>{
+                        setTimeout(()=>{
+                            window.location.hash='/login';
+                        }, 1000);
+                    });
 
             }
 

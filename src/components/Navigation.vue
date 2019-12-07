@@ -294,7 +294,7 @@ export default {
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",
-      userPage: "/users/5db9a4fbd0c7f00004015499",
+      userPage: `/users/${this.$cookie.get("id")}`,
       user: {
         id: 1,
         name: "Robin Desbois"

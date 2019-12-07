@@ -11,7 +11,7 @@
           <input type="password" id="password" name="inputPasseword" v-model="password" required>
         </p>
         <div>
-          <button onclick="login">Login</button>
+          <button v-on:click="login">Login</button>
           <p>First time user? <router-link to="/signup">Register</router-link></p>
         </div>
         <v-snackbar
@@ -28,7 +28,11 @@
 </template>
 
 <script>
-import ApiInterface from "../lib/ApiInterface";
+    /**
+     * email=sonkeng%40gmail.com&name=sonkeng&password=sonkeng
+     */
+    import ApiInterface from "../lib/ApiInterface";
+    import Cookies from 'js-cookies'
     export default {
         data() {
             return {
@@ -45,8 +49,19 @@ import ApiInterface from "../lib/ApiInterface";
             console.log(even);
             const engine =new ApiInterface(false);
             const rep = await engine.login(this.email, this.password);
-            console.log(rep);
-
+            console.log(rep.token);
+                this.$cookie.set("token", rep.token);
+                console.log(this.$cookie.get("token"));
+                this.$cookie.set("email", rep.email);
+                this.$cookie.set("name", rep.name);
+                this.$cookie.set("id", rep.id);
+                //console.log(rep.name);
+                //console.log(rep.email);
+                //console.log(rep.token);
+                setTimeout(() => {
+                    window.location.hash = '/';
+                    location.reload(true);
+                }, 1000);
         },
   }
 };
