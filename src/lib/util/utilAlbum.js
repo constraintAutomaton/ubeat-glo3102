@@ -61,7 +61,7 @@ export const getTracklist = async album_id => {
       "Content-Type": "application/json"
     }
   };
-
+  console.log(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`);
   return fetch(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`, param)
     .then(response => response.json())
     .then(json => {
