@@ -6,6 +6,8 @@ import Artist from "@/components/Artist";
 import Playlists from "@/components/Playlists";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
+import SearchResult from "../components/SearchResult";
+import User from "../components/User";
 import vuetify from 'vuetify'
 
 import('../../node_modules/vuetify/dist/vuetify.min.css');
@@ -52,6 +54,16 @@ export default new Router({
       path: "/playlists",
       name: "Playlists",
       component: Playlists
-    }
+    },
+    {
+      path: "/searchResult/:query?",
+      name: "SearchResult",
+      component: SearchResult
+    },
+    {
+      path: "/users/:id?",
+      name: "User",
+      component: User
+    },
   ]
 });

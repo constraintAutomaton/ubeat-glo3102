@@ -26,6 +26,28 @@ export const getPlaylists = async () => {
     });
 };
 
+export const getPlaylistsByUserId = async userId => {
+    const param = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    };
+  
+    return fetch(
+      `${apiEngine.rootUrlUbeat}users/${userId}/playlists`,
+      param
+    )
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      })
+      .catch(() => {
+        console.error("Unable to get user playlists");
+      });
+  };
+
 export const modifyPlaylist = async playlist => {
   const param = {
     method: "PUT",

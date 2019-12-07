@@ -59,6 +59,14 @@
                   </router-link>
                 </li>
                 <li>
+                  <router-link :to="userPage" class="navbar-item">
+                    <i class="material-icons navbar-icon">
+                      account_circle
+                    </i>
+                    Profile
+                  </router-link>
+                </li>
+                <li>
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       build
@@ -136,6 +144,14 @@
         </router-link>
       </li>
       <li>
+        <router-link class="sidenav-close" :to="userPage">
+          <i class="material-icons">
+            account_circle
+          </i>
+          Profile
+        </router-link>
+      </li>
+      <li>
         <router-link class="sidenav-close" :to="signupPage">
           <i class="material-icons">
             lock
@@ -144,7 +160,6 @@
         </router-link>
       </li>
       <li>
-      <li>
         <router-link class="sidenav-close" :to="loginPage">
           <i class="material-icons">
             lock
@@ -152,6 +167,7 @@
           Login
         </router-link>
       </li>
+      <li>
         <router-link class="sidenav-close" :to="logoutPage">
           <i class="material-icons">
             lock
@@ -238,6 +254,8 @@
 </style>
 
 <script>
+import router from './../router/index.js'
+
 export default {
   methods: {
     toggleDropdown: () => {
@@ -249,8 +267,9 @@ export default {
     hideDropdown: () => {
       document.getElementById("navDropdown").classList.remove("dropdownOpen");
     },
-    search: function() {
-      console.log(this.searchText);
+    search: async function() {
+      const query = this.searchText.replace(new RegExp(" ", "g"), "%20");
+      router.push({ name: 'SearchResult', params: { query: query }});
       this.searchText = "";
       this.toggleSearch();
     },
@@ -275,6 +294,7 @@ export default {
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",
+      userPage: "/users/5db9a4fbd0c7f00004015499",
       user: {
         id: 1,
         name: "Robin Desbois"

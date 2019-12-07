@@ -57,7 +57,28 @@ export default class ApiInterface {
       return { data: "erreur de connexioncccccccc" };
     }
   }
-
+  async getUserById(p_id) {
+    return await this.users(p_id);
+  }
+  async users(p_id) {
+    const param = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    };
+    const rep = await fetch(
+      `${this.rootUrlUbeat}users/${p_id}`,
+      param
+    );
+    if (rep.ok) {
+      return rep.json();
+    } else {
+      console.error(rep);
+      return {};
+    }
+  }
   async search(p_query, p_type = "", p_limite = 10) {
     const param = {
       method: "GET",
