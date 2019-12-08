@@ -23,7 +23,7 @@
 <script>
 import ArtistInfo from "./Artist/ArtistInfo.vue";
 import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
-import { getArtistById } from "../lib/util/utilArtist";
+import { getArtistById,getAlbumOfArtist } from "../lib/util/utilArtist";
 
 export default {
   data() {
@@ -42,10 +42,11 @@ export default {
   methods: {
     async loadArtist() {
       this.error = this.artistInfo = null;
-      this.loading = true;
+      this.loading = false;
 
       try {
-        const artist = await getArtistById(this.$route.params.id);
+        let artist = await getArtistById(this.$route.params.id);
+        artist.albums = await getAlbumOfArtist(this.$route.params.id);
         this.artistInfo = artist;
         this.loading = false;
         this.error = false;

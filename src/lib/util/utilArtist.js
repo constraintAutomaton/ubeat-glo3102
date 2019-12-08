@@ -18,15 +18,20 @@ export const getArtistById = async artistId => {
       artist.artistName
     );
 
-    let resultAlbums = await apiEngine.getArtistAlbumById(artistId);
-    if (resultAlbums.resultCount > 0) {
-      artist.albums = resultAlbums.results;
-    }
-
     return artist;
   } else {
     throw "Failed to fetch artist: " + artistId + ". It does not exist!";
   }
+};
+export const getAlbumOfArtist = async artistId => {
+  let albums;
+  let resultAlbums = await apiEngine.getArtistAlbumById(artistId);
+  if (resultAlbums.resultCount > 0) {
+    const nbAlbum =
+      resultAlbums.results.length > 5 ? 5 : resultAlbums.results.length;
+    albums = resultAlbums.results.slice(0, nbAlbum);
+  }
+  return albums;
 };
 
 export const getArtistInfo = async p_artist => {
