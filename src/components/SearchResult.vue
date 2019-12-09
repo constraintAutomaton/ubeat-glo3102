@@ -19,9 +19,9 @@ const apiEngine = new ApiInterface(isSecure);
 export default {
     data() {
         return {
-        trackResults: null,
-        albumResults: null,
-        artistsResults: true
+        trackResults: [],
+        albumResults: [],
+        artistsResults: []
         };
     },
     created() {
@@ -33,6 +33,11 @@ export default {
             this.trackResults = await apiEngine.searchTracks(query, 6);
             this.albumResults = await apiEngine.searchAlbum(query, 6);
             this.artistsResults = await apiEngine.searchArtiste(query, 6);
+            this.artistsResults.results.forEach(artist => {
+                artist.genre = artist.primaryGenreName;
+                artist.artistImage = artist.highResImage;
+            });
+            debugger;
         }
     },
     components: {
