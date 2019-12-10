@@ -255,6 +255,7 @@
 
 <script>
 import router from './../router/index.js'
+import { userInfo } from 'os';
 
 export default {
   methods: {
@@ -278,7 +279,7 @@ export default {
         !document.getElementById("navSearchContainer").classList.toggle("hide")
       )
         document.getElementById("navSearchInput").focus();
-    }
+    },
   },
   mounted() {
     // eslint-disable-next-line
@@ -289,15 +290,15 @@ export default {
       homePage: "/",
       albumPage: "/album",
       loginPage: "/login",
-        signupPage: "/signup",
+      signupPage: "/signup",
       artistPage: "/artist",
       playlistsPage: "/playlists",
       settingsPage: "/settings",
       logoutPage: "/logout",
       userPage: `/users/${this.$cookie.get("id")}`,
       user: {
-        id: 1,
-        name: "Robin Desbois"
+          id: this.$cookie.get("id"),
+          name: this.$cookie.get("name")
       },
       searchText: ""
     };
