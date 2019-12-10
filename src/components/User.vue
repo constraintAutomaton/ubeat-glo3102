@@ -4,10 +4,11 @@
       Loading...
     </div>
     <div v-if="userInfo">
+      <h1 v-if="isNotUser == false">My Profile</h1>
       <div class="userInfos">
-        <h1>
+        <h3>
             {{userInfo.name}}
-        </h1>
+        </h3>
         <p>
             {{userInfo.email}}
         </p>
@@ -20,11 +21,22 @@
             </p>
         </div> 
       </div>
-      <h2 class="listTitle">Playlists</h2>
+      <h2 v-if="isNotUser" class="listTitle">{{userInfo.name}}'s Playlists</h2>
+      <h2 v-else class="listTitle">My Playlists</h2>
       <div class="userPlaylists">
-        <li v-for="playlist in listePlaylists" :key="playlist.id">{{ playlist.name }}</li>
+        <template v-for="playlist in listePlaylists">
+          <single-playlist
+            :playlist="playlist"
+            :key="playlist.id"
+            ref="singlePlaylist"
+          ></single-playlist>
+        </template>
+        <router-link v-if="isNotUser == false" class="sidenav-close col s6 m4 l2" :to="'/playlists'">
+            <a class="waves-effect waves-light btn"><i class="material-icons left">playlist_add</i>Manage Playlists</a>
+        </router-link>
       </div>
-      <h2 class="listTitle">Friends</h2>
+      <h2 v-if="isNotUser" class="listTitle">{{userInfo.name}}'s Friends</h2>
+      <h2 v-else class="listTitle">My Friends</h2>
       <div class="userFriends flexContent">
         <li v-for="friend in friends" :key="friend.id">
           <router-link class="sidenav-close col s6 m4 l2" :to="{ path: friend.id }">
@@ -42,6 +54,7 @@
 <script>
 import { getUserById, followFriend, deleteFriend } from "../lib/util/utilUser";
 import { getPlaylistsByUserId } from "../lib/util/utilPlaylist";
+import SinglePlaylist from "./Playlist/SinglePlaylist";
 
 export default {
   data() {
@@ -53,6 +66,9 @@ export default {
       isNotUser : false,
       isFriend : false
     };
+  },
+    components: {
+    SinglePlaylist
   },
   watch: {
     $route: "loadUser"
@@ -136,6 +152,14 @@ export default {
   }
   .userFriends .btn:hover {
     background-color: var(--mediumGrey);
+    color: #fff;
+  }
+  .userPlaylists .btn {
+    background-color: var(--primaryAccentColor);
+    color: #fff;
+  }
+  .userPlaylists .btn:hover {
+    background-color: var(--darkerAccentColor);
     color: #fff;
   }
 </style>

@@ -26,10 +26,10 @@
         v-model="playlist.name"
       >
       </textarea>
-      <a class="btn btn-small icons" @click="modifyTitle">
+      <a v-if="route != 'User'" class="btn btn-small icons" @click="modifyTitle">
         <font-awesome-icon class="" :icon="['fa', 'pencil-alt']" />
       </a>
-      <a class="btn btn-small icons" @click="deletePlaylist">
+      <a v-if="route != 'User'" class="btn btn-small icons" @click="deletePlaylist">
         <font-awesome-icon class="" :icon="['fa', 'trash-alt']" />
       </a>
     </div>
@@ -68,7 +68,8 @@ export default {
   data() {
     return {
       isCollapsed: true,
-      previousName: "New Playlist"
+      previousName: "New Playlist",
+      route: this.$route.name
     };
   },
   methods: {
