@@ -41,6 +41,7 @@ export default {
 
 #app .col {
   margin-left: initial;
+  /*flex-basis: inherit;*/
 }
 
 #app .row {

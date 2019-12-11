@@ -1,5 +1,10 @@
 <template>
   <div id="playContainer">
+    <!--    <div id="waveform"></div>-->
+    <div class="waveformContainer">
+      <div id="waveform"></div>
+    </div>
+
     <div id="playBar">
       <span id="timer">0:00</span>
       <div class="audio-progress">
@@ -55,6 +60,10 @@
 <script>
 import AddToPlaylistsDialog from "./Playlist/AddToPlaylistsDialog";
 import { Howl } from "howler";
+import WaveSurfer from "wavesurfer.js";
+import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js";
+import MinimapPlugin from "wavesurfer.js/dist/plugin/wavesurfer.minimap.min.js";
+
 export default {
   name: "PlayContainer.vue",
 
@@ -69,6 +78,25 @@ export default {
       album: "",
       song: undefined
     };
+  },
+
+  mounted() {
+    // let wavesurferScript = document.createElement("script");
+    // wavesurferScript.setAttribute(
+    //   "src",
+    //   "http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"
+    // );
+    // document.head.appendChild(wavesurferScript);
+    // this.wavesurfer = WaveSurfer.create({
+    //   // Use the id or class-name of the element you created, as a selector
+    //   container: "#waveform",
+    //   // The color can be either a simple CSS color or a Canvas gradient
+    //   waveColor: "grey",
+    //   progressColor: "#f87f8f",
+    //   cursorColor: "#fff",
+    //   // This parameter makes the waveform look like SoundCloud's player
+    //   barWidth: 3
+    // });
   },
 
   created() {
@@ -99,14 +127,35 @@ export default {
         onplay: this.updateSongProgress
       });
       console.log("SONG", this.song);
+      if (typeof this.wavesurfer !== "undefined") {
+        this.wavesurfer.destroy();
+      }
+      this.wavesurfer = WaveSurfer.create({
+        // Use the id or class-name of the element you created, as a selector
+        container: "#waveform",
+        interact: "false",
+        // The color can be either a simple CSS color or a Canvas gradient
+        waveColor: "#383842",
+        height: 40,
+        progressColor: "#8fd1d9",
+        cursorWidth: 0,
+        // This parameter makes the waveform look like SoundCloud's player
+        barWidth: 3
+      });
 
+      this.wavesurfer.load(this.song._src);
+      this.wavesurfer.setVolume(0);
       this.$songEvent.$emit("switchSong", this.trackObj.trackId);
-      this.playSong();
+      this.wavesurfer.on("ready", () => {
+        this.playSong();
+      });
+      // this.playSong();
     },
 
     pauseSong() {
       if (typeof this.song !== "undefined") {
         this.song.pause();
+        this.wavesurfer.playPause();
         this.$songEvent.$emit("resumedSong", this.trackObj.trackId);
         document.getElementById("mainPause").style.display = "none";
         document.getElementById("mainPlay").style.display = "block";
@@ -116,6 +165,7 @@ export default {
     playSong() {
       if (typeof this.song !== "undefined") {
         this.song.play(this.song.id);
+        this.wavesurfer.playPause();
         this.$songEvent.$emit("pausedSong", this.trackObj.trackId);
         document.getElementById("mainPlay").style.display = "none";
         document.getElementById("mainPause").style.display = "block";
@@ -142,7 +192,9 @@ export default {
     },
     updateTimeTracker() {
       let seek = this.song.seek() || 0;
-      document.getElementById("timer").textContent = this.formatTime(Math.round(seek));
+      document.getElementById("timer").textContent = this.formatTime(
+        Math.round(seek)
+      );
       document.getElementById("progress").style.width =
         ((seek / this.song.duration()) * 100 || 0) + "%";
 
@@ -154,5 +206,4 @@ export default {
 };
 </script>
 
-<style src="./../css/PlayContainer.css">
-</style>
+<style src="./../css/PlayContainer.css"></style>
