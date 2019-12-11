@@ -90,11 +90,21 @@ export default class ApiInterface {
         "Content-Type": "application/json"
       }
     };
+    let rep;
     p_query = p_query.replace(new RegExp(" ", "g"), "%20");
-    const rep = await fetch(
-      `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
-      param
-    );
+    if(p_type === "users"){
+      console.log("inside users query");
+      console.log(p_query);
+      rep = await fetch(
+        `${this.rootUrlUbeat}search/${p_type}?q=${p_query}`,
+        param
+      );
+    }else{
+      rep = await fetch(
+        `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+        param
+      );
+    }
     if (rep.ok) {
       return rep.json();
     } else {
@@ -110,6 +120,9 @@ export default class ApiInterface {
   }
   async searchTracks(p_query, p_limite = 10) {
     return await this.search(p_query, "tracks", p_limite);
+  }
+  async searchUsers(p_query, p_limite = 10) {
+    return await this.search(p_query, "users", p_limite);
   }
   async _getAlbumOrArtistById(p_type, p_id, p_getTracksOrAlbum = "") {
     const param = {
