@@ -80,24 +80,7 @@ export default {
     };
   },
 
-  mounted() {
-    // let wavesurferScript = document.createElement("script");
-    // wavesurferScript.setAttribute(
-    //   "src",
-    //   "http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"
-    // );
-    // document.head.appendChild(wavesurferScript);
-    // this.wavesurfer = WaveSurfer.create({
-    //   // Use the id or class-name of the element you created, as a selector
-    //   container: "#waveform",
-    //   // The color can be either a simple CSS color or a Canvas gradient
-    //   waveColor: "grey",
-    //   progressColor: "#f87f8f",
-    //   cursorColor: "#fff",
-    //   // This parameter makes the waveform look like SoundCloud's player
-    //   barWidth: 3
-    // });
-  },
+  mounted() {},
 
   created() {
     this.$songEvent.$on("data", this.ChangePlayingSong);
@@ -131,15 +114,14 @@ export default {
         this.wavesurfer.destroy();
       }
       this.wavesurfer = WaveSurfer.create({
-        // Use the id or class-name of the element you created, as a selector
         container: "#waveform",
         interact: "false",
-        // The color can be either a simple CSS color or a Canvas gradient
         waveColor: "#383842",
         height: 40,
         progressColor: "#8fd1d9",
         cursorWidth: 0,
-        // This parameter makes the waveform look like SoundCloud's player
+        responsive: true,
+        hideScrollbar: true,
         barWidth: 3
       });
 
@@ -149,7 +131,6 @@ export default {
       this.wavesurfer.on("ready", () => {
         this.playSong();
       });
-      // this.playSong();
     },
 
     pauseSong() {
