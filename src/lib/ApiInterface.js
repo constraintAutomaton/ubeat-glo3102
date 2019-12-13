@@ -5,7 +5,7 @@
 import formurlencoded from "form-urlencoded"
 export default class ApiInterface {
   constructor(isSecure = true) {
-    this.rootUrlUbeat = "http://localhost:3000/";
+    this.rootUrlUbeat = "https://ubeateq9.herokuapp.com/";
     this.rootUrlDiscogs = "https://api.discogs.com/";
     this.discogsTokken = "kGpyEfufJNVCCSjcBrtQFmJMxcrlSXrtfxgBfzHI";
     this.userTest = {
