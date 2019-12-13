@@ -48,8 +48,7 @@ export default {
       this.loadPlaylists();
     },
     close() {
-      if(this.isOpened)
-      {
+      if (this.isOpened) {
         this.isOpened = false;
         this.$refs.playlistCheckbox.forEach(async chkBox => {
           chkBox.checked = false;

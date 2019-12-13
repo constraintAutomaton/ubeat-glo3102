@@ -45,7 +45,7 @@ export default {
 
 .main-content {
   padding-top: 1rem;
-  padding-bottom: calc(95px + 2rem);
+  padding-bottom: calc(140px + 2rem);
 }
 
 .main-content a {

@@ -8,11 +8,7 @@ import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import SearchResult from "../components/SearchResult";
 import User from "../components/User";
-import vuetify from 'vuetify'
 
-import('../../node_modules/vuetify/dist/vuetify.min.css');
-
-Vue.use(vuetify);
 Vue.use(Router);
 
 export default new Router({
