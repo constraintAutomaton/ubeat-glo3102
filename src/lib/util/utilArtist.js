@@ -11,13 +11,6 @@ export const getArtistById = async artistId => {
   const result = await apiEngine.getArtistById(artistId);
   if (result.resultCount == 1) {
     let artist = result.results[0];
-
-    artist.highResImage = await apiEngine.getHighResImage(
-      artist.artistName,
-      "artiste",
-      artist.artistName
-    );
-
     return artist;
   } else {
     throw "Failed to fetch artist: " + artistId + ". It does not exist!";
