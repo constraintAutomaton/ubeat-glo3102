@@ -89,7 +89,7 @@ export default {
           this.$cookie.set("name", rep.name);
           this.$cookie.set("id", rep.id);
           M.toast({ html: "Login successful, welcome", classes: "rounded" });
-          //window.location.hash = "/";
+          window.location.hash = "/";
         } else {
           M.toast({
             html: "Username or password are wrong!",
