@@ -37,8 +37,8 @@ export default {
 </script>
 
 <style scoped>
-  .listTitle a:hover {
-    cursor: default;
-    color: var(--darkGrey);
-  }
+.listTitle a:hover {
+  cursor: default;
+  color: var(--darkGrey);
+}
 </style>
