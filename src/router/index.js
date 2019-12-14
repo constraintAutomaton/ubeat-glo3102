@@ -7,6 +7,7 @@ import Playlists from "@/components/Playlists";
 import SignUp from "../components/SignUp";
 import Login from "../components/Login";
 import SearchResult from "../components/SearchResult";
+import ArtistSearch from "../components/ArtistSearch";
 import User from "../components/User";
 
 Vue.use(Router);
@@ -55,6 +56,11 @@ export default new Router({
       path: "/searchResult/:query?",
       name: "SearchResult",
       component: SearchResult
+    },
+    {
+      path: "/artistSearch/:query?",
+      name: "ArtistSearch",
+      component: ArtistSearch
     },
     {
       path: "/users/:id?",

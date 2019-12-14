@@ -10,7 +10,7 @@
       :albumList="albumResults.results"
       :title="'Found Albums'"
     />
-    <users-list v-if="" :user-list="usersResults.results"></users-list>
+    <users-list v-if="true" :user-list="usersResults.results"></users-list>
   </div>
 </template>
 

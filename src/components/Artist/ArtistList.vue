@@ -4,21 +4,24 @@
       <a>{{ title }}</a>
     </h2>
 
-    <ul class="listAlbum flexContent row">
-      <ArtistItem
-        v-for="artist in artistList"
-        :key="artist.artistId"
-        :artistId="artist.artistId"
-        :artistName="artist.artistName"
-        :genre="artist.genre"
-        :artistImage="artist.artistImage"
-      ></ArtistItem>
-    </ul>
+    <Pagination ref="paginationTop" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange"/>
+      <ul class="listAlbum flexContent row">
+        <ArtistItem
+          v-for="artist in displayedList"
+          :key="artist.artistId"
+          :artistId="artist.artistId"
+          :artistName="artist.artistName"
+          :genre="artist.genre"
+          :artistImage="artist.artistImage"
+        ></ArtistItem>
+      </ul>
+    <Pagination ref="paginationBottom" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange" />
   </div>
 </template>
 
 <script>
 import ArtistItem from "../Artist/ArtistItem";
+import Pagination from "../Pagination";
 export default {
   props: {
     artistList: {
@@ -71,10 +74,52 @@ export default {
     title: {
       type: String,
       default: "Artists"
+    },
+    pagination: {
+      type: Boolean,
+      default: false
+    },
+    itemPerPage: {
+      type: Number,
+      default: 6
+    }
+  },
+  data() {
+    return {
+      currentPage: 0
+    }
+  },
+  computed: {
+    displayedList() {
+      if(!this.pagination)
+        return this.artistList;
+      
+      const begin = this.currentPage * this.itemPerPage;
+      let end = begin + this.itemPerPage;
+
+      if(end > this.artistList.length)
+        end = this.artistList.length;
+
+      return this.artistList.slice(begin, end);
+    },
+    pageCount() {
+      if(this.artistList.length % this.itemPerPage == 0)
+        return this.artistList.length / this.itemPerPage;
+      
+      return Math.floor(this.artistList.length / this.itemPerPage) + 1;
+    }
+  },
+  methods: {
+    pageChange(pageNumber) {
+      this.currentPage = pageNumber - 1;
+
+      this.$refs.paginationBottom.setCurrentPage(pageNumber);
+      this.$refs.paginationTop.setCurrentPage(pageNumber);
     }
   },
   components: {
-    ArtistItem
+    ArtistItem,
+    Pagination
   },
   name: "ArtistList"
 };
