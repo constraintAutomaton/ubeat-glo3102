@@ -11,7 +11,7 @@
 
 <script>
 import { mixin as clickaway } from 'vue-clickaway';
-import { getPlaylists, addTrackToPlaylist } from "../../lib/util/utilPlaylist";
+import { getPlaylistsByUserId, addTrackToPlaylist } from "../../lib/util/utilPlaylist";
 
 export default {
     mixins: [ clickaway ],
@@ -25,7 +25,7 @@ export default {
         async addSongToPlaylist() {
         const addToPlaylistBoxUl = document.getElementById('addToPlaylistBoxUl');
         const addSongToPlaylistButton = document.getElementById('addSongIcon');
-        let playlists = await getPlaylists();
+        let playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
         playlists.forEach((e) => {
             const li = document.createElement('li');
             li.classList.add('playlistElem');

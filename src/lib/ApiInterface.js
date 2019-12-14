@@ -94,8 +94,7 @@ export default class ApiInterface {
     let rep;
     p_query = p_query.replace(new RegExp(" ", "g"), "%20");
     if (p_type === "users") {
-      console.log("inside users query");
-      console.log(p_query);
+
       rep = await fetch(
         `${this.rootUrlUbeat}search/${p_type}?q=${p_query}`,
         param
@@ -160,7 +159,6 @@ export default class ApiInterface {
     return await this._getAlbumOrArtistById("artists", p_id, "albums");
   }
   async getHighResImage(p_query, p_type) {
-    console.log(p_query);
     const param = {
       method: "POST",
       headers: {
