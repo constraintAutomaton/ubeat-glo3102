@@ -11,13 +11,6 @@ export const getArtistById = async artistId => {
   const result = await apiEngine.getArtistById(artistId);
   if (result.resultCount == 1) {
     let artist = result.results[0];
-
-    artist.highResImage = await apiEngine.getHighResImage(
-      artist.artistName,
-      "artiste",
-      artist.artistName
-    );
-
     return artist;
   } else {
     throw "Failed to fetch artist: " + artistId + ". It does not exist!";
@@ -70,4 +63,10 @@ export const getAlbumInfo = async (p_id, nb_album = -1) => {
   });
 
   return formated;
+};
+export const batchHighResAlbumImage = async p_query => {
+  if (p_query.lenght != 0) {
+    return apiEngine.getHighResImage(p_query, "album");
+  }
+  return { results: [] };
 };

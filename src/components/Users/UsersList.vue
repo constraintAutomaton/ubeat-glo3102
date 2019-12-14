@@ -4,27 +4,29 @@
       <a>Utilisateurs</a>
     </h2>
 
-    <ul class="listAlbum flexContent row">
-      <div
+    <ul>
+        <UserItem
         v-for="user in userList"
         :key="user.id"
-      >
-        {{user.name}}
-
-      </div>
+        :user="user"
+      ></UserItem>
     </ul>
   </div>
 </template>
 
 <script>
-	export default {
-		name: "UsersList",
-	  props:{
-		  userList:{
-			  type: Array
-		  }
-	  }
-	}
+import UserItem from "./UserItem";
+export default {
+  name: "UsersList",
+  props:{
+    userList:{
+      type: Array
+    }
+  },
+  components: {
+    UserItem
+  }
+}
 
 </script>
 

@@ -271,6 +271,7 @@ export default {
     search: async function() {
       const query = this.searchText.replace(new RegExp(" ", "g"), "%20");
       router.push({ name: 'SearchResult', params: { query: query }});
+      router.go();
       this.searchText = "";
       this.toggleSearch();
     },

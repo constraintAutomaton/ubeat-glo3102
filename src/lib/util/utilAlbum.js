@@ -13,11 +13,6 @@ export const getAlbumById = async albumId => {
     let album = result.results[0];
 
     album.trackList = await getTracklist(album.collectionId);
-    album.highResImage = await apiEngine.getHighResImage(
-      album.collectionName,
-      "album",
-      album.artistName
-    );
 
     return album;
   } else {
@@ -41,13 +36,9 @@ export const getAlbumInfo = async p_album => {
     linkItune: result.collectionViewUrl,
     trackList: await getTracklist(result.collectionId)
   };
-  const highResImage = await apiEngine.getHighResImage(
-    p_album,
-    "album",
-    formated.artist
-  );
 
-  formated["image"] = highResImage != "" ? highResImage : result.artworkUrl100;
+  formated["image"] =
+    formated.highResImage != "" ? formated.highResImage : result.artworkUrl100;
   return [formated, result.collectionId];
 
   //return searchResult;
