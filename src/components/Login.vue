@@ -73,18 +73,11 @@ export default {
 
   methods: {
     login: async function(even) {
-      if (
-        this.$v.password.required === true &&
-        this.$v.email.required === true &&
-        this.$v.email.email === true
-      ) {
+      if (!this.$v.password.$error && !this.$v.email.$error) {
         const engine = new ApiInterface(false);
         const rep = await engine.login(this.email, this.password);
-        console.log(rep);
-        console.log(rep.token);
         if (rep.data !== "erreur de connexion") {
           this.$cookie.set("token", rep.token);
-          console.log(this.$cookie.get("name"));
           this.$cookie.set("email", rep.email);
           this.$cookie.set("name", rep.name);
           this.$cookie.set("id", rep.id);
