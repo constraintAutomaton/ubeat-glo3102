@@ -96,7 +96,7 @@ export const deleteTrack = async (playlistId, songId) => {
   });
 };
 
-export const addPlaylist = async (playlistName) => {
+export const addPlaylist = async (userEmail, playlistName) => {
   const param = {
     method: "POST",
     headers: {
@@ -105,7 +105,7 @@ export const addPlaylist = async (playlistName) => {
     },
     body: JSON.stringify({
       "name" : playlistName,
-      "owner" : apiEngine.userTest.email
+      "owner" : userEmail
     })
   };
 
