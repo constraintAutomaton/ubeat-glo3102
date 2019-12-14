@@ -13,6 +13,7 @@
         {{showAllBio===false?artistInfo.bio.substring(0,maxStringBio):artistInfo.bio}}
         <span
           v-if="artistInfo.bio!=='' && showAllBio===false"
+          v-on:click="showBio"
         >[...]</span>
       </p>
       <button v-on:click="showBio" v-if="artistInfo.bio!==''">Show more</button>

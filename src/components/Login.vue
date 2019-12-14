@@ -4,18 +4,37 @@
       <h3>Login</h3>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" v-model="email" class="validate" required="" aria-required="true">
+          <input
+            id="email"
+            type="email"
+            v-model="email"
+            class="validate"
+            required
+            aria-required="true"
+          />
           <label for="email">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" v-model="password" class="validate" required="" aria-required="true">
+          <input
+            id="password"
+            type="password"
+            v-model="password"
+            class="validate"
+            required
+            aria-required="true"
+          />
           <label for="password">Password</label>
         </div>
       </div>
       <div class="input-field col s12">
-        <button class="btn waves-effect waves-light" type="submit" name="action" @click="login">LOGIN</button>
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+          @click="login"
+        >LOGIN</button>
       </div>
       <div>
         <p>
@@ -40,25 +59,28 @@ export default {
     };
   },
   methods: {
-      login: async function(even){
-          console.log(even);
-          const engine =new ApiInterface(false);
-          await engine.login(this.email, this.password).then((rep)=>{
-              console.log(rep.token);
-              this.$cookie.set("token", rep.token);
-              console.log(this.$cookie.get("token"));
-              this.$cookie.set("email", rep.email);
-              this.$cookie.set("name", rep.name);
-              this.$cookie.set("id", rep.id);
-              M.toast({html: 'Login successful, welcome', classes: 'rounded'});
-              setTimeout(() => {
-                  window.location.hash = '/';
-                  location.reload(true);
-              }, 1000);
-          }).catch(() => {
-              M.toast({html: 'Username and password are wrong!', classes: 'rounded'});
-          });
-      },
+    login: async function(even) {
+      console.log(even);
+      const engine = new ApiInterface(false);
+      const rep = await engine.login(this.email, this.password);
+      console.log(rep);
+      console.log(rep.token);
+      if (rep.data !== "erreur de connexion") {
+        this.$cookie.set("token", rep.token);
+        console.log(this.$cookie.get("token"));
+        this.$cookie.set("email", rep.email);
+        this.$cookie.set("name", rep.name);
+        this.$cookie.set("id", rep.id);
+        M.toast({ html: "Login successful, welcome", classes: "rounded" });
+      } else {
+        M.toast({
+          html: "Username and password are wrong!",
+          classes: "rounded"
+        });
+      }
+
+      //window.location.hash = "/";
+    }
   }
 };
 </script>
