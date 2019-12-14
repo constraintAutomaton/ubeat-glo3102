@@ -24,7 +24,11 @@
 <script>
 import ArtistInfo from "./Artist/ArtistInfo.vue";
 import AlbumOfArtist from "./Artist/AlbumOfArtist.vue";
-import { getArtistById, getAlbumOfArtist } from "../lib/util/utilArtist";
+import {
+  getArtistById,
+  getAlbumOfArtist,
+  batchHighResAlbumImage
+} from "../lib/util/utilArtist";
 
 export default {
   data() {
@@ -46,11 +50,13 @@ export default {
     async loadArtist() {
       this.error = this.artistInfo = null;
       this.loading = true;
-
+      let albumNames = [];
       try {
         let artist = await getArtistById(this.$route.params.id);
         artist.albums = await getAlbumOfArtist(this.$route.params.id);
-        console.log(artist.bio);
+        albumNames = artist.albums.map(el => {
+          return el.collectionName;
+        });
         this.artistInfo = artist;
         this.loading = false;
         this.error = false;
@@ -58,6 +64,17 @@ export default {
         this.error = error;
         this.loading = false;
       }
+      let arrayHighResImage = await batchHighResAlbumImage(albumNames);
+      arrayHighResImage = arrayHighResImage.results;
+      for (let i in this.artistInfo.albums) {
+        const image =
+          arrayHighResImage[i].highResImage == "" 
+            ? this.artistInfo.albums[i].artworkUrl100
+            : arrayHighResImage[i].highResImage;
+        this.artistInfo.albums[i].artworkUrl100 = image;
+      }
+
+      console.log(this.artistInfo.albums);
     },
     showBio() {
       this.showAllBio = !this.showAllBio;

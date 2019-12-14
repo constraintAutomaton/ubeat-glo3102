@@ -160,15 +160,16 @@ export default class ApiInterface {
     return await this._getAlbumOrArtistById("artists", p_id, "albums");
   }
   async getHighResImage(p_query, p_type) {
+    console.log(p_query);
     const param = {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json",
-        body: JSON.stringify({
-          query: p_query
-        })
-      }
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        query: p_query
+      })
     };
     const rep = await fetch(
       `${this.rootUrlUbeat}search/extra/${p_type}`,
@@ -179,7 +180,7 @@ export default class ApiInterface {
       return await rep.json();
     } else {
       console.error(rep);
-      return {};
+      return { results: [] };
     }
   }
 }

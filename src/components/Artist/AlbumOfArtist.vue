@@ -20,6 +20,7 @@
 <script>
 import AlbumsItem from "./AlbumsItem.vue";
 export default {
+
   props: {
     albumList: {
       type: Array,
@@ -82,8 +83,8 @@ export default {
 </script>
 
 <style scoped>
-  .listTitle a:hover {
-    cursor: default;
-    color: var(--darkGrey);
-  }
+.listTitle a:hover {
+  cursor: default;
+  color: var(--darkGrey);
+}
 </style>

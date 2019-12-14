@@ -64,3 +64,9 @@ export const getAlbumInfo = async (p_id, nb_album = -1) => {
 
   return formated;
 };
+export const batchHighResAlbumImage = async p_query => {
+  if (p_query.lenght != 0) {
+    return apiEngine.getHighResImage(p_query, "album");
+  }
+  return { results: [] };
+};
