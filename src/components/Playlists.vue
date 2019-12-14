@@ -19,7 +19,7 @@
 
 <script>
 import {
-  getPlaylists,
+  getPlaylistsByUserId,
   addPlaylist,
   deletePlaylist
 } from "./../lib/util/utilPlaylist";
@@ -50,11 +50,11 @@ export default {
   computed: {},
   methods: {
     async refreshPlaylists() {
-      this.playlists = await getPlaylists();
+      this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
       this.playlists = _.sortBy(this.playlists, ["id"]);
     },
     async newPlaylist() {
-      const response = await addPlaylist("New Playlist");
+      const response = await addPlaylist(this.$cookie.get('email'), "New Playlist");
       await this.refreshPlaylists();
       this.modifyPlaylistById(response.id);
     },

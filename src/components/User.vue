@@ -135,6 +135,7 @@ export default {
   }
   .userFriends li {
     margin-bottom: 1rem;
+    padding: 0.1rem;
   }
   @media screen and (max-width: 1024px) {
     .userFriends li {

@@ -21,7 +21,7 @@
 
 <script>
 import {
-  getPlaylists,
+  getPlaylistsByUserId,
   addTrackToPlaylist,
   deleteTrack
 } from "../../lib/util/utilPlaylist";
@@ -99,7 +99,7 @@ export default {
       });
     },
     async loadPlaylists() {
-      this.playlists = await getPlaylists();
+      this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
       this.playlists = _.sortBy(this.playlists, ["id"]);
     },
     async saveToPlaylist(event) {
