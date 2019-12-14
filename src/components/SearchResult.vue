@@ -8,6 +8,7 @@
     <ArtistList
       :artistList="artistsResults.results"
       :title="'Found Artists'"
+      :link="'/artistSearch/' + this.$route.params.query"
     />
     <AlbumOfArtist
       :albumList="albumResults.results"
