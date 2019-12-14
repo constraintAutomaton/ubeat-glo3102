@@ -8,12 +8,14 @@
         :genre="artistInfo.primaryGenreName"
         :artistLink="artistInfo.artistLinkUrl"
       ></ArtistInfo>
-      <h1>Biographie</h1>
+      <h1 v-if="artistInfo.bio!==''">Biographie</h1>
       <p v-if!="loading">
         {{showAllBio===false?artistInfo.bio.substring(0,maxStringBio):artistInfo.bio}}
-        <span v-if="artistInfo.bio.length===0 || showAllBio===false">[...]</span>
+        <span
+          v-if="artistInfo.bio!=='' && showAllBio===false"
+        >[...]</span>
       </p>
-      <button v-on:click="showBio" v-if!="artistInfo.bio.length===0">Show more</button>
+      <button v-on:click="showBio" v-if="artistInfo.bio!==''">Show more</button>
       <AlbumOfArtist title="Albums" :albumList="artistInfo.albums"></AlbumOfArtist>
     </div>
     <div v-if="error">{{ error }}</div>
@@ -48,7 +50,7 @@ export default {
       try {
         let artist = await getArtistById(this.$route.params.id);
         artist.albums = await getAlbumOfArtist(this.$route.params.id);
-        console.log(artist);
+        console.log(artist.bio);
         this.artistInfo = artist;
         this.loading = false;
         this.error = false;
