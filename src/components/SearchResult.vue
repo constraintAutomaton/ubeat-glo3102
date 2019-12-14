@@ -1,5 +1,8 @@
 <template>
   <div class="mainContainer container">
+    <div v-if="loading">
+      Loading...
+    </div>
     <h2 class="listTitle"><a>Found Tracks</a></h2>
     <Tracks :trackList="trackResults.results"></Tracks>
     <ArtistList
@@ -10,7 +13,7 @@
       :albumList="albumResults.results"
       :title="'Found Albums'"
     />
-    <users-list v-if="" :user-list="usersResults.results"></users-list>
+    <users-list :userList="usersResults.results"></users-list>
   </div>
 </template>
 
@@ -27,6 +30,7 @@ const apiEngine = new ApiInterface(isSecure);
 export default {
   data() {
     return {
+      loading: true,
       trackResults: [],
       albumResults: [],
       artistsResults: [],
@@ -47,7 +51,7 @@ export default {
       });
       this.usersResults = await apiEngine.searchUsers(query, 6);
 
-		// debugger;
+      this.loading = false;
     }
   },
   components: {
