@@ -1,35 +1,33 @@
 <template>
-
   <div id="signupPage" class="container">
     <div id="signup-form">
-      <h3>Signup</h3>
-      <p>
-        <label for="username"> Enter your username</label>
-        <input type="text" id="name" name="name" v-model="inputName" required>
-      </p>
-      <p>
-        <label for="email"> Enter your email adress </label>
-        <input type="email" id="email" name="email" v-model="inputEmail" required>
-        <p> test {{inputEmail}}</p>
-      </p>
-      <p>
-        <label for="password"> Enter your password</label>
-        <input type="password" id="password" name="password" v-model="inputPassword" required>
-      </p>
-      <p>
-        <label for="password"> Repeat your Password</label>
-        <input type="password" id="repeatPassword" name="inputRepeatPasseword" v-model="inputRepeatPassword" required>
-      </p>
-      <div >
-        <button id="signupBtn" v-on:click="signup">SIGNUP</button>
+      <h3>Signup</h3><div class="row">
+      <div class="input-field col s12">
+        <input id="name" type="text" v-model="inputName" class="validate">
+        <label for="name">Enter your username</label>
       </div>
-
-      <v-snackbar
-        :color="color"
-        v-model="snackbar"
-      > {{snackText}}
-        <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
-      </v-snackbar>
+    </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" v-model="inputEmail" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" v-model="inputPassword" data-length="10" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="inputRepeatPassword" type="password" v-model="inputRepeatPassword" class="validate">
+          <label for="password">Repeat password</label>
+        </div>
+      </div>
+      <div >
+        <button class="btn waves-effect waves-light" type="submit" name="signup" v-on:click="signup">SIGNUP</button>
+      </div>
     </div>
   </div>
 </template>
@@ -51,25 +49,23 @@ import ApiInterface from "./../lib/ApiInterface";
         },
         methods: {
             signup: async function(event){
-
-
                 if(this.inputPassword===this.inputRepeatPassword){
                     console.log(event);
-                    console.log("test");
-
+                    //console.log("test");
                     const engine =new ApiInterface(false);
-                    console.log(this.inputName,this.inputEmail,this.inputPassword);
-                    //const rep = await engine.signup(this.inputName, this.inputEmail, this.inputPassword);
-                    //console.log(rep);
+                    //console.log(this.inputName,this.inputEmail,this.inputPassword);
                     await engine.signup(this.inputName, this.inputEmail, this.inputPassword).then(() =>{
+                        M.toast({html: 'Successful sign up, welcome', classes: 'rounded'});
                         setTimeout(()=>{
                             window.location.hash='/login';
-                        }, 1000);
+                        },2000);
+                    }).catch(() => {
+                        M.toast({html: 'Sign up failed!', classes: 'rounded'});
                     });
-
+                }else {
+                    M.toast({html: 'Passwords do not match', classes: 'rounded'});
+                }
             }
-
-        }
     }
     }
 </script>

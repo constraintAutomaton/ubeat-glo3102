@@ -69,7 +69,7 @@
                 <li>
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
-                      build
+                      account_balance
                     </i>
                     Sign Up
                   </router-link>
@@ -77,7 +77,7 @@
                 <li>
                   <router-link :to="loginPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
-                      build
+                      account_box
                     </i>
                     Login
                   </router-link>
@@ -154,7 +154,7 @@
       <li>
         <router-link class="sidenav-close" :to="signupPage">
           <i class="material-icons">
-            lock
+            account_balance
           </i>
           Sign Up
         </router-link>
@@ -162,7 +162,7 @@
       <li>
         <router-link class="sidenav-close" :to="loginPage">
           <i class="material-icons">
-            lock
+            account_box
           </i>
           Login
         </router-link>

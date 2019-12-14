@@ -2,25 +2,27 @@
   <div id="loginPage" class="container">
     <div id="login-form">
       <h3>Login</h3>
-      <p>
-        <label for="email">Votre Adresse email</label>
-        <input type="email" id="email" name="inputEmail" v-model="email" required />
-      </p>
-      <p>
-        <label for="password">Votre Adresse password</label>
-        <input type="password" id="password" name="inputPasseword" v-model="password" required />
-      </p>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" v-model="email" class="validate" required="" aria-required="true">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" v-model="password" class="validate" required="" aria-required="true">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="input-field col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action" @click="login">LOGIN</button>
+      </div>
       <div>
-        <button v-on:click="login">Login</button>
         <p>
           First time user?
           <router-link to="/signup">Register</router-link>
         </p>
       </div>
-      <v-snackbar :color="color" v-model="snackbar">
-        {{snackText}}
-        <v-btn dark flat @click.native="snackbar = false">Close</v-btn>
-      </v-snackbar>
     </div>
   </div>
 </template>
@@ -30,36 +32,33 @@
  * email=sonkeng%40gmail.com&name=sonkeng&password=sonkeng
  */
 import ApiInterface from "../lib/ApiInterface";
-import Cookies from "js-cookies";
 export default {
   data() {
     return {
-      snackText: "",
-      snackbar: false,
-      color: "",
       email: "",
       password: ""
     };
   },
   methods: {
-    login: async function(even) {
-      console.log(even);
-      const engine = new ApiInterface(false);
-      const rep = await engine.login(this.email, this.password);
-      console.log(rep.token);
-      this.$cookie.set("token", rep.token);
-      console.log(this.$cookie.get("token"));
-      this.$cookie.set("email", rep.email);
-      this.$cookie.set("name", rep.name);
-      this.$cookie.set("id", rep.id);
-      //console.log(rep.name);
-      //console.log(rep.email);
-      //console.log(rep.token);
-      setTimeout(() => {
-        window.location.hash = "/";
-        location.reload(true);
-      }, 1000);
-    }
+      login: async function(even){
+          console.log(even);
+          const engine =new ApiInterface(false);
+          await engine.login(this.email, this.password).then((rep)=>{
+              console.log(rep.token);
+              this.$cookie.set("token", rep.token);
+              console.log(this.$cookie.get("token"));
+              this.$cookie.set("email", rep.email);
+              this.$cookie.set("name", rep.name);
+              this.$cookie.set("id", rep.id);
+              M.toast({html: 'Login successful, welcome', classes: 'rounded'});
+              setTimeout(() => {
+                  window.location.hash = '/';
+                  location.reload(true);
+              }, 1000);
+          }).catch(() => {
+              M.toast({html: 'Username and password are wrong!', classes: 'rounded'});
+          });
+      },
   }
 };
 </script>
