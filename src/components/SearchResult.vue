@@ -13,7 +13,7 @@
       :albumList="albumResults.results"
       :title="'Found Albums'"
     />
-    <users-list :userList="usersResults.results"></users-list>
+    <users-list :userList="usersResults"></users-list>
   </div>
 </template>
 
