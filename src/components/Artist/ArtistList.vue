@@ -1,7 +1,8 @@
 <template>
   <div class="mainContainer">
     <h2 class="listTitle">
-      <a>{{ title }}</a>
+      <router-link v-if="link !== undefined" :to="'/artistSearch/' + this.$route.params.query">{{ title }}</router-link>
+      <span v-else>{{ title }}</span>
     </h2>
 
     <Pagination ref="paginationTop" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange"/>
@@ -38,6 +39,10 @@ export default {
     itemPerPage: {
       type: Number,
       default: 6
+    },
+    link: {
+      type: String,
+      default: undefined
     }
   },
   data() {
@@ -82,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.listTitle a:hover {
+.listTitle span:hover {
   cursor: default;
   color: var(--darkGrey);
 }

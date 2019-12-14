@@ -5,7 +5,11 @@
       <a>Found Tracks</a>
     </h2>
     <Tracks :trackList="trackResults.results"></Tracks>
-    <ArtistList :artistList="artistsResults.results" :title="'Found Artists'" />
+    <ArtistList
+      :artistList="artistsResults.results"
+      :title="'Found Artists'"
+      :link="'/artistSearch/' + this.$route.params.query"
+    />
     <AlbumOfArtist :albumList="albumResults.results" :title="'Found Albums'" />
     <users-list :userList="usersResults"></users-list>
   </div>
