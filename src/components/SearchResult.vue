@@ -1,5 +1,8 @@
 <template>
   <div class="mainContainer container">
+    <div v-if="loading">
+      Loading...
+    </div>
     <h2 class="listTitle"><a>Found Tracks</a></h2>
     <Tracks :trackList="trackResults.results"></Tracks>
     <ArtistList
@@ -27,6 +30,7 @@ const apiEngine = new ApiInterface(isSecure);
 export default {
   data() {
     return {
+      loading: true,
       trackResults: [],
       albumResults: [],
       artistsResults: [],
@@ -46,6 +50,8 @@ export default {
         artist.artistImage = artist.highResImage;
       });
       this.usersResults = await apiEngine.searchUsers(query, 6);
+
+      this.loading = false;
     }
   },
   components: {
