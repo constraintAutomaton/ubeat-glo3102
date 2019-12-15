@@ -26,7 +26,7 @@ export default {
   created()
   {
     router.beforeEach((to, from, next) => {
-      const loggedId = this.$cookie.get("id");
+      const loggedId = this.$cookie.get("token");
       if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!loggedId) {
           next({ name: 'Login' });
@@ -37,6 +37,8 @@ export default {
         next();
       }
     });
+
+    router.push({ name: 'Home'});
   }
 };
 </script>

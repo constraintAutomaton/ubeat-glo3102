@@ -62,6 +62,9 @@ export default {
       currentUser: undefined
     };
   },
+  beforeRouteUpdate(to) {
+    this.search(to.params.query);
+  },
   created() {
     const promise = this.loadUser();
     promise.then
