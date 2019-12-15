@@ -1,6 +1,6 @@
 import ApiInterface from "./../ApiInterface";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
 const isSecure2 = true;
@@ -11,15 +11,8 @@ export const createUser = async (name, email, password)=>{
   console.log(rep);
 };
 
-export const getUserById = async userId => {
-  const result = await apiEngine.getUserById(userId);
-
-  if (result != null) {
-    let user = result;
-    return user;
-  } else {
-    throw "Failed to fetch user: " + userId + ". It does not exist!";
-  }
+export const getUserById = (userId, token) => {
+  return apiEngine.getUserById(userId, token);
 };
 
 export const followFriend = async (friendId, token) => {
@@ -28,7 +21,7 @@ export const followFriend = async (friendId, token) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: token
+        "Authorization": token
       },
       body: JSON.stringify({
         "id" : friendId
@@ -50,8 +43,8 @@ export const deleteFriend = async (friendId, token) => {
       {
         method: "DELETE",
         headers: {
-            Authorization: token
-          },
+          "Authorization": token
+        },
       }
     ).catch(() => {
       console.error("Unable to delete this friend.");

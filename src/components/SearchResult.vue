@@ -62,6 +62,9 @@ export default {
       currentUser: undefined
     };
   },
+  beforeRouteUpdate(to) {
+    this.search(to.params.query);
+  },
   created() {
     const promise = this.loadUser();
     promise.then;
@@ -120,7 +123,7 @@ export default {
     },
     async loadUser() {
       try {
-        this.currentUser = await getUserById(this.$cookie.get("id"));
+        this.currentUser = await getUserById(this.$cookie.get("id"), this.$cookie.get("token"));
       } catch (ex) {}
     }
   },

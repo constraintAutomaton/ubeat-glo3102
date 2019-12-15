@@ -5,7 +5,6 @@
 import formurlencoded from "form-urlencoded";
 export default class ApiInterface {
   constructor(isSecure = true) {
-    this.isSecure = isSecure;
     this.rootUrlUbeat = "https://ubeateq9.herokuapp.com/";
     if (!isSecure) {
       this.rootUrlUbeat += "unsecure/";
@@ -52,45 +51,57 @@ export default class ApiInterface {
       return { data: rep };
     }
   }
-  async getUserById(p_id) {
-    return await this.users(p_id);
-  }
-  async users(p_id) {
+  async getUserById(p_id, token = "") {
     const param = {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": token
       }
     };
-    const rep = await fetch(`${this.rootUrlUbeat}users/${p_id}`, param);
-    if (rep.ok) {
-      return rep.json();
-    } else {
-      console.error(rep);
-      return {};
-    }
-  }
-  async search(p_query, p_type = "", p_limite = 10) {
-    const param = {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    };
-    let rep;
-    p_query = p_query.replace(new RegExp(" ", "g"), "%20");
-    rep = await fetch(
-      `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+
+
+    return fetch(
+      `${this.rootUrlUbeat}users/${p_id}`,
       param
-    );
-    if (rep.ok) {
-      return rep.json();
-    } else {
-      console.error(rep);
-      return {};
-    }
+    )
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
+    })
+    .catch(() => {
+      console.error("unable to get user");
+    });
+  }
+
+  async search(p_query, p_type = "", p_limite = 10, token = "") {
+    const param = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Authorization": token
+      }
+    };
+    
+    p_query = p_query.replace(new RegExp(" ", "g"), "%20");
+    return fetch(`${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+      param
+    )
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
+    })
+    .catch(() => {
+      console.error("unable to get user");
+    });
   }
   async searchAlbum(p_query, p_limite = 10) {
     return await this.search(p_query, "albums", p_limite);
@@ -104,27 +115,31 @@ export default class ApiInterface {
   async searchUsers(p_query, p_limite = 10) {
     return await this.search(p_query, "users", p_limite);
   }
-  async _getAlbumOrArtistById(p_type, p_id, p_getTracksOrAlbum = "") {
+  async _getAlbumOrArtistById(p_type, p_id, p_getTracksOrAlbum = "", token = "") {
     const param = {
       method: "GET",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": token
       }
     };
     p_getTracksOrAlbum =
       p_getTracksOrAlbum != "" ? p_getTracksOrAlbum + "/" : "";
-    const rep = await fetch(
-      `${this.rootUrlUbeat}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
-      param
-    );
 
-    if (rep.ok) {
-      return await rep.json();
-    } else {
-      console.error(rep);
-      return {};
-    }
+    return fetch(`${this.rootUrlUbeat}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
+      param
+    )
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
+    })
+    .catch(() => {
+      console.error("unable to get user");
+    });
   }
   async getAlbumById(p_id) {
     return await this._getAlbumOrArtistById("albums", p_id);
