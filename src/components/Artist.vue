@@ -12,11 +12,11 @@
       <p v-if="!loading">
         {{showAllBio===false?artistInfo.bio.substring(0,maxStringBio):artistInfo.bio}}
         <span
-          v-if="artistInfo.bio!=='' && showAllBio===false"
+          v-if="artistInfo.bio.length>maxStringBio && showAllBio===false"
           v-on:click="showBio"
         >[...]</span>
       </p>
-      <button v-on:click="showBio" v-if="artistInfo.bio!==''">Show more</button>
+      <button v-on:click="showBio" v-if="artistInfo.bio.length>maxStringBio">Show more</button>
       <AlbumOfArtist title="Albums" :albumList="artistInfo.albums"></AlbumOfArtist>
     </div>
     <div v-if="error">{{ error }}</div>
@@ -38,7 +38,7 @@ export default {
       loading: true,
       error: null,
       maxStringBio: 1100,
-      showAllBio: false
+      showAllBio: false,
     };
   },
   watch: {
