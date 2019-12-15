@@ -1,9 +1,10 @@
 <template>
-    <ul>
-        <li>
-        {{user.name}}
-        </li>
-    </ul>
+  <li>
+    <router-link :to="{ name: 'User', params: { id: user.id }}">
+      {{ user.name }}
+    </router-link>
+
+  </li>
 </template>
 
 <script>
