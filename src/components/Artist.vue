@@ -9,7 +9,7 @@
         :artistLink="artistInfo.artistLinkUrl"
       ></ArtistInfo>
       <h1 v-if="artistInfo.bio!==''">Biographie</h1>
-      <p v-if!="loading">
+      <p v-if="!loading">
         {{showAllBio===false?artistInfo.bio.substring(0,maxStringBio):artistInfo.bio}}
         <span
           v-if="artistInfo.bio!=='' && showAllBio===false"
@@ -69,7 +69,7 @@ export default {
       arrayHighResImage = arrayHighResImage.results;
       for (let i in this.artistInfo.albums) {
         const image =
-          arrayHighResImage[i].highResImage == "" 
+          arrayHighResImage[i].highResImage == ""
             ? this.artistInfo.albums[i].artworkUrl100
             : arrayHighResImage[i].highResImage;
         this.artistInfo.albums[i].artworkUrl100 = image;

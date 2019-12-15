@@ -61,8 +61,6 @@
 import AddToPlaylistsDialog from "./Playlist/AddToPlaylistsDialog";
 import { Howl } from "howler";
 import WaveSurfer from "wavesurfer.js";
-import TimelinePlugin from "wavesurfer.js/dist/plugin/wavesurfer.timeline.min.js";
-import MinimapPlugin from "wavesurfer.js/dist/plugin/wavesurfer.minimap.min.js";
 
 export default {
   name: "PlayContainer.vue",
@@ -104,12 +102,10 @@ export default {
       this.artist = track.artistName;
       this.albumId = track.collectionId;
       this.album = track.collectionName;
-      console.log("LINK", this.songLink);
       this.song = new Howl({
         src: [this.songLink],
         onplay: this.updateSongProgress
       });
-      console.log("SONG", this.song);
       if (typeof this.wavesurfer !== "undefined") {
         this.wavesurfer.destroy();
       }
