@@ -111,7 +111,7 @@ export default {
       }
       this.wavesurfer = WaveSurfer.create({
         container: "#waveform",
-        interact: "false",
+        interact: false,
         waveColor: "#383842",
         height: 40,
         progressColor: "#8fd1d9",
