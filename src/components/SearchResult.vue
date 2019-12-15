@@ -16,7 +16,11 @@
       :title="'Found Albums'"
       :link="'/albumSearch/' + this.$route.params.query"
     />
-    <users-list :userList="usersResults"></users-list>
+    <users-list
+      :userList="usersResults"
+      :title="'Found Users'"
+      :link="'/userSearch/' + this.$route.params.query"
+    />
   </div>
 </template>
 

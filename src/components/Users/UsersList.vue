@@ -1,7 +1,8 @@
 <template>
   <div class="mainContainer">
     <h2 class="listTitle">
-      <a>Utilisateurs</a>
+      <router-link v-if="link !== undefined" :to="link">{{ title }}</router-link>
+      <span v-else>{{ title }}</span>
     </h2>
 
     <ul>
@@ -21,6 +22,14 @@ export default {
   props:{
     userList:{
       type: Array
+    },
+    title: {
+      type: String,
+      default: "Users"
+    },
+    link: {
+      type: String,
+      default: undefined
     }
   },
   components: {
@@ -31,5 +40,8 @@ export default {
 </script>
 
 <style scoped>
-
+.listTitle span:hover {
+  cursor: default;
+  color: var(--darkGrey);
+}
 </style>
