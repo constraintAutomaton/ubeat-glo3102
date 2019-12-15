@@ -34,56 +34,89 @@ export default new Router({
     },
     {
       path: "/artist",
-      redirect: "/"
+      redirect: "/",
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/artist/:id?",
       name: "Artist",
-      component: Artist
+      component: Artist,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/album",
-      redirect: "/"
+      redirect: "/",
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/album/:id?",
       name: "Album",
-      component: Album
+      component: Album,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/playlists",
       name: "Playlists",
-      component: Playlists
+      component: Playlists,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/searchResult/:query?",
       name: "SearchResult",
-      component: SearchResult
+      component: SearchResult,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/artistSearch/:query?",
       name: "ArtistSearch",
-      component: ArtistSearch
+      component: ArtistSearch,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/albumSearch/:query?",
       name: "AlbumSearch",
-      component: AlbumSearch
+      component: AlbumSearch,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/trackSearch/:query?",
       name: "TrackSearch",
-      component: TrackSearch
+      component: TrackSearch,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/userSearch/:query?",
       name: "UserSearch",
-      component: UserSearch
+      component: UserSearch,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/users/:id?",
       name: "User",
-      component: User
+      component: User,
+      meta: {
+        requiresAuth: true
+      }
     },
   ]
 });
