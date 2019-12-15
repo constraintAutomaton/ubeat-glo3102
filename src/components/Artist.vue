@@ -53,29 +53,42 @@ export default {
       this.loading = true;
       let albumNames = [];
       try {
-        let artist = await getArtistById(this.$route.params.id);
-        artist.albums = await getAlbumOfArtist(this.$route.params.id);
-        albumNames = artist.albums.map(el => {
-          return el.collectionName;
-        });
-        this.artistInfo = artist;
-        this.loading = false;
-        this.error = false;
+        let artist = await getArtistById(this.$route.params.id, this.$cookie.get("token"));
+        if(artist.ok) {
+          let albumsResult = await getAlbumOfArtist(this.$route.params.id, this.$cookie.get("token"));
+          if(albumsResult.ok) {
+            artist.albums = albumsResult;
+            albumNames = artist.albums.map(el => {
+              return el.collectionName;
+            });
+            this.artistInfo = artist;
+            this.error = false;
+          }
+          else {
+            this.error = albumsResult.message;
+          }
+        }
+        else {
+          this.error = artist.message;
+        }
       } catch (error) {
         this.error = error;
-        this.loading = false;
       }
-      let arrayHighResImage = await batchHighResAlbumImage(albumNames);
-      arrayHighResImage = arrayHighResImage.results;
-      for (let i in this.artistInfo.albums) {
-        const image =
-          arrayHighResImage[i].highResImage == ""
-            ? this.artistInfo.albums[i].artworkUrl100
-            : arrayHighResImage[i].highResImage;
-        this.artistInfo.albums[i].artworkUrl100 = image;
-      }
+      this.loading = false;
 
-      console.log(this.artistInfo.albums);
+      if(!this.error) {
+        /*let arrayHighResImage = await batchHighResAlbumImage(albumNames, this.$cookie.get("token"));
+        
+        arrayHighResImage = arrayHighResImage.results;
+        console.log(arrayHighResImage.length + " " + this.artistInfo.albums.length);
+        for (let i in this.artistInfo.albums) {
+          const image =
+            arrayHighResImage[i].highResImage == ""
+              ? this.artistInfo.albums[i].artworkUrl100
+              : arrayHighResImage[i].highResImage;
+          this.artistInfo.albums[i].artworkUrl100 = image;
+        }*/
+      }
     },
     showBio() {
       this.showAllBio = !this.showAllBio;

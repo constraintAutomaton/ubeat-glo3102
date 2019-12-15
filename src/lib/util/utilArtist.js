@@ -1,72 +1,45 @@
 import ApiInterface from "./../ApiInterface";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
-export const getArtistById = async artistId => {
+export const getArtistById = async (artistId, token = "") => {
   if (isNaN(artistId)) {
     throw "The ID specified is not a number";
   }
 
-  const result = await apiEngine.getArtistById(artistId);
+  const result = await apiEngine.getArtistById(artistId, token);
+  if(!result.ok)
+    return result;
+  
   if (result.resultCount == 1) {
     let artist = result.results[0];
+    artist.ok = true;
     return artist;
   } else {
     throw "Failed to fetch artist: " + artistId + ". It does not exist!";
   }
 };
-export const getAlbumOfArtist = async artistId => {
+
+export const getAlbumOfArtist = async (artistId, token = "") => {
   let albums;
-  let resultAlbums = await apiEngine.getArtistAlbumById(artistId);
+  let resultAlbums = await apiEngine.getArtistAlbumById(artistId, token);
+  if(!resultAlbums.ok)
+    return resultAlbums;
+    
   if (resultAlbums.resultCount > 0) {
     const nbAlbum =
       resultAlbums.results.length > 5 ? 5 : resultAlbums.results.length;
     albums = resultAlbums.results.slice(0, nbAlbum);
   }
+  albums.ok = true;
   return albums;
 };
 
-export const getArtistInfo = async p_artist => {
-  const searchResults = await apiEngine.searchArtiste(p_artist, 1);
-  const result = searchResults.results[0];
-  let formated = {
-    artistName: result.artistName,
-    genre: result.primaryGenreName,
-    artistLink: result.artistLinkUrl
-  };
-  const highResImage = await apiEngine.getHighResImage(
-    p_artist,
-    "artiste",
-    p_artist
-  );
-  formated["imgArtist"] = highResImage != "" ? highResImage : "";
-
-  return [formated, result.artistId];
-};
-export const getAlbumInfo = async (p_id, nb_album = -1) => {
-  const searchResults = await apiEngine.getAlbumById(p_id);
-  const results =
-    nb_album === -1
-      ? searchResults.results.splice(1, searchResults.length - 1)
-      : searchResults.results.slice(1, nb_album + 1);
-  const formated = results.map(el => {
-    let index = el.collectionName.search(/(\(|\[)/) - 1; // look for ( or [
-    index = index < 0 ? el.collectionName.length : index;
-
-    return {
-      albumTitle: el.collectionName.substring(0, index),
-      albumImage: el.artworkUrl100,
-      albumYear: new Date(el.releaseDate).getFullYear(),
-      albumId: el.collectionId
-    };
-  });
-
-  return formated;
-};
-export const batchHighResAlbumImage = async p_query => {
+export const batchHighResAlbumImage = async (p_query, token = "") => {
   if (p_query.lenght != 0) {
-    return apiEngine.getHighResImage(p_query, "album");
+    let result = await apiEngine.getHighResImage(p_query, "album", token);
+    return result;
   }
-  return { results: [] };
+  return { ok: false, message: "Query is empty" };
 };

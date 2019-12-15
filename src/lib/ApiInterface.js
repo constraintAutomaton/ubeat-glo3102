@@ -153,27 +153,31 @@ export default class ApiInterface {
   async getArtistAlbumById(p_id, token) {
     return await this._getAlbumOrArtistById("artists", p_id, "albums", token);
   }
-  async getHighResImage(p_query, p_type) {
+  async getHighResImage(p_query, p_type, token) {
+    let e_query = formurlencoded(p_query);
+
     const param = {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": token
       },
       body: JSON.stringify({
-        query: p_query
+        query: e_query
       })
     };
-    const rep = await fetch(
-      `${this.rootUrlUbeat}search/extra/${p_type}`,
-      param
-    );
 
-    if (rep.ok) {
-      return await rep.json();
-    } else {
-      console.error(rep);
-      return { results: [] };
-    }
+    return fetch(`${this.rootUrlUbeat}search/extra/${p_type}`, param)
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
+    })
+    .catch(() => {
+      console.error("unable to get High Res Image");
+    });
   }
 }
