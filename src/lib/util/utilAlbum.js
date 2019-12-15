@@ -1,18 +1,27 @@
 import ApiInterface from "./../ApiInterface";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
-export const getAlbumById = async albumId => {
+export const getAlbumById = async (albumId, token) => {
   if (isNaN(albumId)) {
     throw "The ID specified is not a number";
   }
 
-  const result = await apiEngine.getAlbumById(albumId);
+  const result = await apiEngine.getAlbumById(albumId, token);
+  if(!result.ok)
+    return result;
+
   if (result.resultCount == 1) {
     let album = result.results[0];
+    const trackList = await getTracklist(album.collectionId, token)
 
-    album.trackList = await getTracklist(album.collectionId);
+    if(trackList.ok){
+      album.trackList = trackList.results;
+      album.ok = true;
+    }
+    else
+      return trackList;
 
     return album;
   } else {
@@ -20,70 +29,25 @@ export const getAlbumById = async albumId => {
   }
 };
 
-export const getAlbumInfo = async p_album => {
-  const searchResults =
-    typeof p_album === "string"
-      ? await apiEngine.searchAlbum(p_album, 1)
-      : await apiEngine.getAlbumById(Number(p_album));
-  const result = searchResults.results[0];
-
-  let formated = {
-    albumName: result.collectionName,
-    artist: result.artistName,
-    genre: result.primaryGenreName,
-    release: new Date(result.releaseDate).getFullYear(),
-    numberOfTrack: result.trackCount,
-    linkItune: result.collectionViewUrl,
-    trackList: await getTracklist(result.collectionId)
-  };
-
-  formated["image"] =
-    formated.highResImage != "" ? formated.highResImage : result.artworkUrl100;
-  return [formated, result.collectionId];
-
-  //return searchResult;
-};
-
-export const getTracklist = async album_id => {
+export const getTracklist = async (album_id, token = "") => {
   const param = {
     method: "GET",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": token
     }
   };
-  console.log(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`);
+  
   return fetch(`${apiEngine.rootUrlUbeat}albums/${album_id}/tracks`, param)
-    .then(response => response.json())
-    .then(json => {
-      return json.results;
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
     })
     .catch(() => {
       console.error("Unable to get album's tracks");
     });
-};
-
-export const getTrackInfo = async (p_id, nb_track = -1) => {
-  const searchResults = await apiEngine.getAlbumTrackById(p_id);
-  const results =
-    nb_track === -1
-      ? searchResults.results
-      : searchResults.results.slice(0, nb_track);
-  const formated = results.map(el => {
-    return {
-      trackObj: el,
-      trackNumber: el.trackNumber,
-      songTitle: el.trackName,
-      trackDuration: convertMillisToTrackTime(el.trackTimeMillis),
-      songLink: el.previewUrl
-    };
-  });
-  return formated;
-};
-const convertMillisToTrackTime = p_millis => {
-  p_millis /= 1000;
-  const minutes = Math.trunc(p_millis / 60);
-  let seconds = Math.trunc(p_millis - minutes * 60);
-  seconds = seconds < 10 ? `0${seconds}` : seconds;
-  return `${minutes}:${seconds}`;
 };

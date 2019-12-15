@@ -141,17 +141,17 @@ export default class ApiInterface {
       console.error("unable to get user");
     });
   }
-  async getAlbumById(p_id) {
-    return await this._getAlbumOrArtistById("albums", p_id);
+  async getAlbumById(p_id, token) {
+    return await this._getAlbumOrArtistById("albums", p_id, "", token);
   }
-  async getAlbumTrackById(p_id) {
-    return await this._getAlbumOrArtistById("albums", p_id, "tracks");
+  async getAlbumTrackById(p_id, token) {
+    return await this._getAlbumOrArtistById("albums", p_id, "tracks", token);
   }
-  async getArtistById(p_id) {
-    return await this._getAlbumOrArtistById("artists", p_id);
+  async getArtistById(p_id, token) {
+    return await this._getAlbumOrArtistById("artists", p_id, "", token);
   }
-  async getArtistAlbumById(p_id) {
-    return await this._getAlbumOrArtistById("artists", p_id, "albums");
+  async getArtistAlbumById(p_id, token) {
+    return await this._getAlbumOrArtistById("artists", p_id, "albums", token);
   }
   async getHighResImage(p_query, p_type) {
     const param = {
