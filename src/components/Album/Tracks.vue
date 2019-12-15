@@ -6,7 +6,7 @@
     </h2>
 
     <Pagination ref="paginationTop" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange"/>
-    <ul v-if="trackList.length !== 0">
+    <ul v-if="trackList !== undefined && trackList.length !== 0">
       <single-track
         v-for="track in displayedList"
         :key="track.id"
