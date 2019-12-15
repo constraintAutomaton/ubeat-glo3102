@@ -64,7 +64,7 @@ export default {
   },
   created() {
     const promise = this.loadUser();
-    promise.then
+    promise.then;
     {
       this.search(this.$route.params.query);
     }
@@ -73,25 +73,24 @@ export default {
     async search(query) {
       this.trackResults = await apiEngine.searchTracks(query, 6);
       this.albumResults = await apiEngine.searchAlbum(query, 6);
-      this.artistsResults = await apiEngine.searchArtiste(query, 6);
-      this.artistsResults.results.forEach(artist => {
+      let artistsResults = await apiEngine.searchArtiste(query, 6);
+      artistsResults.results.forEach(artist => {
         artist.genre = artist.primaryGenreName;
         artist.artistImage = artist.highResImage;
       });
       this.usersResults = await apiEngine.searchUsers(query, 6);
-      
+
       this.usersResults.forEach(user => {
         user.currentFollowing = false;
         this.currentUser.following.forEach(follow => {
-          if(follow.id == user.id)
-            user.currentFollowing = true;
+          if (follow.id == user.id) user.currentFollowing = true;
         });
       });
       this.loading = false;
       const albumName = this.albumResults.results.map(el => {
         return el.collectionName;
       });
-      const artistName = this.artistsResults.results.map(el => {
+      const artistName = artistsResults.results.map(el => {
         return el.artistName;
       });
       this.loadingHighResImages = true;
@@ -103,22 +102,23 @@ export default {
         artistName,
         "artist"
       );
-      for (let i in artistName) {
-        if (extraDataArtist.results[i].highResImage != "") {
-          this.artistsResults.results[i].artistImage = extraDataArtist.results[i].highResImage;
-        }
-      }
-
       for (let i in albumName) {
         if (extraDataAlbum.results[i].highResImage != "") {
-          this.albumResults.results[i].artworkUrl100 = extraDataAlbum.results[i].highResImage;
+          this.albumResults.results[i].artworkUrl100 =
+            extraDataAlbum.results[i].highResImage;
         }
       }
+      for (let i in artistName) {
+        if (extraDataArtist.results[i].highResImage != "") {
+          artistsResults.results[i].artistImage =
+            extraDataArtist.results[i].highResImage;
+        }
+      }
+      this.artistsResults = artistsResults;
       this.loadingHighResImages = false;
       console.log(this.artistsResults);
     },
-    async loadUser()
-    {
+    async loadUser() {
       try {
         this.currentUser = await getUserById(this.$cookie.get("id"));
       } catch (ex) {}
