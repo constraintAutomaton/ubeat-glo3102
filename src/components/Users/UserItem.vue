@@ -3,7 +3,7 @@
       <router-link :to="{ name: 'User', params: { id: user.id }}">
         <span class="username">{{ user.name }}</span>
       </router-link>
-      <label>
+      <label v-if="!user.isCurrUser">
         <input ref="followCheckbox" type="checkbox" v-model="user.currentFollowing" @click="follow"/>
         <span>Follow</span>
       </label>
@@ -16,6 +16,14 @@ export default {
   name: "UserItem",
   props: {
     user: {}
+  },
+  created() {
+    if(this.$cookie.get("id") != this.user.id) {
+        this.user.isCurrUser = false;
+    }
+    else{
+        this.user.isCurrUser = true;
+    }
   },
   methods: {
     async follow() {
