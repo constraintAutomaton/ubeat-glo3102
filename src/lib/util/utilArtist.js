@@ -22,7 +22,7 @@ export const getArtistById = async (artistId, token = "") => {
 };
 
 export const getAlbumOfArtist = async (artistId, token = "") => {
-  let albums;
+  let albums = [];
   let resultAlbums = await apiEngine.getArtistAlbumById(artistId, token);
   if(!resultAlbums.ok)
     return resultAlbums;
@@ -31,6 +31,9 @@ export const getAlbumOfArtist = async (artistId, token = "") => {
     const nbAlbum =
       resultAlbums.results.length > 5 ? 5 : resultAlbums.results.length;
     albums = resultAlbums.results.slice(0, nbAlbum);
+  }
+  else {
+    albums = [];
   }
   albums.ok = true;
   return albums;

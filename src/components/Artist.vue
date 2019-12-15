@@ -56,8 +56,9 @@ export default {
         let artist = await getArtistById(this.$route.params.id, this.$cookie.get("token"));
         if(artist.ok) {
           let albumsResult = await getAlbumOfArtist(this.$route.params.id, this.$cookie.get("token"));
-          if(albumsResult.ok) {
+          if(albumsResult.ok) {         
             artist.albums = albumsResult;
+            console.log(artist.albums);
             albumNames = artist.albums.map(el => {
               return el.collectionName;
             });
