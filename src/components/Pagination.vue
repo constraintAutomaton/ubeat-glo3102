@@ -13,7 +13,6 @@
 <script>
 
 export default {
-	components: {  },
 	props: {
 		pageCount: {
 			type: Number,

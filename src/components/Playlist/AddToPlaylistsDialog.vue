@@ -50,9 +50,11 @@ export default {
     close() {
       if (this.isOpened) {
         this.isOpened = false;
-        this.$refs.playlistCheckbox.forEach(async chkBox => {
-          chkBox.checked = false;
-        });
+        if(this.$refs.playlistCheckbox !== undefined){
+          this.$refs.playlistCheckbox.forEach(async chkBox => {
+            chkBox.checked = false;
+          });
+        }
       }
     },
     showSuccessAdd(chkBox) {
@@ -85,8 +87,8 @@ export default {
         }
       });
     },
-    showErrorToast() {
-      this.$toasted.show("An error occured", {
+    showErrorToast(msg = "An error occured") {
+      this.$toasted.show(msg, {
         position: "bottom-left",
         duration: 5000,
         action: {
@@ -99,42 +101,71 @@ export default {
       });
     },
     async loadPlaylists() {
-        if(this.$cookie.get("token") != "" && this.$cookie.get("token") != undefined)
-        {
-            this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
-            this.playlists = _.sortBy(this.playlists, ["id"]);
-        }
+      const result = await getPlaylistsByUserId(this.$cookie.get("id"), this.$cookie.get("token"));
+
+      if(result.ok)
+      {
+        this.playlists = result;
+        this.playlists = _.sortBy(this.playlists, ["id"]);
+      }
+      else
+      {
+        console.error(result.message);
+        this.close();
+      }
     },
     async saveToPlaylist(event) {
       if (this.tracks != null) {
         const chkBox = event.target;
 
         if (chkBox.checked) {
-          await this.addTracks(chkBox.value);
-          this.showSuccessAdd(chkBox);
-          this.$songEvent.$emit("playlistUpdated");
+          const result = await this.addTracks(chkBox.value);
+          if(result.ok)
+          {
+            this.showSuccessAdd(chkBox);
+            this.$songEvent.$emit("playlistUpdated");
+          }
+          else {
+            this.showErrorToast(result.message);
+            chkBox.checked = false;
+          }
         } else {
-          this.deleteTracks(chkBox.value);
-          this.showSuccessDelete(chkBox);
-          this.$songEvent.$emit("playlistUpdated");
+          const result = await this.deleteTracks(chkBox.value);
+          if(result.ok)
+          {
+            this.showSuccessDelete(chkBox);
+            this.$songEvent.$emit("playlistUpdated");
+          }
+          else {
+            this.showErrorToast(result.message);
+            chkBox.checked = true;
+          }
         }
       }
     },
-    async addTracks(playlistId) {
-      this.tracks.forEach(async track => {
-        const response = await addTrackToPlaylist(playlistId, track);
-        if (response.status != 200) {
-          this.showErrorToast();
+    addTracks(playlistId) {
+      let result = {ok: true};
+
+      this.tracks.forEach(track => {
+        const response = addTrackToPlaylist(playlistId, track, this.$cookie.get("token"));
+        if (!response.ok) {
+          result = response;
+          return result;
         }
       });
+      return result;
     },
     async deleteTracks(playlistId) {
-      this.tracks.forEach(async track => {
-        const response = await deleteTrack(playlistId, track.trackId);
-        if (response.status != 200) {
-          this.showErrorToast();
+      let result = {ok: true};
+
+      this.tracks.forEach(track => {
+        const response = deleteTrack(playlistId, track.trackId, this.$cookie.get("token"));
+        if (!response.ok) {
+          result = response;
+          return result;
         }
       });
+      return result;
     },
     userClick(event) {
       if (event.target.classList.contains("dialog")) {

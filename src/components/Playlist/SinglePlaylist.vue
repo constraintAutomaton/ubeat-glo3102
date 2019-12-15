@@ -129,7 +129,9 @@ export default {
     },
 
     async callPutAPI() {
-      await modifyPlaylist(this.playlist);
+      const result = await modifyPlaylist(this.playlist, this.$cookie.get("token"));
+      if(!result.ok)
+        console.error(result.message);
     },
 
     deleteSong(trackId) {
@@ -141,11 +143,18 @@ export default {
 
         .then(async () => {
           try {
-            await deleteTrack(this.playlist.id, trackId);
-            const trackIndex = this.playlist.tracks.findIndex(
-              track => track.trackId === trackId
-            );
-            this.playlist.tracks.splice(trackIndex, 1);
+            const result = await deleteTrack(this.playlist.id, trackId, this.$cookie.get("token"));
+            if(result.ok)
+            {
+              const trackIndex = this.playlist.tracks.findIndex(
+                track => track.trackId === trackId
+              );
+              this.playlist.tracks.splice(trackIndex, 1);
+            }
+            else
+            {
+              console.error(result.message);
+            }
           } catch (e) {
             alert(e);
           }

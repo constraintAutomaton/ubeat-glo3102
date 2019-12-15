@@ -83,7 +83,7 @@ export default {
     signup: async function(event) {
       console.log(event);
       if (!this.$v.$invalid) {
-        const engine = new ApiInterface(false);
+        const engine = new ApiInterface();
         const rep = await engine.signup(
           this.inputName,
           this.inputEmail,

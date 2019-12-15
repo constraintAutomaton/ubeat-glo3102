@@ -1,18 +1,23 @@
 <template>
   <div id="playlistsPage" class="container">
-    <h2 class="listTitle">My Playlists</h2>
-    <template v-for="playlist in playlists">
-      <single-playlist
-        :playlist="playlist"
-        :key="playlist.id"
-        ref="singlePlaylist"
-        @deletePlaylist="deletePlaylistById"
-      ></single-playlist>
-    </template>
-    <div class="newPlaylist">
-      <a class="waves-effect waves-light btn" @click="newPlaylist"
-        ><i class="material-icons right">add</i>New playlist</a
-      >
+    <div v-if="!error">
+      <h2 class="listTitle">My Playlists</h2>
+      <template v-for="playlist in playlists">
+        <single-playlist
+          :playlist="playlist"
+          :key="playlist.id"
+          ref="singlePlaylist"
+          @deletePlaylist="deletePlaylistById"
+        ></single-playlist>
+      </template>
+      <div class="newPlaylist">
+        <a class="waves-effect waves-light btn" @click="newPlaylist"
+          ><i class="material-icons right">add</i>New playlist</a
+        >
+      </div>
+    </div>
+    <div v-else-if="error">
+      {{ error }}
     </div>
   </div>
 </template>
@@ -31,7 +36,8 @@ export default {
 
   data() {
     return {
-      playlists: []
+      playlists: [],
+      error: ""
     };
   },
 
@@ -50,13 +56,26 @@ export default {
   computed: {},
   methods: {
     async refreshPlaylists() {
-      this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
-      this.playlists = _.sortBy(this.playlists, ["id"]);
+      const result = await getPlaylistsByUserId(this.$cookie.get("id"), this.$cookie.get("token"));
+      if(result.ok)
+      {
+        this.playlists = result;
+        this.playlists = _.sortBy(this.playlists, ["id"]);
+      }
+      else {
+        this.error = result.message;
+      }
     },
     async newPlaylist() {
-      const response = await addPlaylist(this.$cookie.get('email'), "New Playlist");
-      await this.refreshPlaylists();
-      this.modifyPlaylistById(response.id);
+      const result = await addPlaylist("New Playlist", this.$cookie.get('token'));
+      if(result.ok)
+      {
+        await this.refreshPlaylists();
+        this.modifyPlaylistById(result.id);
+      }
+      else {
+        this.error = result.message;
+      }
     },
     async deletePlaylistById(playlist) {
       this.$dialog
@@ -66,8 +85,14 @@ export default {
 
         .then(async dialog => {
           try {
-            const response = await deletePlaylist(playlist.id);
-            this.refreshPlaylists();
+            const result = await deletePlaylist(playlist.id, this.$cookie.get('token'));            
+            if(result.ok)
+            {
+              this.refreshPlaylists();
+            }
+            else {
+              this.error = result.message;
+            }
           } catch (e) {
             console.log(e);
           }
