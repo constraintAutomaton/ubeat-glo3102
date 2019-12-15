@@ -120,7 +120,7 @@ export default {
     async loadUser()
     {
       try {
-        this.currentUser = await getUserById(this.$cookie.get("id"));
+        this.currentUser = await getUserById(this.$cookie.get("id"), this.$cookie.get("token"));
       } catch (ex) {}
     }
   },

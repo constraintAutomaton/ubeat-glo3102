@@ -85,30 +85,43 @@ export default {
       this.isFriend = false;
 
       try {
-        const user = await getUserById(this.$route.params.id);
-        const userLogon = await getUserById(this.$cookie.get("id"));
-        const playlist = await getPlaylistsByUserId(this.$route.params.id, this.$cookie.get("token"));
-        this.userInfo = user;
-        this.userLogon = userLogon;
-        this.listePlaylists = playlist;
-        this.friends = user.following;
-        this.logonFriends = userLogon.following;
-        if(this.$cookie.get("id") != user.id) {
-            this.isNotUser = true;
-        }
-        if(this.$cookie.get("id") == user.id) {
-            this.isNotUser = false;
-        }
-        if(this.$cookie.get("token") != "" && this.$cookie.get("token") != undefined)
-        {
+        const token = this.$cookie.get("token");
+        const user = await getUserById(this.$route.params.id, token);
+        const userLogon = await getUserById(this.$cookie.get("id"), token);
+        const playlist = await getPlaylistsByUserId(this.$route.params.id, token);
+
+        if(user.ok && userLogon.ok && playlist.ok) {
+          this.userInfo = user;
+          this.userLogon = userLogon;
+          this.listePlaylists = playlist;
+          this.friends = user.following;
+          this.logonFriends = userLogon.following;
+          if(this.$cookie.get("id") != user.id) {
+              this.isNotUser = true;
+          }
+          if(this.$cookie.get("id") == user.id) {
+              this.isNotUser = false;
+          }
+          if(this.$cookie.get("token") != "" && this.$cookie.get("token") != undefined)
+          {
             for (this.i; this.i < this.logonFriends.length; this.i++) {
-                if(this.logonFriends[this.i].id == this.userInfo.id) {
-                    this.isFriend = true;
-                }
+              if(this.logonFriends[this.i].id == this.userInfo.id) {
+                  this.isFriend = true;
+              }
             }
+          }
+          this.loading = false;
+          this.error = false;
         }
-        this.loading = false;
-        this.error = false;
+        else {
+          this.loading = false;
+          if(user.message !== undefined)
+            this.error = user.message;
+          else if (userLogon.message !== undefined)
+            this.error = userLogon.message;
+          else
+            this.error = playlist.message;
+        }
       } catch (error) {
         this.error = error;
         this.loading = false;
