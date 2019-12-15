@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2 class="listTitle">
-      <a>{{ title }}</a>
+      <router-link v-if="link !== undefined" :to="link">{{ title }}</router-link>
+      <span v-else>{{ title }}</span>
     </h2>
 
     <ul class="listAlbum flexContent row">
@@ -27,7 +28,11 @@ export default {
     },
     title: {
       type: String,
-      default: "Artists"
+      default: "Albums"
+    },
+    link: {
+      type: String,
+      default: undefined
     }
   },
   components: {
@@ -37,7 +42,7 @@ export default {
 </script>
 
 <style scoped>
-.listTitle a:hover {
+.listTitle span:hover {
   cursor: default;
   color: var(--darkGrey);
 }

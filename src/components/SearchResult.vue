@@ -10,7 +10,11 @@
       :title="'Found Artists'"
       :link="'/artistSearch/' + this.$route.params.query"
     />
-    <AlbumOfArtist :albumList="albumResults.results" :title="'Found Albums'" />
+    <AlbumOfArtist
+      :albumList="albumResults.results"
+      :title="'Found Albums'"
+      :link="'/albumSearch/' + this.$route.params.query"
+    />
     <users-list :userList="usersResults"></users-list>
   </div>
 </template>
