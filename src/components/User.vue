@@ -87,7 +87,7 @@ export default {
       try {
         const user = await getUserById(this.$route.params.id);
         const userLogon = await getUserById(this.$cookie.get("id"));
-        const playlist = await getPlaylistsByUserId(this.$route.params.id);
+        const playlist = await getPlaylistsByUserId(this.$route.params.id, this.$cookie.get("token"));
         this.userInfo = user;
         this.userLogon = userLogon;
         this.listePlaylists = playlist;

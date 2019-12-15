@@ -5,13 +5,8 @@
 import formurlencoded from "form-urlencoded";
 export default class ApiInterface {
   constructor(isSecure = true) {
+    this.isSecure = isSecure;
     this.rootUrlUbeat = "https://ubeateq9.herokuapp.com/";
-    this.userTest = {
-      name: "User Test",
-      email: "valerie.boivin.7@ulaval.ca",
-      id: "5db9a4fbd0c7f00004015499",
-      password: "Equipe7ulaval"
-    };
     if (!isSecure) {
       this.rootUrlUbeat += "unsecure/";
     }
@@ -19,7 +14,6 @@ export default class ApiInterface {
   async login(email, password) {
     const body = formurlencoded({
       email: email,
-      name: name,
       password: password
     });
     const param = {
@@ -29,11 +23,8 @@ export default class ApiInterface {
       },
       body: body
     };
-    const rootUrl = this.rootUrlUbeat.substring(
-      0,
-      this.rootUrlUbeat.indexOf("unsecure")
-    );
-    const rep = await fetch(`${rootUrl}login`, param);
+
+    const rep = await fetch(`${this.rootUrlUbeat}login`, param);
     if (rep.ok) {
       return await rep.json();
     } else {
@@ -53,11 +44,8 @@ export default class ApiInterface {
       },
       body: body
     };
-    const rootUrl = this.rootUrlUbeat.substring(
-      0,
-      this.rootUrlUbeat.indexOf("unsecure")
-    );
-    const rep = await fetch(`${rootUrl}signup`, param);
+
+    const rep = await fetch(`${this.rootUrlUbeat}signup`, param);
     if (rep.ok) {
       return await rep.json();
     } else {

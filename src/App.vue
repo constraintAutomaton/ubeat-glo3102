@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import router from './router/index.js'
 import Navigation from "@/components/Navigation";
 
 const default_layout = "default";
@@ -21,6 +22,21 @@ export default {
     layout() {
       return this.$route.meta.layout || default_layout + "-layout";
     }
+  },
+  created()
+  {
+    router.beforeEach((to, from, next) => {
+      const loggedId = this.$cookie.get("id");
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!loggedId) {
+          next({ name: 'Login' });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    });
   }
 };
 </script>

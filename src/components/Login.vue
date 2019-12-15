@@ -74,7 +74,7 @@ export default {
   methods: {
     login: async function(even) {
       if (!this.$v.$invalid) {
-        const engine = new ApiInterface(false);
+        const engine = new ApiInterface();
         const rep = await engine.login(this.email, this.password);
         if (rep.data !== "erreur de connexion") {
           this.$cookie.set("token", rep.token);
