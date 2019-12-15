@@ -1,22 +1,35 @@
 <template>
   <div class="mainContainer container">
     <div v-if="loading">Loading...</div>
-    <Tracks
-      :trackList="trackResults.results"
-      :title="'Found Tracks'"
-      :link="'/trackSearch/' + this.$route.params.query"
-    />
-    <ArtistList
-      :artistList="artistsResults.results"
-      :title="'Found Artists'"
-      :link="'/artistSearch/' + this.$route.params.query"
-    />
-    <AlbumOfArtist
-      :albumList="albumResults.results"
-      :title="'Found Albums'"
-      :link="'/albumSearch/' + this.$route.params.query"
-    />
-    <users-list :userList="usersResults"></users-list>
+
+    <template
+      v-if="
+        trackResults.results.length === 0 &&
+        artistsResults.length === 0 &&
+          albumResults.length == 0 &&
+          usersResults.length == 0
+      "
+    >
+      <p>No results found for this search.</p>
+    </template>
+    <template v-else>
+      <Tracks
+        :trackList="trackResults.results"
+        :title="'Found Tracks'"
+        :link="'/trackSearch/' + this.$route.params.query"
+      />
+      <ArtistList
+        :artistList="artistsResults.results"
+        :title="'Found Artists'"
+        :link="'/artistSearch/' + this.$route.params.query"
+      />
+      <AlbumOfArtist
+        :albumList="albumResults.results"
+        :title="'Found Albums'"
+        :link="'/albumSearch/' + this.$route.params.query"
+      />
+      <users-list :userList="usersResults"></users-list>
+    </template>
   </div>
 </template>
 
@@ -70,13 +83,15 @@ export default {
       );
       for (let i in artistName) {
         if (extraDataAlbum.results[i].highResImage != "") {
-          this.albumResults.results[i].artworkUrl100 = extraDataAlbum.results[i].highResImage;
+          this.albumResults.results[i].artworkUrl100 =
+            extraDataAlbum.results[i].highResImage;
         }
       }
-     
+
       for (let i in albumName) {
         if (extraDataArtist.results[i].highResImage != "") {
-          this.artistsResults.results[i].artistImage = extraDataArtist.results[i].highResImage;
+          this.artistsResults.results[i].artistImage =
+            extraDataArtist.results[i].highResImage;
         }
       }
       console.log(this.artistsResults);

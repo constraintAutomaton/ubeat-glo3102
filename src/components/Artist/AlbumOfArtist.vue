@@ -5,7 +5,7 @@
       <span v-else>{{ title }}</span>
     </h2>
 
-    <ul class="listAlbum flexContent row">
+    <ul class="listAlbum flexContent row" v-if="albumList !== undefined && albumList.length !== 0">
       <AlbumsItem
         v-for="album in albumList"
         :key="album.collectionId"
@@ -15,6 +15,8 @@
         :albumId="album.collectionId"
       ></AlbumsItem>
     </ul>
+    <p v-else>No albums found</p>
+
   </div>
 </template>
 
