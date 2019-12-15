@@ -99,7 +99,7 @@ export default {
       });
     },
     async loadPlaylists() {
-        if(this.$cookie.get("token") != "")
+        if(this.$cookie.get("token") != "" && this.$cookie.get("token") != undefined)
         {
             this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
             this.playlists = _.sortBy(this.playlists, ["id"]);

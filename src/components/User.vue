@@ -99,7 +99,7 @@ export default {
         if(this.$cookie.get("id") == user.id) {
             this.isNotUser = false;
         }
-        if(this.$cookie.get("token") != "")
+        if(this.$cookie.get("token") != "" && this.$cookie.get("token") != undefined)
         {
             for (this.i; this.i < this.logonFriends.length; this.i++) {
                 if(this.logonFriends[this.i].id == this.userInfo.id) {

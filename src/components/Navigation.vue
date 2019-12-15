@@ -66,7 +66,7 @@
                     Profile
                   </router-link>
                 </li>
-                <li v-if="token == ''">
+                <li v-if="token == '' || token == undefined">
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_balance
@@ -74,7 +74,7 @@
                     Sign Up
                   </router-link>
                 </li>
-                <li v-if="token == ''">
+                <li v-if="token == '' || token == undefined">
                   <router-link :to="loginPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_box
@@ -282,6 +282,7 @@ export default {
         document.getElementById("navSearchInput").focus();
     },
     async logout () {
+        this.$cookie.get("token");
         this.$cookie.set("token", "");
         this.$cookie.set("name", "");
         this.$cookie.set("email", "");
