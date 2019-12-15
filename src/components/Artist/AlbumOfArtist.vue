@@ -5,9 +5,10 @@
       <span v-else>{{ title }}</span>
     </h2>
 
+    <Pagination ref="paginationTop" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange"/>
     <ul class="listAlbum flexContent row">
       <AlbumsItem
-        v-for="album in albumList"
+        v-for="album in displayedList"
         :key="album.collectionId"
         :albumTitle="album.collectionName"
         :albumYear="album.releaseDate"
@@ -15,11 +16,13 @@
         :albumId="album.collectionId"
       ></AlbumsItem>
     </ul>
+    <Pagination ref="paginationBottom" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange" />
   </div>
 </template>
 
 <script>
 import AlbumsItem from "./AlbumsItem.vue";
+import Pagination from "../Pagination";
 export default {
 
   props: {
@@ -33,10 +36,52 @@ export default {
     link: {
       type: String,
       default: undefined
+    },
+    pagination: {
+      type: Boolean,
+      default: false
+    },
+    itemPerPage: {
+      type: Number,
+      default: 6
     }
   },
   components: {
-    AlbumsItem
+    AlbumsItem,
+    Pagination
+  },
+  data() {
+    return {
+      currentPage: 0
+    }
+  },
+  computed: {
+    displayedList() {
+      if(!this.pagination)
+        return this.albumList;
+      
+      const begin = this.currentPage * this.itemPerPage;
+      let end = begin + this.itemPerPage;
+
+      if(end > this.albumList.length)
+        end = this.albumList.length;
+
+      return this.albumList.slice(begin, end);
+    },
+    pageCount() {
+      if(this.albumList.length % this.itemPerPage == 0)
+        return this.albumList.length / this.itemPerPage;
+      
+      return Math.floor(this.albumList.length / this.itemPerPage) + 1;
+    }
+  },
+  methods: {
+    pageChange(pageNumber) {
+      this.currentPage = pageNumber - 1;
+
+      this.$refs.paginationBottom.setCurrentPage(pageNumber);
+      this.$refs.paginationTop.setCurrentPage(pageNumber);
+    }
   }
 };
 </script>

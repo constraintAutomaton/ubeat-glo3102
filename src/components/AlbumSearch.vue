@@ -37,7 +37,7 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
-			this.albumsResults = (await apiEngine.searchAlbum(this.$route.params.query, 10)).results;
+			this.albumsResults = (await apiEngine.searchAlbum(this.$route.params.query, 200)).results;
 			this.loading = false;
 		}
 	}
