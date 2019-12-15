@@ -1,7 +1,7 @@
 <template>
   <div class="mainContainer">
     <h2 class="listTitle">
-      <router-link v-if="link !== undefined" :to="'/artistSearch/' + this.$route.params.query">{{ title }}</router-link>
+      <router-link v-if="link !== undefined" :to="link">{{ title }}</router-link>
       <span v-else>{{ title }}</span>
     </h2>
 

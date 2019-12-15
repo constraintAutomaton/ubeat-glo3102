@@ -9,6 +9,7 @@ import Login from "../components/Login";
 import SearchResult from "../components/SearchResult";
 import ArtistSearch from "../components/ArtistSearch";
 import AlbumSearch from "../components/AlbumSearch";
+import TrackSearch from "../components/TrackSearch";
 import User from "../components/User";
 
 Vue.use(Router);
@@ -67,6 +68,11 @@ export default new Router({
       path: "/albumSearch/:query?",
       name: "AlbumSearch",
       component: AlbumSearch
+    },
+    {
+      path: "/trackSearch/:query?",
+      name: "TrackSearch",
+      component: TrackSearch
     },
     {
       path: "/users/:id?",

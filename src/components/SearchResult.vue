@@ -1,10 +1,11 @@
 <template>
   <div class="mainContainer container">
     <div v-if="loading">Loading...</div>
-    <h2 class="listTitle">
-      <a>Found Tracks</a>
-    </h2>
-    <Tracks :trackList="trackResults.results"></Tracks>
+    <Tracks
+      :trackList="trackResults.results"
+      :title="'Found Tracks'"
+      :link="'/trackSearch/' + this.$route.params.query"
+    />
     <ArtistList
       :artistList="artistsResults.results"
       :title="'Found Artists'"

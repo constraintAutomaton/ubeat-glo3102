@@ -1,5 +1,9 @@
 <template>
   <section class="tracks">
+    <h2 class="listTitle" v-if="title !== undefined" >
+      <router-link v-if="link !== undefined" :to="link">{{ title }}</router-link>
+      <span v-else>{{ title }}</span>
+    </h2>
     <ul>
       <single-track
         v-for="track in trackList"
@@ -15,6 +19,14 @@ export default {
   props: {
     trackList: {
       type: Array
+    },
+    link: {
+      type: String,
+      default: undefined
+    },
+    title: {
+      type: String,
+      default: undefined
     }
   },
   components: {
@@ -22,3 +34,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.listTitle span:hover {
+  cursor: default;
+  color: var(--darkGrey);
+}
+</style>
