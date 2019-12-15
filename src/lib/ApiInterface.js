@@ -93,18 +93,10 @@ export default class ApiInterface {
     };
     let rep;
     p_query = p_query.replace(new RegExp(" ", "g"), "%20");
-    if (p_type === "users") {
-
-      rep = await fetch(
-        `${this.rootUrlUbeat}search/${p_type}?q=${p_query}`,
-        param
-      );
-    } else {
-      rep = await fetch(
-        `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
-        param
-      );
-    }
+    rep = await fetch(
+      `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+      param
+    );
     if (rep.ok) {
       return rep.json();
     } else {
