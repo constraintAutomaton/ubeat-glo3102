@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<ul class="pagination">
+		<ul v-if="pageCount > 1" class="pagination">
 			<li class="waves-effect disabled" ref="prev" @click="prevPage"><a><i class="material-icons">chevron_left</i></a></li>            
 			<li v-for="n in pageCount" :key="n" :class="{ active: n==1 }" ref="pageLink" class="waves-effect" @click="pageChange" :data-id="n">
 					<a>{{n}}</a>
