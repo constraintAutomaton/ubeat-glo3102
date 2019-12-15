@@ -73,7 +73,7 @@ export default {
 
   methods: {
     login: async function(even) {
-      if (!this.$v.password.$error && !this.$v.email.$error) {
+      if (!this.$v.$invalid) {
         const engine = new ApiInterface(false);
         const rep = await engine.login(this.email, this.password);
         if (rep.data !== "erreur de connexion") {
