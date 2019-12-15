@@ -33,38 +33,60 @@
 </template>
 
 <script>
-//import {createUser} from "./../lib/util/utilUser";
 import ApiInterface from "./../lib/ApiInterface";
+import { required, email } from "vuelidate/lib/validators";
     export default {
         data(){
             return {
-                snackText: '',
-                snackbar: false,
-                color: '',
                 inputName: '',
                 inputEmail: '',
                 inputPassword: '',
                 inputRepeatPassword: ''
             };
         },
+        validations() {
+            return {
+                inputName:{
+                    required
+                },
+                inputEmail: {
+                    required,
+                    email
+                },
+                inputPassword: {
+                    required
+                },
+                inputRepeatPassword: {
+                    required
+                }
+            };
+        },
         methods: {
             signup: async function(event){
-                if(this.inputPassword===this.inputRepeatPassword){
                     console.log(event);
-                    //console.log("test");
-                    const engine =new ApiInterface(false);
-                    //console.log(this.inputName,this.inputEmail,this.inputPassword);
-                    await engine.signup(this.inputName, this.inputEmail, this.inputPassword).then(() =>{
-                        M.toast({html: 'Successful sign up, welcome', classes: 'rounded'});
-                        setTimeout(()=>{
-                            window.location.hash='/login';
-                        },2000);
-                    }).catch(() => {
-                        M.toast({html: 'Sign up failed!', classes: 'rounded'});
-                    });
-                }else {
-                    M.toast({html: 'Passwords do not match', classes: 'rounded'});
-                }
+                    if (this.$v.inputName.required === true &&
+                        this.$v.inputPassword.required === true &&
+                        this.$v.inputRepeatPassword.required === true &&
+                        this.$v.inputEmail.required === true &&
+                        this.$v.inputEmail.email === true) {
+                        if(this.inputPassword===this.inputRepeatPassword){
+                            const engine =new ApiInterface(false);
+                            const rep = await engine.signup(this.inputName, this.inputEmail, this.inputPassword)
+                            console.log(rep);
+                            M.toast({html: 'Successful sign up, welcome', classes: 'rounded'});
+                            setTimeout(()=>{
+                               window.location.hash='/login';
+                            },2000);
+
+                        } else {
+                            M.toast({html: 'Passwords do not match', classes: 'rounded'});
+                        }
+                    } else {
+                        M.toast({
+                            html: "Username, email, password or repeat Password missing",
+                            classes: "rounded"
+                        });
+                    }
             }
     }
     }
