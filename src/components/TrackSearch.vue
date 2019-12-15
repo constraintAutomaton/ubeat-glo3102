@@ -37,7 +37,7 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
-			this.trackResults = (await apiEngine.searchTracks(this.$route.params.query, 10)).results;
+			this.trackResults = (await apiEngine.searchTracks(this.$route.params.query, 200)).results;
 			this.loading = false;
 		}
 	}

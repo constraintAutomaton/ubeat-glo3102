@@ -37,7 +37,7 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
-			this.usersResults = (await apiEngine.searchUsers(this.$route.params.query, 10));
+			this.usersResults = (await apiEngine.searchUsers(this.$route.params.query, 200));
 			this.loading = false;
 		}
 	}
