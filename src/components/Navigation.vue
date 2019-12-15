@@ -41,7 +41,7 @@
               </a>
 
               <ul id="navDropdown" class="dropdown-content">
-                <li>
+                <li v-if="token">
                   <router-link :to="playlistsPage">
                     <i class="material-icons navbar-icon">
                       play_circle_outline
@@ -50,7 +50,7 @@
                   </router-link>
                 </li>
                 <li class="divider"></li>
-                <li>
+                <li v-if="token">
                   <router-link :to="settingsPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       build
@@ -58,7 +58,7 @@
                     Settings
                   </router-link>
                 </li>
-                <li>
+                <li v-if="token">
                   <router-link :to="userPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_circle
@@ -66,7 +66,7 @@
                     Profile
                   </router-link>
                 </li>
-                <li>
+                <li v-if="token == ''">
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_balance
@@ -74,7 +74,7 @@
                     Sign Up
                   </router-link>
                 </li>
-                <li>
+                <li v-if="token == ''">
                   <router-link :to="loginPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_box
@@ -82,8 +82,8 @@
                     Login
                   </router-link>
                 </li>
-                <li>
-                  <router-link :to="logoutPage" class="navbar-item">
+                <li v-if="token" @click="logout">
+                  <router-link :to="homePage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       lock
                     </i>
@@ -281,6 +281,13 @@ export default {
       )
         document.getElementById("navSearchInput").focus();
     },
+    async logout () {
+        this.$cookie.set("token", "");
+        this.$cookie.set("name", "");
+        this.$cookie.set("email", "");
+        this.$cookie.set("id", "");
+        location.reload();
+    }
   },
   mounted() {
     // eslint-disable-next-line
@@ -301,7 +308,8 @@ export default {
           id: this.$cookie.get("id"),
           name: this.$cookie.get("name")
       },
-      searchText: ""
+      searchText: "",
+      token: this.$cookie.get("token")
     };
   }
 };

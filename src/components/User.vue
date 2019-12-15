@@ -12,7 +12,7 @@
         <p>
             {{userInfo.email}}
         </p>
-        <div v-if="isNotUser">
+        <div v-if="isNotUser && token">
             <p>
               <label>
                 <input ref="followCheckbox" type="checkbox" v-model="isFriend" @click="followFriend"/>
@@ -64,7 +64,8 @@ export default {
       loading: true,
       error: null,
       isNotUser : false,
-      isFriend : false
+      isFriend : false,
+      token: this.$cookie.get("token")
     };
   },
     components: {
@@ -98,9 +99,12 @@ export default {
         if(this.$cookie.get("id") == user.id) {
             this.isNotUser = false;
         }
-        for (this.i; this.i < this.logonFriends.length; this.i++) {
-            if(this.logonFriends[this.i].id == this.userInfo.id) {
-                this.isFriend = true;
+        if(this.$cookie.get("token") != "")
+        {
+            for (this.i; this.i < this.logonFriends.length; this.i++) {
+                if(this.logonFriends[this.i].id == this.userInfo.id) {
+                    this.isFriend = true;
+                }
             }
         }
         this.loading = false;

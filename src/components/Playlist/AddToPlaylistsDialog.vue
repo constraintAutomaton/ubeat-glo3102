@@ -99,8 +99,11 @@ export default {
       });
     },
     async loadPlaylists() {
-      this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
-      this.playlists = _.sortBy(this.playlists, ["id"]);
+        if(this.$cookie.get("token") != "")
+        {
+            this.playlists = await getPlaylistsByUserId(this.$cookie.get("id"));
+            this.playlists = _.sortBy(this.playlists, ["id"]);
+        }
     },
     async saveToPlaylist(event) {
       if (this.tracks != null) {
