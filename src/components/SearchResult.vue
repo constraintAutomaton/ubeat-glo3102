@@ -7,7 +7,8 @@
         trackResults.length === 0 &&
         artistsResults.length === 0 &&
           albumResults.length == 0 &&
-          usersResults.length == 0
+          usersResults.length == 0&&
+          !loading
       "
     >
       <p>No results found for this search.</p>
