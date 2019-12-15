@@ -6,7 +6,7 @@
     </h2>
 
     <Pagination ref="paginationTop" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange"/>
-    <ul class="listAlbum flexContent row">
+    <ul class="listAlbum flexContent row" v-if="albumList !== undefined && albumList.length !== 0">
       <AlbumsItem
         v-for="album in displayedList"
         :key="album.collectionId"
@@ -16,7 +16,9 @@
         :albumId="album.collectionId"
       ></AlbumsItem>
     </ul>
+    <p v-else>No albums found</p>
     <Pagination ref="paginationBottom" v-if="pagination" :pageCount="pageCount" @pageChange="pageChange" />
+
   </div>
 </template>
 

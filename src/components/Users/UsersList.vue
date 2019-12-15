@@ -5,13 +5,15 @@
       <span v-else>{{ title }}</span>
     </h2>
 
-    <ul>
+    <ul v-if="userList.length !== 0 ">
         <UserItem
         v-for="user in userList"
         :key="user.id"
         :user="user"
       ></UserItem>
     </ul>
+
+    <p v-else>No users found</p>
   </div>
 </template>
 
