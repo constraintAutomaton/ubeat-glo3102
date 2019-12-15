@@ -51,6 +51,7 @@
  * email=sonkeng%40gmail.com&name=sonkeng&password=sonkeng
  */
 import ApiInterface from "../lib/ApiInterface";
+import { required, email } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -58,28 +59,42 @@ export default {
       password: ""
     };
   },
+  validations() {
+    return {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
+    };
+  },
+
   methods: {
     login: async function(even) {
-      console.log(even);
-      const engine = new ApiInterface(false);
-      const rep = await engine.login(this.email, this.password);
-      console.log(rep);
-      console.log(rep.token);
-      if (rep.data !== "erreur de connexion") {
-        this.$cookie.set("token", rep.token);
-        console.log(this.$cookie.get("token"));
-        this.$cookie.set("email", rep.email);
-        this.$cookie.set("name", rep.name);
-        this.$cookie.set("id", rep.id);
-        M.toast({ html: "Login successful, welcome", classes: "rounded" });
+      if (!this.$v.password.$error && !this.$v.email.$error) {
+        const engine = new ApiInterface(false);
+        const rep = await engine.login(this.email, this.password);
+        if (rep.data !== "erreur de connexion") {
+          this.$cookie.set("token", rep.token);
+          this.$cookie.set("email", rep.email);
+          this.$cookie.set("name", rep.name);
+          this.$cookie.set("id", rep.id);
+          M.toast({ html: "Login successful, welcome", classes: "rounded" });
+          window.location.hash = "/";
+        } else {
+          M.toast({
+            html: "Username or password are wrong!",
+            classes: "rounded"
+          });
+        }
       } else {
         M.toast({
-          html: "Username and password are wrong!",
+          html: "Username or password missing",
           classes: "rounded"
         });
       }
-
-      //window.location.hash = "/";
     }
   }
 };

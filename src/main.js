@@ -8,11 +8,11 @@ import VuejsDialog from "vuejs-dialog";
 
 import Toasted from "vue-toasted";
 import _ from "lodash";
-import * as vueCookie from "vue-cookie"
+import * as vueCookie from "vue-cookie";
 
-import AudioVisual from 'vue-audio-visual'
+import AudioVisual from "vue-audio-visual";
 
-
+import Vuelidate from "vuelidate";
 // include the default style
 import "vuejs-dialog/dist/vuejs-dialog.min.css";
 
@@ -63,7 +63,7 @@ Vue.use(Toasted);
 Vue.use(_);
 Vue.use(vueCookie);
 Vue.use(AudioVisual);
-
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 Vue.prototype.$songEvent = new Vue(); // Global event bus
