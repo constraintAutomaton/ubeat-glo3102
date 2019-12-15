@@ -5,6 +5,8 @@ const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
 export const getPlaylistsByUserId = async (userId, token = "") => {
+    if(userId == "")
+      return {ok: false, message: "Please login"}
     const param = {
       method: "GET",
       headers: {
