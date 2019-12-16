@@ -26,16 +26,18 @@ export default {
   created()
   {
     router.beforeEach((to, from, next) => {
-      const loggedIn = this.$cookie.get("token");
-      if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!loggedIn) {
-          next({ name: 'Login' });
+      try {
+        const loggedIn = this.$cookie.get("token");
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+          if (!loggedIn) {
+            next({ name: 'Login' });
+          } else {
+            next();
+          }
         } else {
           next();
         }
-      } else {
-        next();
-      }
+      } catch(ex) { }
     });
 
     
