@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { getUserById } from "../lib/util/utilUser";
 import ApiInterface from "./../lib/ApiInterface";
 import UserList from "./Users/UsersList";
 import SearchBar from "./SearchBar";
@@ -37,7 +38,14 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
+			let currentUser = await getUserById(this.$cookie.get("id"), this.$cookie.get("token"));			
 			this.usersResults = (await apiEngine.searchUsers(this.$route.params.query, 200, this.$cookie.get("token")));
+			this.usersResults.forEach(user => {
+				user.currentFollowing = false;
+				currentUser.following.forEach(follow => {
+				if (follow.id === user.id) user.currentFollowing = true;
+				});
+			});
 			this.loading = false;
 		}
 	}

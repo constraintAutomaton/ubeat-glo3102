@@ -2,7 +2,7 @@
   <li class="col s6 m4 l2">
     <router-link :to="'/artist/' + artistId">
       <div class="imgContainer">
-        <img :src="artistImage" class="featureArtistImg" />
+        <img :src="img" class="featureArtistImg" />
       </div>
       <h3 class="albumTitle">
         <a>{{ artistName }}</a>
@@ -13,7 +13,24 @@
 </template>
 
 <script>
+import { getArtistById } from "../../lib/util/utilArtist";
 export default {
+  async mounted() {
+    if(!this.highResChecked && this.artistImage == "" && this.$route.name == "SearchResult")
+    {
+      let newArtist = await getArtistById(this.artistId, this.$cookie.get("token"));
+      if(newArtist.ok){
+        this.img = newArtist.highResImage;
+      }
+      this.highResChecked = true;
+    }
+  },
+  data() {
+    return {
+      highResChecked: false,
+      img: this.artistImage
+    }
+  },
   props: {
     artistId: {
       type: Number,
@@ -29,7 +46,7 @@ export default {
     },
     artistImage: {
       type: String,
-      default: "./"
+      default: ""
     }
   },
   name: "ArtistItem"

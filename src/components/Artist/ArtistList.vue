@@ -42,9 +42,6 @@ import Pagination from "../Pagination";
 import _ from "lodash";
 
 export default {
-  // updated() {
-  //   // console.log(artistList);
-  // },
   props: {
     artistList: {
       type: Array

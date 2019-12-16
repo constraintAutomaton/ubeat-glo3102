@@ -137,7 +137,6 @@ export default class ApiInterface {
         let json = await response.json();
 
         json.ok = response.ok;
-
         return json;
       })
       .catch(() => {

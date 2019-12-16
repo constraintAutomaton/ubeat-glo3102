@@ -21,7 +21,7 @@
         :link="'/trackSearch/' + this.$route.params.query"
       />
       <ArtistList
-        :artistList="artistsResults.results"
+        :artistList="artistsResults"
         :title="'Found Artists'"
         :link="'/artistSearch/' + this.$route.params.query"
       />
@@ -73,12 +73,8 @@ export default {
     async search(query) {
       this.trackResults = await apiEngine.searchTracks(query, 6, this.$cookie.get("token"));
       this.albumResults = await apiEngine.searchAlbum(query, 6, this.$cookie.get("token"));
-      let artistsResults = await apiEngine.searchArtiste(query, 6, this.$cookie.get("token"));
-      artistsResults.results.forEach(artist => {
-        artist.genre = artist.primaryGenreName;
-        artist.artistImage = artist.highResImage;
-      });
       this.usersResults = await apiEngine.searchUsers(query, 6, this.$cookie.get("token"));
+      this.artistsResults = (await apiEngine.searchArtiste(query, 6, this.$cookie.get("token"))).results;
 
       this.usersResults.forEach(user => {
         user.currentFollowing = false;
@@ -87,42 +83,6 @@ export default {
         });
       });
       this.loading = false;
-      const albumName = this.albumResults.results.map(el => {
-        return el.collectionName;
-      });
-      const artistName = artistsResults.results.map(el => {
-        return el.artistName;
-      });
-      this.loadingHighResImages = true;
-      const extraDataAlbum = await apiEngine.getHighResImage(
-        albumName,
-        "album",
-        this.$cookie.get("token")
-      );
-      const extraDataArtist = await apiEngine.getHighResImage(
-        artistName,
-        "artist",
-        this.$cookie.get("token")
-      );
-      for (let i in albumName) {
-        if (
-          !_.isUndefined(extraDataAlbum.results[i].highResImage) &&
-          extraDataAlbum.results[i].highResImage !== ""
-        ) {
-          this.albumResults.results[i].artworkUrl100 =
-            extraDataAlbum.results[i].highResImage;
-        }
-      }
-      for (let i in artistName) {
-        if ( !_.isUndefined(extraDataArtist.results[i].highResImage) &&
-        	extraDataArtist.results[i].highResImage !== "") {
-          artistsResults.results[i].artistImage =
-            extraDataArtist.results[i].highResImage;
-        }
-      }
-      this.artistsResults = artistsResults;
-      this.loadingHighResImages = false;
-      console.log(this.artistsResults);
     },
     async loadUser() {
       try {

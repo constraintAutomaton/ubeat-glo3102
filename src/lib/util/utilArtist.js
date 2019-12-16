@@ -7,7 +7,7 @@ export const getArtistById = async (artistId, token = "") => {
   if (isNaN(artistId)) {
     throw "The ID specified is not a number";
   }
-
+  
   const result = await apiEngine.getArtistById(artistId, token);
   if(!result.ok)
     return result;
