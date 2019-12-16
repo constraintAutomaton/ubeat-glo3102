@@ -32,8 +32,15 @@ export default {
         } else {
           next();
         }
-      } catch (ex){}
+      } catch (ex) {}
     });
+
+    const loggedIn = this.$cookie.get("token");
+    if (loggedIn && this.$route.name !== "Home") {
+      router.push({ name: "Home" });
+    } else if (this.$route.name !== "Login") {
+      router.push({ name: "Login" });
+    }
   }
 };
 </script>
