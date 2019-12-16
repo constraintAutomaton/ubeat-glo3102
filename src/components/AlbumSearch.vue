@@ -13,7 +13,7 @@ import ApiInterface from "./../lib/ApiInterface";
 import AlbumOfArtist from "./Artist/AlbumOfArtist";
 import SearchBar from "./SearchBar";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
 export default {
@@ -37,7 +37,7 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
-			this.albumsResults = (await apiEngine.searchAlbum(this.$route.params.query, 200)).results;
+			this.albumsResults = (await apiEngine.searchAlbum(this.$route.params.query, 200, this.$cookie.get("token"))).results;
 			this.loading = false;
 		}
 	}

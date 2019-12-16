@@ -13,7 +13,7 @@ import ApiInterface from "./../lib/ApiInterface";
 import UserList from "./Users/UsersList";
 import SearchBar from "./SearchBar";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
 export default {
@@ -37,7 +37,7 @@ export default {
 	methods: {
 		async search() {
 			this.loading = true;
-			this.usersResults = (await apiEngine.searchUsers(this.$route.params.query, 200));
+			this.usersResults = (await apiEngine.searchUsers(this.$route.params.query, 200, this.$cookie.get("token")));
 			this.loading = false;
 		}
 	}

@@ -100,17 +100,17 @@ export default class ApiInterface {
         console.error("unable to get user");
       });
   }
-  async searchAlbum(p_query, p_limite = 10) {
-    return await this.search(p_query, "albums", p_limite);
+  async searchAlbum(p_query, p_limite = 10, token = "") {
+    return await this.search(p_query, "albums", p_limite, token);
   }
-  async searchArtiste(p_query, p_limite = 10) {
-    return await this.search(p_query, "artists", p_limite);
+  async searchArtiste(p_query, p_limite = 10, token = "") {
+    return await this.search(p_query, "artists", p_limite, token);
   }
-  async searchTracks(p_query, p_limite = 10) {
-    return await this.search(p_query, "tracks", p_limite);
+  async searchTracks(p_query, p_limite = 10, token = "") {
+    return await this.search(p_query, "tracks", p_limite, token);
   }
-  async searchUsers(p_query, p_limite = 10) {
-    return await this.search(p_query, "users", p_limite);
+  async searchUsers(p_query, p_limite = 10, token = "") {
+    return await this.search(p_query, "users", p_limite, token);
   }
   async _getAlbumOrArtistById(
     p_type,

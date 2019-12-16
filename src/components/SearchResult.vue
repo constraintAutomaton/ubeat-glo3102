@@ -47,7 +47,7 @@ import AlbumOfArtist from "./Artist/AlbumOfArtist";
 import ArtistList from "./Artist/ArtistList";
 import UsersList from "./Users/UsersList";
 
-const isSecure = false;
+const isSecure = true;
 const apiEngine = new ApiInterface(isSecure);
 
 export default {
@@ -71,14 +71,14 @@ export default {
   },
   methods: {
     async search(query) {
-      this.trackResults = await apiEngine.searchTracks(query, 6);
-      this.albumResults = await apiEngine.searchAlbum(query, 6);
-      let artistsResults = await apiEngine.searchArtiste(query, 6);
+      this.trackResults = await apiEngine.searchTracks(query, 6, this.$cookie.get("token"));
+      this.albumResults = await apiEngine.searchAlbum(query, 6, this.$cookie.get("token"));
+      let artistsResults = await apiEngine.searchArtiste(query, 6, this.$cookie.get("token"));
       artistsResults.results.forEach(artist => {
         artist.genre = artist.primaryGenreName;
         artist.artistImage = artist.highResImage;
       });
-      this.usersResults = await apiEngine.searchUsers(query, 6);
+      this.usersResults = await apiEngine.searchUsers(query, 6, this.$cookie.get("token"));
 
       this.usersResults.forEach(user => {
         user.currentFollowing = false;
@@ -96,11 +96,13 @@ export default {
       this.loadingHighResImages = true;
       const extraDataAlbum = await apiEngine.getHighResImage(
         albumName,
-        "album"
+        "album",
+        this.$cookie.get("token")
       );
       const extraDataArtist = await apiEngine.getHighResImage(
         artistName,
-        "artist"
+        "artist",
+        this.$cookie.get("token")
       );
       for (let i in albumName) {
         if (
