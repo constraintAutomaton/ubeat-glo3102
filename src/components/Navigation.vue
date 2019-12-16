@@ -58,7 +58,7 @@
                     Profile
                   </router-link>
                 </li>
-                <li v-if="token == '' || token == undefined">
+                <li v-if="token === '' || token !== undefined">
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_balance
@@ -66,7 +66,7 @@
                     Sign Up
                   </router-link>
                 </li>
-                <li v-if="token == '' || token == undefined">
+                <li v-if="token === '' || token !== undefined">
                   <router-link :to="loginPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_box
@@ -238,8 +238,9 @@
 </style>
 
 <script>
-import router from './../router/index.js'
-import { userInfo } from 'os';
+import router from "./../router/index.js";
+import { userInfo } from "os";
+import _ from "lodash";
 
 export default {
   methods: {
@@ -254,7 +255,7 @@ export default {
     },
     search: async function() {
       const query = this.searchText.replace(new RegExp(" ", "g"), "%20");
-      router.push({ name: 'SearchResult', params: { query: query }});
+      router.push({ name: "SearchResult", params: { query: query } });
       this.searchText = "";
       this.toggleSearch();
     },
@@ -264,13 +265,13 @@ export default {
       )
         document.getElementById("navSearchInput").focus();
     },
-    async logout () {
-        this.$cookie.get("token");
-        this.$cookie.set("token", "");
-        this.$cookie.set("name", "");
-        this.$cookie.set("email", "");
-        this.$cookie.set("id", "");
-        location.reload();
+    async logout() {
+      this.$cookie.get("token");
+      this.$cookie.set("token", "");
+      this.$cookie.set("name", "");
+      this.$cookie.set("email", "");
+      this.$cookie.set("id", "");
+      location.reload();
     }
   },
   mounted() {
@@ -288,8 +289,8 @@ export default {
       logoutPage: "/logout",
       userPage: `/users/${this.$cookie.get("id")}`,
       user: {
-          id: this.$cookie.get("id"),
-          name: this.$cookie.get("name")
+        id: this.$cookie.get("id"),
+        name: this.$cookie.get("name")
       },
       searchText: "",
       token: this.$cookie.get("token")

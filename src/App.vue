@@ -1,53 +1,40 @@
 <template>
   <div id="app">
     <component :is="layout">
-      <!--      <nav-menu></nav-menu>-->
       <router-view></router-view>
     </component>
   </div>
 </template>
 
 <script>
-import router from './router/index.js'
+import router from "./router/index.js";
 import Navigation from "@/components/Navigation";
 
 const default_layout = "default";
 
 export default {
   name: "app",
-  components: {
-    // "nav-menu": Navigation
-  },
+  components: {},
   computed: {
     layout() {
       return this.$route.meta.layout || default_layout + "-layout";
     }
   },
-  created()
-  {
+  created() {
     router.beforeEach((to, from, next) => {
       try {
         const loggedIn = this.$cookie.get("token");
         if (to.matched.some(record => record.meta.requiresAuth)) {
           if (!loggedIn) {
-            next({ name: 'Login' });
+            next({ name: "Login" });
           } else {
             next();
           }
         } else {
           next();
         }
-      } catch(ex) { }
+      } catch (ex){}
     });
-
-    
-    const loggedIn = this.$cookie.get("token");
-    if(loggedIn) {
-      router.push({ name: 'Home'});
-    }
-    else{
-      router.push({ name: 'Login'});
-    }
   }
 };
 </script>
@@ -106,7 +93,7 @@ p:last-child {
   align-items: center;
 }
 
-.badgeContainer{
+.badgeContainer {
   width: 135px;
   height: 40px;
   margin-top: 1rem;

@@ -57,25 +57,21 @@ export default class ApiInterface {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": token
+        Authorization: token
       }
     };
 
+    return fetch(`${this.rootUrlUbeat}users/${p_id}`, param)
+      .then(async response => {
+        let json = await response.json();
 
-    return fetch(
-      `${this.rootUrlUbeat}users/${p_id}`,
-      param
-    )
-    .then(async response => {
-      let json = await response.json();
-      
-      json.ok = response.ok;
+        json.ok = response.ok;
 
-      return json;
-    })
-    .catch(() => {
-      console.error("unable to get user");
-    });
+        return json;
+      })
+      .catch(() => {
+        console.error("unable to get user");
+      });
   }
 
   async search(p_query, p_type = "", p_limite = 10, token = "") {
@@ -84,24 +80,25 @@ export default class ApiInterface {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": token
+        Authorization: token
       }
     };
-    
+
     p_query = p_query.replace(new RegExp(" ", "g"), "%20");
-    return fetch(`${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
+    return fetch(
+      `${this.rootUrlUbeat}search/${p_type}?q=${p_query}&limit=${p_limite}`,
       param
     )
-    .then(async response => {
-      let json = await response.json();
-      
-      json.ok = response.ok;
+      .then(async response => {
+        let json = await response.json();
 
-      return json;
-    })
-    .catch(() => {
-      console.error("unable to get user");
-    });
+        json.ok = response.ok;
+
+        return json;
+      })
+      .catch(() => {
+        console.error("unable to get user");
+      });
   }
   async searchAlbum(p_query, p_limite = 10) {
     return await this.search(p_query, "albums", p_limite);
@@ -115,31 +112,37 @@ export default class ApiInterface {
   async searchUsers(p_query, p_limite = 10) {
     return await this.search(p_query, "users", p_limite);
   }
-  async _getAlbumOrArtistById(p_type, p_id, p_getTracksOrAlbum = "", token = "") {
+  async _getAlbumOrArtistById(
+    p_type,
+    p_id,
+    p_getTracksOrAlbum = "",
+    token = ""
+  ) {
     const param = {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": token
+        Authorization: token
       }
     };
     p_getTracksOrAlbum =
       p_getTracksOrAlbum != "" ? p_getTracksOrAlbum + "/" : "";
 
-    return fetch(`${this.rootUrlUbeat}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
+    return fetch(
+      `${this.rootUrlUbeat}${p_type}/${p_id}/${p_getTracksOrAlbum}`,
       param
     )
-    .then(async response => {
-      let json = await response.json();
-      
-      json.ok = response.ok;
+      .then(async response => {
+        let json = await response.json();
 
-      return json;
-    })
-    .catch(() => {
-      console.error("unable to get user");
-    });
+        json.ok = response.ok;
+
+        return json;
+      })
+      .catch(() => {
+        console.error("unable to get user");
+      });
   }
   async getAlbumById(p_id, token) {
     return await this._getAlbumOrArtistById("albums", p_id, "", token);
@@ -161,7 +164,7 @@ export default class ApiInterface {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": token
+        Authorization: token
       },
       body: JSON.stringify({
         query: e_query
@@ -169,15 +172,15 @@ export default class ApiInterface {
     };
 
     return fetch(`${this.rootUrlUbeat}search/extra/${p_type}`, param)
-    .then(async response => {
-      let json = await response.json();
-      
-      json.ok = response.ok;
+      .then(async response => {
+        let json = await response.json();
 
-      return json;
-    })
-    .catch(() => {
-      console.error("unable to get High Res Image");
-    });
+        json.ok = response.ok;
+
+        return json;
+      })
+      .catch(() => {
+        console.error("unable to get High Res Image");
+      });
   }
 }

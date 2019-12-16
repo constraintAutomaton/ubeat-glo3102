@@ -50,7 +50,7 @@ export default {
     close() {
       if (this.isOpened) {
         this.isOpened = false;
-        if(this.$refs.playlistCheckbox !== undefined){
+        if (this.$refs.playlistCheckbox !== undefined) {
           this.$refs.playlistCheckbox.forEach(async chkBox => {
             chkBox.checked = false;
           });
@@ -101,16 +101,15 @@ export default {
       });
     },
     async loadPlaylists() {
-      const result = await getPlaylistsByUserId(this.$cookie.get("id"), this.$cookie.get("token"));
+      const result = await getPlaylistsByUserId(
+        this.$cookie.get("id"),
+        this.$cookie.get("token")
+      );
 
-      if(result.ok)
-      {
+      if (result.ok) {
         this.playlists = result;
         this.playlists = _.sortBy(this.playlists, ["id"]);
-      }
-      else
-      {
-        console.error(result.message);
+      } else {
         this.close();
       }
     },
@@ -120,23 +119,19 @@ export default {
 
         if (chkBox.checked) {
           const result = await this.addTracks(chkBox.value);
-          if(result.ok)
-          {
+          if (result.ok) {
             this.showSuccessAdd(chkBox);
             this.$songEvent.$emit("playlistUpdated");
-          }
-          else {
+          } else {
             this.showErrorToast(result.message);
             chkBox.checked = false;
           }
         } else {
           const result = await this.deleteTracks(chkBox.value);
-          if(result.ok)
-          {
+          if (result.ok) {
             this.showSuccessDelete(chkBox);
             this.$songEvent.$emit("playlistUpdated");
-          }
-          else {
+          } else {
             this.showErrorToast(result.message);
             chkBox.checked = true;
           }
@@ -144,10 +139,14 @@ export default {
       }
     },
     addTracks(playlistId) {
-      let result = {ok: true};
+      let result = { ok: true };
 
       this.tracks.forEach(track => {
-        const response = addTrackToPlaylist(playlistId, track, this.$cookie.get("token"));
+        const response = addTrackToPlaylist(
+          playlistId,
+          track,
+          this.$cookie.get("token")
+        );
         if (!response.ok) {
           result = response;
           return result;
@@ -156,10 +155,14 @@ export default {
       return result;
     },
     async deleteTracks(playlistId) {
-      let result = {ok: true};
+      let result = { ok: true };
 
       this.tracks.forEach(track => {
-        const response = deleteTrack(playlistId, track.trackId, this.$cookie.get("token"));
+        const response = deleteTrack(
+          playlistId,
+          track.trackId,
+          this.$cookie.get("token")
+        );
         if (!response.ok) {
           result = response;
           return result;

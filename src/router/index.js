@@ -121,5 +121,10 @@ export default new Router({
         requiresAuth: true
       }
     },
+    {
+      path: '*',
+      name: null,
+      redirect: "/"
+    }
   ]
 });
