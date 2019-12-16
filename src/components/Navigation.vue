@@ -58,7 +58,7 @@
                     Profile
                   </router-link>
                 </li>
-                <li v-if="token === '' || token === undefined">
+                <li v-if="token == '' || token == undefined">
                   <router-link :to="signupPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_balance
@@ -66,7 +66,7 @@
                     Sign Up
                   </router-link>
                 </li>
-                <li v-if="token === '' || token === undefined">
+                <li v-if="token == '' || token == undefined">
                   <router-link :to="loginPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_box
