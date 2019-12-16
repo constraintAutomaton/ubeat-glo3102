@@ -8,7 +8,6 @@
 
 <script>
 import router from "./router/index.js";
-import Navigation from "@/components/Navigation";
 
 const default_layout = "default";
 
