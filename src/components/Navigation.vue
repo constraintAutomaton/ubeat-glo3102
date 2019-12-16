@@ -51,14 +51,6 @@
                 </li>
                 <li class="divider"></li>
                 <li v-if="token">
-                  <router-link :to="settingsPage" class="navbar-item">
-                    <i class="material-icons navbar-icon">
-                      build
-                    </i>
-                    Settings
-                  </router-link>
-                </li>
-                <li v-if="token">
                   <router-link :to="userPage" class="navbar-item">
                     <i class="material-icons navbar-icon">
                       account_circle
@@ -135,14 +127,6 @@
         </router-link>
       </li>
       <li class="divider"></li>
-      <li>
-        <router-link class="sidenav-close" :to="settingsPage">
-          <i class="material-icons">
-            build
-          </i>
-          Settings
-        </router-link>
-      </li>
       <li>
         <router-link class="sidenav-close" :to="userPage">
           <i class="material-icons">
@@ -301,7 +285,6 @@ export default {
       signupPage: "/signup",
       artistPage: "/artist",
       playlistsPage: "/playlists",
-      settingsPage: "/settings",
       logoutPage: "/logout",
       userPage: `/users/${this.$cookie.get("id")}`,
       user: {

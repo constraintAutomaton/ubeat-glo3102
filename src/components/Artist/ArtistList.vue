@@ -2,9 +2,7 @@
   <div class="mainContainer">
     <h2 class="listTitle">
       <router-link v-if="link !== undefined" :to="link">
-        {{
-        title
-        }}
+        {{ title }}
       </router-link>
       <span v-else>{{ title }}</span>
     </h2>
@@ -21,7 +19,7 @@
     >
       <ArtistItem
         v-for="artist in displayedList"
-        :key="artist.artistImage"
+        :key="artist.artistId"
         :artistId="artist.artistId"
         :artistName="artist.artistName"
         :genre="artist.genre"
@@ -44,9 +42,9 @@ import Pagination from "../Pagination";
 import _ from "lodash";
 
 export default {
-  updated() {
-    console.log(artistList);
-  },
+  // updated() {
+  //   // console.log(artistList);
+  // },
   props: {
     artistList: {
       type: Array
@@ -85,7 +83,7 @@ export default {
       return this.artistList.slice(begin, end);
     },
     pageCount() {
-      if (this.artistList.length % this.itemPerPage == 0)
+      if (this.artistList.length % this.itemPerPage === 0)
         return this.artistList.length / this.itemPerPage;
 
       return Math.floor(this.artistList.length / this.itemPerPage) + 1;
