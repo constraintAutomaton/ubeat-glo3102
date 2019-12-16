@@ -6,9 +6,9 @@
     <template
       v-if="
         trackResults.length === 0 &&
-        artistsResults.length === 0 &&
-          albumResults.length == 0 &&
-          usersResults.length == 0&&
+          artistsResults.length === 0 &&
+          albumResults.length === 0 &&
+          usersResults.length === 0 &&
           !loading
       "
     >
@@ -67,10 +67,7 @@ export default {
   },
   created() {
     const promise = this.loadUser();
-    promise.then;
-    {
-      this.search(this.$route.params.query);
-    }
+    promise.then(() => this.search(this.$route.params.query));
   },
   methods: {
     async search(query) {
@@ -86,7 +83,7 @@ export default {
       this.usersResults.forEach(user => {
         user.currentFollowing = false;
         this.currentUser.following.forEach(follow => {
-          if (follow.id == user.id) user.currentFollowing = true;
+          if (follow.id === user.id) user.currentFollowing = true;
         });
       });
       this.loading = false;
@@ -106,13 +103,17 @@ export default {
         "artist"
       );
       for (let i in albumName) {
-        if (extraDataAlbum.results[i].highResImage != "") {
+        if (
+          !_.isUndefined(extraDataAlbum.results[i].highResImage) &&
+          extraDataAlbum.results[i].highResImage !== ""
+        ) {
           this.albumResults.results[i].artworkUrl100 =
             extraDataAlbum.results[i].highResImage;
         }
       }
       for (let i in artistName) {
-        if (extraDataArtist.results[i].highResImage != "") {
+        if ( !_.isUndefined(extraDataArtist.results[i].highResImage) &&
+        	extraDataArtist.results[i].highResImage !== "") {
           artistsResults.results[i].artistImage =
             extraDataArtist.results[i].highResImage;
         }
@@ -123,7 +124,10 @@ export default {
     },
     async loadUser() {
       try {
-        this.currentUser = await getUserById(this.$cookie.get("id"), this.$cookie.get("token"));
+        this.currentUser = await getUserById(
+          this.$cookie.get("id"),
+          this.$cookie.get("token")
+        );
       } catch (ex) {}
     }
   },
