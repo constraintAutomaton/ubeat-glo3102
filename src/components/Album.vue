@@ -39,10 +39,17 @@ export default {
       this.loading = true;
 
       try {
-        const album = await getAlbumById(this.$route.params.id);
-        this.albumInfo = album;
-        this.loading = false;
-        this.error = false;
+        const album = await getAlbumById(this.$route.params.id, this.$cookie.get("token"));
+        
+        if(album.ok) {
+          this.albumInfo = album;
+          this.loading = false;
+          this.error = false;
+        }
+        else {
+          this.loading = false;
+          this.error = album.message;
+        }
       } catch (error) {
         this.error = error;
         this.loading = false;

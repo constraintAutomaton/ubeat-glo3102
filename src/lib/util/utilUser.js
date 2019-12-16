@@ -28,8 +28,11 @@ export const followFriend = async (friendId, token) => {
       })
     };
     return fetch(`${apiEngineSecure.rootUrlUbeat}follow`, param)
-    .then(response => response.json())
-    .then(json => {
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
       return json;
     })
     .catch(() => {
@@ -46,7 +49,15 @@ export const deleteFriend = async (friendId, token) => {
           "Authorization": token
         },
       }
-    ).catch(() => {
+    )
+    .then(async response => {
+      let json = await response.json();
+      
+      json.ok = response.ok;
+
+      return json;
+    })
+    .catch(() => {
       console.error("Unable to delete this friend.");
     });
   };
